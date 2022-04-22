@@ -36,8 +36,8 @@ $(document).ready(function(){
        updateCartTotal()
 
    });
-
-   $(document).on('click', '.remove-item', function (e) {
+   //$('.remove-item').click(function(e){
+ $(document).on('click', '.remove-item', function (e) {
     e.preventDefault();
     $(this).closest(".row").remove();
     updateCartTotal();

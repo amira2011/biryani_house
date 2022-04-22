@@ -103,10 +103,25 @@
         </aside>
     </main>
     <footer class="flex-center">
-        <p>Copyright &copy; BiryanHouse</p>
+        <p class="test">Copyright &copy; BiryanHouse</p>
     </footer>
-     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <script>
+        $(document).ready(function(i){
+            console.log("welcome")
+            $(".test").on({
+
+                mouseover: function() {
+                    $("body").css("background-color","red");
+                },
+
+                mouseout: function() {
+                    $("body").css("background-color","yellow");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
