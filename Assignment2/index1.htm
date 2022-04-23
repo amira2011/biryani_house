@@ -24,7 +24,18 @@
 </head>
 
 <body>
+  
+  <div class="container-flex">
+    <nav class="navbar navbar-dark bg-dark">
+      <!-- Navbar content -->
+      <a class="navbar-brand" href="#" style="font-size: 0.8rem;">
+        <img src="img/github.webp" style="background-color: white;" alt="" class="d-inline-block " width="30" height="30">
+        GitHub Repos 
+      </a>
+    </nav>
 
+  </div>
+   
 
   <div class="container">
 
@@ -96,7 +107,7 @@
                 var html = ` <div class="card-body border">
           <h5 class="card-title font-weight-bold" ">${result[i].full_name}</h5>
           <p class="card-text" style="font-size: 14px;line-height: 9px;">${result[i].description}</p>
-          <div   style="vertical-align: top">
+          <div class="container" style="vertical-align: top">
             <div class="row">
               <div class="col-sm-1 col-lg-1 col-md-1">
           <i class="fa-solid fa-code-branch"></i>
