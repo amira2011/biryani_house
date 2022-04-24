@@ -73,22 +73,6 @@
                  
                 
                 
-                <div class="row">
-                    <div class="col-md-6">
-                      <p style="font-size: 12px;">Languages</p>
-                      <ul style="margin-top:-14px; font-size: 10px; ">
-                        <li> Ruby</li>
-                        </ul> 
-                    </div>
-                    <div class="col-md-6">
-                        <p style="font-size: 12px;">Stats</p>
-                      <ul style="margin-top:-14px; font-size: 10px; ">
-                        <li> Ruby</li>
-                        </ul> 
-                    </div>
-                    
-                </div>
-            </div>
 
 
 
@@ -206,6 +190,40 @@
 
                 $('.result1').append(html1);
 
+                html2=`
+                <div class="row">
+                    <div class="col-md-6">
+                      <p style="font-size: 12px;">Languages</p>
+                      <ul style="margin-top:-14px; font-size: 10px; ">
+                        <li> Ruby</li>
+                        </ul> 
+                    </div>
+                    <div class="col-md-6">
+                        <p style="font-size: 12px;">Stats</p>
+                      <ul style="margin-top:-14px; font-size: 10px; ">
+                        <li> Ruby</li>
+                        </ul> 
+                    </div>
+                    
+                </div>
+            </div>`;
+
+            $('.result1').append(html2);
+                
+               var url1=`${meta_Data[idx].url}/pulls?state=all`;
+
+               $.get(url1, function(data1) {
+                        
+                        $.each(data1, function(id, repo) {
+                            console.log(id)
+                            var html = `<li style="font-size: 13px;">${repo.title}</li>`;
+                            $(".result1").append(html);
+                            
+                        });
+                    });
+                
+
+                 
                 
             });
 
