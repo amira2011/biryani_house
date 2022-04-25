@@ -51,7 +51,7 @@
 
                     <ul class="repo-list  ">
 
-                       
+
 
                     </ul>
 
@@ -65,47 +65,48 @@
 
             </div>
 
- 
+
 
 
             <div class="col-md-9 mt-1 result1">
                 <i class="fa fa-spinner fa-spin w-spinner"></i>
-                 
-                
-                
 
 
 
+
+
+
+            </div>
         </div>
-    </div>
 
 
- 
-    
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
 
-    <script>
-        $(document).ready(function () {
-            var meta_Data;
 
-            $(".w-spinner").hide();
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
 
-            function list_Repos() {
-                console.log("hi");
-                $('.repo-list').empty();
-                $(".w-spinner").show();
-                var userName = $("#username").val();
-                console.log(userName);
-                var url = `https://api.github.com/users/${userName}/repos`;
-                $.get(url, function(data) {
-                        meta_Data=data;
+        <script>
+            $(document).ready(function () {
+                var meta_Data;
+                var pull_count;
+
+                $(".w-spinner").hide();
+
+                function list_Repos() {
+                    console.log("hi");
+                    $('.repo-list').empty();
+                    $(".w-spinner").show();
+                    var userName = $("#username").val();
+                    console.log(userName);
+                    var url = `https://api.github.com/users/${userName}/repos`;
+                    $.get(url, function (data) {
+                        meta_Data = data;
                         $(".w-spinner").hide();
                         $("#repo-list").show();
-                        $.each(data, function(id, repo) {
+                        $.each(data, function (id, repo) {
                             console.log(id)
                             var html = `<li style="font-size: 13px;" class="repo-item" id="${repo.url}" data-id="${id}">${repo.full_name}</li>`;
                             $(".repo-list").append(html);
@@ -114,29 +115,29 @@
                     });
                 }
 
-            
 
 
-            $("#search-repos").click(function () {
-                list_Repos();
 
-            });
-
-
-            $("#username").keypress(function (e) {
-                if (e.which == 13) {
+                $("#search-repos").click(function () {
                     list_Repos();
-                }
-            });
+
+                });
 
 
-            $(document).on('click', '.repo-item', function (e) {
-                e.preventDefault();
-                $(".result1").empty();
-                var idx=parseInt($(this).data("id"));
-                console.log(meta_Data[idx] );
+                $("#username").keypress(function (e) {
+                    if (e.which == 13) {
+                        list_Repos();
+                    }
+                });
 
-                var  html1=`<p class="fs-6 mb-0" style="font-weight: 700; font-size: 14px;">${meta_Data[idx].name}</p>
+
+                $(document).on('click', '.repo-item', function (e) {
+                    e.preventDefault();
+                    $(".result1").empty();
+                    var idx = parseInt($(this).data("id"));
+                    console.log(meta_Data[idx]);
+
+                    var html1 = `<p class="fs-6 mb-0" style="font-weight: 700; font-size: 14px;">${meta_Data[idx].name}</p>
                 <div class="card">
                     <h5 class="card-header" style="font-size: 14px;">
                        Overview
@@ -152,7 +153,7 @@
                                     <div class="progress-bar bg-info w-25">
                                     </div>
                                 </div>
-                                <p class="fs-6 mb-1 mt-1" style=" style="font-size: 10px;">${meta_Data[idx].open_issues_count} Active Issues</p>
+                                <p class="fs-6 mb-1 mt-1 pull-count" style=" style="font-size: 10px;"> </p>
                             </div>
                             <div class="col-md-6">
                                  
@@ -188,48 +189,81 @@
                 
                 `;
 
-                $('.result1').append(html1);
+                    $('.result1').append(html1);
 
-                html2=`
+
+
+
+
+                    html2 = `
                 <div class="row">
                     <div class="col-md-6">
                       <p style="font-size: 12px;">Languages</p>
-                      <ul style="margin-top:-14px; font-size: 10px; ">
-                        <li> Ruby</li>
+                      <ul class="languages" style="margin-top:-14px; font-size: 10px; ">
+                        
                         </ul> 
                     </div>
                     <div class="col-md-6">
                         <p style="font-size: 12px;">Stats</p>
-                      <ul style="margin-top:-14px; font-size: 10px; ">
-                        <li> Ruby</li>
+                      <ul class="stats" style="margin-top:-14px; font-size: 10px; ">
+                        
                         </ul> 
                     </div>
                     
                 </div>
             </div>`;
 
-            $('.result1').append(html2);
-                
-               var url1=`${meta_Data[idx].url}/pulls?state=all`;
+                    $('.result1').append(html2);
 
-               $.get(url1, function(data1) {
-                        
-                        $.each(data1, function(id, repo) {
+                    var url_lang = `${meta_Data[idx].url}/languages`
+
+
+                    $.get(url_lang, function (data0) {
+
+                        $.each(data0, function (i, lang) {
+                            
+                            var html = `<li style="font-size: 13px;">${i}</li>`;
+                            $(".languages").append(html);
+
+                        });
+
+                    });
+
+                     
+                    var html = `<li style="font-size: 13px;">${meta_Data[idx].stargazers_count}</li>
+                    <li style="font-size: 13px;">${meta_Data[idx].watchers_count}</li>
+                    <li style="font-size: 13px;"> <i class="fa-solid fa-code-fork"></i> ${meta_Data[idx].forks_count}</li>
+                    `;
+                    $(".stats").append(html);
+
+
+
+
+
+                    var pull_count;
+
+                    var url1 = `${meta_Data[idx].url}/pulls?state=all`;
+
+                    $.get(url1, function (data1) {
+                        pull_count=data1.length;
+                        $(".pull-count").text(`${pull_count} Active Pull Request`)
+
+                        $.each(data1, function (id, repo) {
                             console.log(id)
                             var html = `<li style="font-size: 13px;">${repo.title}</li>`;
                             $(".result1").append(html);
-                            
+
                         });
                     });
-                
 
-                 
-                
+
+
+
+                });
+
             });
 
-        });
-
-    </script>
+        </script>
 </body>
 
 </html>
