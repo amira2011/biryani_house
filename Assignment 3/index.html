@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body style="background-color: rgb(238, 231, 231);">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <h6 style="color: white; margin-left: 50px; margin-top: 4px;">Forms Demo1</h6>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4 bg-light p-5  " style="min-height: 300px;">
+                        <h5 class="text-center ">Login</h5>
+                        <form>
+                            <div class="form-group">
+
+                                <label for="userName" style="font-size: 12px;">
+                                    UserName
+                                </label>
+                                <input type="text" placeholder="Enter Email" class="form-control" id="userName"
+                                    style="font-size: 14px;line-height: 14px;" />
+                            </div>
+                            <div class="form-group mb-3">
+
+                                <label for="passwaord" style="font-size: 12px;">
+                                    Password
+                                </label>
+                                <input type="password" placeholder="Password" class="form-control" id="password" />
+                            </div>
+
+                            <button type="submit" id="login" class="btn btn-primary"
+                                style="line-height: 14px;font-size: 14px;">
+                                Login
+                            </button>
+                        </form>
+
+                        <div class="mt-2 ">
+
+                            <ul class="ul-1" style="font-size: 12px; color: red">
+                                <li id="lenth" class="pass-li" style="display: none;">Password Must be 8 Character Long
+                                </li>
+                                <li id="uppercase" class="pass-li" style="display: none;">Password Must Contain At least
+                                    1 Uppercase
+                                    Letter</li>
+                                <li id="lowercase" class="pass-li" style="display: none;">Password Must Contain At least
+                                    1 Lowercase
+                                    Letter</li>
+                                <li id="special" class="pass-li" style="display: none;">Password Must Contain At least 1
+                                    Special
+                                    Character</li>
+                                <li id="number" class="pass-li" style="display: none;">Password Must Contain At least 1
+                                    Number </li>
+                                <li id="user-name" class="user-li" style="display: none;">Enter Valid User Name </li>
+                                <li id="status-201" class="user-li" style="display: none;">Different Status Code:201 </li>
+                                <li id="status-404" class="user-li" style="display: none;">Different Status Code:201 </li>
+                            </ul>
+
+                             
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            var flag_all = false;
+
+            var flag_user = false;
+            //$("#password").keyup(function (e) {
+            //  validate_password();
+            // });
+
+            $("#login").click(function (e) {
+                e.preventDefault();
+                var pass = $("#password").val();
+                var userName = $("#userName").val();
+                
+                $("#status-201").hide();
+                $("#status-404").hide();
+                validate_password(pass);
+                validate_useName(userName)
+                if (flag_all && flag_user) {
+                    $("#login").html("Please wait..");
+
+                    
+                    url1=`https://ptsv2.com/t/${userName}/post`;
+
+                    $.post(url1, function (data, status,jqXHR  ) {
+                     
+
+                        jqXHR.done(function(){
+
+                            console.log("Hi it")
+                        })
+
+                        jqXHR.fail(function(){
+                            $("#status-404").show();
+                            $("#login").html("Login");
+
+                        })
+
+                        
+                        console.log(jqXHR)
+                        
+                        if(jqXHR.status==200){
+                            var url = "http://google.com";
+                            $(location).attr('href',url);
+
+                        }
+                        
+                        
+                        if(jqXHR.status==201){
+                            $("#status-201").show();
+                            $("#login").html("Login");
+
+
+                        }  
+ 
+                         
+                       
+ 
+
+                      
+
+
+                    });
+
+
+
+
+                }
+
+
+
+
+            });
+
+
+            function validate_useName(userName) {
+                var user_regex1 = /([a-z])/;
+                $(".user-name").hide();
+                if (user_regex1.test(userName) == false) {
+                    $("#user-name").show();
+                }
+                else {
+                    flag_user = true
+                    $(".user-name").show();
+                }
+
+            }
+
+
+
+            function validate_password(pass) {
+
+                var flag_length = false;
+                var flag_lower = false;
+                var flag_upper = false;
+                var flag_number = false;
+                var flag_special = false;
+                var password_regex1 = /([a-z])/;
+                var password_regex2 = /([0-9])/;
+                var password_regex3 = /([!,%,&,@,#,$,^,*,?,_,~])/;
+                var password_regex4 = /([A-Z])/;
+                $(".pass-li").hide();
+                if (pass.length < 8) {
+                    $("#lenth").show();
+                }
+                else {
+                    flag_length = true
+                    
+                }
+                if (password_regex1.test(pass) == false) {
+                    $("#lowercase").show();
+                }
+                else {
+                    flag_lower = true
+                }
+
+                if (password_regex2.test(pass) == false) {
+                    $("#number").show();
+                }
+                else {
+                    flag_number = true
+                }
+
+                if (password_regex3.test(pass) == false) {
+                    $("#special").show();
+                }
+                else {
+                    flag_special = true
+                }
+                if (password_regex4.test(pass) == false) {
+                    $("#uppercase").show();
+                }
+                else {
+                    flag_upper = true
+                }
+
+                if (flag_length && flag_lower && flag_upper && flag_special && flag_number) {
+                    flag_all = true;
+
+                }
+
+            }
+
+
+        });
+
+
+    </script>
+</body>
+
+</html>
