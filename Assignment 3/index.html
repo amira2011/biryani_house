@@ -43,7 +43,7 @@
                                 <label for="passwaord" style="font-size: 12px;">
                                     Password
                                 </label>
-                                <input type="password" placeholder="Password" class="form-control" id="password" />
+                                <input type="password" placeholder="Password" class="form-control" id="password" style="font-size: 14px;line-height: 14px;" />
                             </div>
 
                             <button type="submit" id="login" class="btn btn-primary"
@@ -69,11 +69,12 @@
                                 <li id="number" class="pass-li" style="display: none;">Password Must Contain At least 1
                                     Number </li>
                                 <li id="user-name" class="user-li" style="display: none;">Enter Valid User Name </li>
-                                <li id="status-201" class="user-li" style="display: none;">Different Status Code:201 </li>
-                                <li id="status-404" class="user-li" style="display: none;">Different Status Code:201 </li>
+                                <li id="status-201" class="user-li" style="display: none;">Different Status Code:201
+                                </li>
+                                <li id="status-404" class="user-li" style="display: none;">Something Else Happened </li>
                             </ul>
 
-                             
+
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -103,7 +104,7 @@
                 e.preventDefault();
                 var pass = $("#password").val();
                 var userName = $("#userName").val();
-                
+
                 $("#status-201").hide();
                 $("#status-404").hide();
                 validate_password(pass);
@@ -111,9 +112,37 @@
                 if (flag_all && flag_user) {
                     $("#login").html("Please wait..");
 
-                    
-                    url1=`https://ptsv2.com/t/${userName}/post`;
 
+                    url1 = `https://ptsv2.com/t/${userName}/post`;
+
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: url1,
+                            success: function (data, status,jqXHR  ) {
+                                if(jqXHR.status==200){
+                            var url = "http://google.com";
+                            $(location).attr('href',url);
+
+                        }else if(jqXHR.status==201){
+                            $("#status-201").show();
+                            $("#login").html("Login");
+
+
+                        } 
+                            },
+
+                            error: function(jqXHR, status, error){
+                                $("#status-404").show();
+                                $("#login").html("Login");
+
+                            }
+
+                        }
+                    );
+
+
+                    /*
                     $.post(url1, function (data, status,jqXHR  ) {
                      
 
@@ -135,14 +164,14 @@
                             var url = "http://google.com";
                             $(location).attr('href',url);
 
-                        }
-                        
-                        
-                        if(jqXHR.status==201){
+                        }else if(jqXHR.status==201){
                             $("#status-201").show();
                             $("#login").html("Login");
 
 
+                        }else{
+                            $("#status-404").show();
+                            $("#login").html("Login");
                         }  
  
                          
@@ -152,7 +181,7 @@
                       
 
 
-                    });
+                    }); */
 
 
 
@@ -197,7 +226,7 @@
                 }
                 else {
                     flag_length = true
-                    
+
                 }
                 if (password_regex1.test(pass) == false) {
                     $("#lowercase").show();
