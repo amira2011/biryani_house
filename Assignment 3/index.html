@@ -36,23 +36,23 @@
                                     UserName
                                 </label>
                                 <input type="text" placeholder="Enter Email" class="form-control" id="userName"
-                                    style="font-size: 14px;line-height: 14px;" />
+                                    style="font-size: 14px;" />
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3 mt-3">
 
                                 <label for="passwaord" style="font-size: 12px;">
                                     Password
                                 </label>
-                                <input type="password" placeholder="Password" class="form-control" id="password" style="font-size: 14px;line-height: 14px;" />
+                                <input type="password" placeholder="Password" class="form-control" id="password" style="font-size: 14px;" />
                             </div>
 
                             <button type="submit" id="login" class="btn btn-primary"
-                                style="line-height: 14px;font-size: 14px;">
+                                style="font-size: 16px; line-height: 16px">
                                 Login
                             </button>
                         </form>
 
-                        <div class="mt-2 ">
+                        <div class="mt-4 ">
 
                             <ul class="ul-1" style="font-size: 12px; color: red">
                                 <li id="lenth" class="pass-li" style="display: none;">Password Must be 8 Character Long
@@ -111,7 +111,7 @@
                 validate_useName(userName)
                 if (flag_all && flag_user) {
                     $("#login").html("Please wait..");
-
+                    $("#login").prop('disabled', true);
 
                     url1 = `https://ptsv2.com/t/${userName}/post`;
 
@@ -124,10 +124,11 @@
                             var url = "http://google.com";
                             $(location).attr('href',url);
 
-                        }else if(jqXHR.status==201){
+                        }else{
+                            $("#status-201").text(`Error Code : ${jqXHR.status}`)
                             $("#status-201").show();
                             $("#login").html("Login");
-
+                            $("#login").prop('disabled', false);
 
                         } 
                             },
@@ -135,6 +136,7 @@
                             error: function(jqXHR, status, error){
                                 $("#status-404").show();
                                 $("#login").html("Login");
+                                $("#login").prop('disabled', false);
 
                             }
 
