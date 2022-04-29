@@ -52,7 +52,7 @@
                             </button>
                         </form>
 
-                        <div class="mt-4 ">
+                        <div class="mt-3 ">
 
                             <ul class="ul-1" style="font-size: 12px; color: red">
                                 <li id="lenth" class="pass-li" style="display: none;">Password Must be 8 Character Long
@@ -119,6 +119,7 @@
                         {
                             type: "POST",
                             url: url1,
+                            data: { name: userName, password: pass },
                             success: function (data, status,jqXHR  ) {
                                 if(jqXHR.status==200){
                             var url = "http://google.com";
