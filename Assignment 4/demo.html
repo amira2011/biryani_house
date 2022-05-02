@@ -323,7 +323,7 @@
             function pagination() {
 
                 $(".pagination").empty()
-                var html = `<li class="page-item"><a class="page-link Previous" href="javascript:;">Previous</a></li>`
+                var html = `<li class="page-item Previous"><a class="page-link " href="javascript:;">Previous</a></li>`
                 $(".pagination").append(html);
 
                 for (let i = 1; i <= pages; i++) {
@@ -339,8 +339,24 @@
                     }
                 }
 
-                html = `<li class="page-item"><a class="page-link Next" href="javascript:;">Next</a></li>`
+                html = `<li class="page-item Next"><a class="page-link " href="javascript:;">Next</a></li>`
                 $(".pagination").append(html);
+
+                if(page_no==1){
+                    $(".Previous").addClass("disabled")
+                }else{
+                    $(".Previous").removeClass("disabled")
+
+                }
+
+                if(page_no==pages){
+                    $(".Next").addClass("disabled")
+                }else{
+                    $(".Next").removeClass("disabled")
+
+                }
+
+
 
             }
 
