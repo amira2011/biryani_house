@@ -182,21 +182,17 @@
             <table id="example" class="table movie-table display" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Release Date</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Popularity</th>
-                        <th scope="col">Details</th>
+                        <th scope="col" data-column="original_title" data-order="desc">Title</th>
+                        <th scope="col" data-column="release_date" data-order="desc">Release Date</th>
+                        <th scope="col" data-column="vote_average" data-order="desc">Rating</th>
+                        <th scope="col" data-column="popularity" data-order="desc">Popularity</th>
+                        <th scope="col" data-column="idx" data-order="desc">Details</th>
+  
+
                     </tr>
                 </thead>
-                <tbody class="movie-list">
-                    <tr>
+                <tbody class="movie-list" id="myTable">
 
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
 
                 </tbody>
             </table>
@@ -229,16 +225,16 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function () {
+
+            var my_table_data = []
             var api_call = 0;
             var meta_data;
             var page_no = 1;
             var pages;
             var total_records;
-            var table;
+
             $('.movie-table').hide();
 
             $('#movie-search').click(function (e) {
@@ -260,10 +256,7 @@
                     meta_data = data.results;
                     $.each(meta_data, function (idx, movie) {
                         var html = `  <tr> \
-                        <td>${movie.original_title}</td>\
-                        <td>${movie.release_date}</td>\
-                        <td>${movie.vote_average}</td>\
-                        <td>${movie.popularity}</td>\
+                        <td>${movie.original_title}</td>\movie.release_date
                         <td><a href='javascript:;' class='movie-details' data-id='${idx}'  data-toggle="modal" data-target="#modal-movie">Details</a></td>\
                     </tr>`;
                         $(".movie-list").append(html);
@@ -287,24 +280,15 @@
                         total_records = data.total_results;
                         console.log(data)
                         console.log(pages, total_records)
+                        my_table_data = []
 
                         $.each(meta_data, function (idx, movie) {
-                            var html = `  <tr style="line-height: 2px;font-size: 14px;"> \
-                        <td>${movie.original_title}</td>\
-                        <td>${movie.release_date}</td>\
-                        <td>${movie.vote_average}</td>\
-                        <td>${movie.popularity}</td>\
-                        <td><a href='javascript:;' class='movie-details' data-id='${idx}'  data-toggle="modal" data-target="#modal-movie">Details</a></td>\
-                    </tr>`;
-                            $(".movie-list").append(html);
-
+                            my_table_data.push({ 'original_title': movie.original_title, 'release_date': movie.release_date, 'vote_average': movie.vote_average, 'popularity': movie.popularity, 'id': idx })
                         })
 
-                        table = $('#example').DataTable({
-                            paging: false,
-                            "showNEntries" : false,
-                            "bInfo" : false
-                        });
+
+                        buildTable(my_table_data)
+
                         pagination()
 
                         progress_bar()
@@ -318,6 +302,29 @@
 
                 });
             }
+
+
+            function buildTable(data) {
+
+                var Table = document.getElementById("myTable");
+                Table.innerHTML = "";
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var html = `  <tr style="line-height: 2px;font-size: 14px;"> \
+                        <td>${data[i].original_title}</td>\
+                        <td>${data[i].release_date}</td>\
+                        <td>${data[i].vote_average}</td>\
+                        <td>${data[i].popularity}</td>\
+                        <td><a href='javascript:;' class='movie-details' data-id='${data[i].id}'  data-toggle="modal" data-target="#modal-movie">Details</a></td>\
+                    </tr>`;
+                    Table.innerHTML += html
+
+                }
+
+
+            }
+
 
 
             function pagination() {
@@ -342,16 +349,16 @@
                 html = `<li class="page-item Next"><a class="page-link " href="javascript:;">Next</a></li>`
                 $(".pagination").append(html);
 
-                if(page_no==1){
+                if (page_no == 1) {
                     $(".Previous").addClass("disabled")
-                }else{
+                } else {
                     $(".Previous").removeClass("disabled")
 
                 }
 
-                if(page_no==pages){
+                if (page_no == pages) {
                     $(".Next").addClass("disabled")
-                }else{
+                } else {
                     $(".Next").removeClass("disabled")
 
                 }
@@ -382,7 +389,6 @@
                 }
             }
 
-
             $(document).on('click', '.movie-details', function (e) {
 
                 e.preventDefault();
@@ -405,9 +411,9 @@
 
                 if (page_no > 1) {
                     page_no--;
-                    table.destroy();
+
                     fetch_data();
-                   
+
                 }
 
 
@@ -418,9 +424,9 @@
 
                 if (page_no < pages) {
                     page_no++;
-                    table.destroy();
+
                     fetch_data();
-                    
+
                 }
 
 
@@ -429,14 +435,13 @@
 
 
             $(document).on('click', '.page-no', function (e) {
-
                 page_no = $(this).data("id")
 
                 $(this).addClass("active")
-                table.destroy();
+
 
                 fetch_data();
-              
+
             });
 
 
@@ -444,7 +449,54 @@
 
 
 
+            $(document).on('click', 'th', function (e) {
+                var column = $(this).data('column')
+                var order = $(this).data('order')
 
+                console.log(column,order)
+
+                if(order == 'desc'){
+                    $(this).data('order','asc')
+                my_table_data.sort((a, b) => {
+                    let fa = a[column],
+                        fb = b[column];
+                        console.log(fa,fb)
+
+                    if (fa < fb) {
+                        return -1;
+                    }
+                    if (fa > fb) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
+            }else{
+                $(this).data('order','desc')
+                my_table_data.sort((a, b) => {
+                    let fa = a[column],
+                        fb = b[column];
+                        console.log(fa,fb)
+
+                    if (fa > fb) {
+                        return -1;
+                    }
+                    if (fa < fb) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
+            }
+
+
+
+
+                buildTable(my_table_data)
+
+
+
+            });
 
 
 
