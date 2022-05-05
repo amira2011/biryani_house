@@ -86,18 +86,19 @@ ul li.active a i.fa-chevron-right{
                 </div>
 
                 <ul class="nav flex-column to-do-list">
-                    <li class="nav-item active">
+                    <!--
+                    <li class="nav-item active nav-list">
                       <a class="nav-link " aria-current="page" href="javascript:;">Active <i class="fa fa-chevron-right"></i></a>
                      
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-list">
                       <a class="nav-link" href="javascript:;">Link <i class="fa fa-chevron-right"></i></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-list">
                       <a class="nav-link" href="javascript:;">Link <i class="fa fa-chevron-right"></i></a>
                     </li>
                      
-                  </ul>
+                  </ul>-->
 
 
 
@@ -182,13 +183,21 @@ ul li.active a i.fa-chevron-right{
 
     <script>
         $(document).ready(function () {
-
+            var list_id_index=0
+            var current_list_id;
             var todo_list = []
             var index = todo_list.length
+
+
             $('#to-do-item').change(function () {
                 var input = $(this).val();
-
-                todo_list.push({ 'idx': index, 'name': input, 'status': "incomplete" })
+                if (typeof current_list_id === "undefined") {
+                    alert("Select List First")
+                    $(this).val('');
+                }else{
+     
+                console.log(current_list_id)
+                todo_list.push({  'idx': index, 'name': input, 'status': "incomplete" })
                 console.log(todo_list)
 
                 createNode()
@@ -196,6 +205,7 @@ ul li.active a i.fa-chevron-right{
                 index++
 
                 $(this).val('');
+                }
 
             })
 
@@ -205,7 +215,7 @@ ul li.active a i.fa-chevron-right{
                 $('#complete').empty()
                 for (var i = 0; i < todo_list.length; i++) {
 
-
+                   
 
 
 
@@ -232,6 +242,8 @@ ul li.active a i.fa-chevron-right{
                         $('#all').append(html1)
                         $('#complete').append(html1)
                     }
+
+               
                 }
 
 
@@ -239,8 +251,10 @@ ul li.active a i.fa-chevron-right{
 
             }
 
-            $(document).on('click', 'ul li', function(){
+            $(document).on('click', '.nav-list', function(){
                 $(this).addClass("active").siblings().removeClass("active")
+                current_list_id=$(this).data("list-id");
+                console.log(current_list_id)
             })
 
 
@@ -249,14 +263,14 @@ ul li.active a i.fa-chevron-right{
             $(document).on('click', '#btn-create-list', function () {
                 var new_list=$("#new-to-do-list").val();
 
-                var html2= `   <li class="nav-item">
+                var html2= `   <li class="nav-item nav-list" data-list-id=${list_id_index}>
                       <a class="nav-link  " aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
                     </li>`
-               
-               
+                       
                      
                 $(".to-do-list").append(html2)
-
+                  
+                list_id_index++   
                 
 
 
@@ -264,11 +278,7 @@ ul li.active a i.fa-chevron-right{
             })
 
 
-
-            $(document).on('click', 'nav .nav-link', function () {
-
-                console.log("You Clicked ME")
-            })
+ 
 
 
             $(document).on('click', '.fa-times', function () {
