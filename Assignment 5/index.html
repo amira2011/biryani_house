@@ -49,22 +49,51 @@
     <div class=" container mt-5">
         <div class="row">
             <div class="col-md-3  ">
-                <div class="username-label">
+                <div class="username-label" style="padding: 0.5rem 1rem;">
                     Create List
+                    <i class="fa fa-plus" style="color: blue;" data-toggle="modal" data-target="#exampleModal"></i>
+
+
                 </div>
 
-                <div class="repo-list">
-                    <i class="fa fa-spinner fa-spin hidden repos-fetch-spinner"></i>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#">Active <i class="fa fa-angle-right"></i> </a>
+                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Link</a>
+
+                </nav>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <p style="font-size: 14px; font-weight: 600; line-height: 15px; margin-bottom: 2px;">New
+                                To-Do List</p>
+                            <input type="text" style="    line-height: 5px;" class="form-control" id="new-to-do-list"
+                                placeholder="Enter To-Do List" autofocus>
+                            <button type="button" id="btn-create-list" class="btn btn-primary mt-1"
+                                style="font-size: 14px;   line-height: 15px;  " data-dismiss="modal">Create</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
+
+
             <div class="col-md-9  ">
 
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-sm-9">
                         <input type="text" class="form-control" id="to-do-item" placeholder="Enter To-Do Item"
                             autofocus>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3 mt-1">
                         <a href="javascript:;" class="btn btn-sm btn-primary" id="add-item">Add</a>
                     </div>
 
@@ -91,7 +120,7 @@
                             <div id="all" class="container tab-pane active  mt-5  "><br>
                             </div>
                             <div id="active" class="container tab-pane fade  mt-5"><br>
-                                 
+
                             </div>
                             <div id="complete" class="container tab-pane fade  mt-5"><br>
 
@@ -137,9 +166,9 @@
 
 
 
-                   
 
-                    if(todo_list[i].status=='incomplete'){
+
+                    if (todo_list[i].status == 'incomplete') {
 
 
                         var html = `<div data-id=${todo_list[i].idx} data-status=${todo_list[i].status}  class="row border align-items-center p-1 " style="line-height: 0px;">
@@ -148,36 +177,45 @@
                                 <i class="fa fa-times  " aria-hidden="true"></i>
                                </div>`
 
-                          $('#all').append(html)
-                        
+                        $('#all').append(html)
+
                         $('#active').append(html)
                     }
 
-                    if(todo_list[i].status=='complete'){
+                    if (todo_list[i].status == 'complete') {
                         var html1 = `<div data-id=${todo_list[i].idx} data-status=${todo_list[i].status}  class="row border align-items-center p-1 " style="line-height: 0px;">
                                 <input class="check" type="checkbox" checked/> 
                                 <p class="mt-3 pl-3" style="text-decoration: line-through">${todo_list[i].name}</p>
                                 <i class="fa fa-times  " aria-hidden="true"></i>
                                </div>`
-                               $('#all').append(html1)
+                        $('#all').append(html1)
                         $('#complete').append(html1)
                     }
                 }
 
 
-               
+
 
             }
+            $(document).on('click', '#btn-create-list', function () {
+
+                console.log( $("#new-to-do-list").val())
+            })
 
 
+
+            $(document).on('click', 'nav .nav-link', function () {
+
+                console.log("You Clicked ME")
+            })
 
 
             $(document).on('click', '.fa-times', function () {
 
                 var id = $(this).parent().data("id");
 
-                
-                
+
+
                 console.log(id, "Removed", todo_list)
 
                 todo_list = todo_list.filter(object => object.idx != id);
@@ -189,19 +227,19 @@
 
                 var id = $(this).parent().data("id");
 
-                
+
                 const index = todo_list.findIndex(object => {
-                        return object.idx === id;
-                    });
+                    return object.idx === id;
+                });
 
 
-                console.log(id, "Complete",todo_list)
-                todo_list[index].status="complete"
-                console.log(id, "Complete",todo_list)
+                console.log(id, "Complete", todo_list)
+                todo_list[index].status = "complete"
+                console.log(id, "Complete", todo_list)
                 createNode()
-                
 
-                
+
+
 
 
 
