@@ -197,11 +197,11 @@ ul li.active a i.fa-chevron-right{
                 }else{
      
                 console.log(current_list_id)
-                todo_list.push({  'idx': index, 'name': input, 'status': "incomplete" })
+                todo_list.push({ 'list_id': current_list_id, 'idx': index, 'name': input, 'status': "incomplete" })
                 console.log(todo_list)
 
+                 
                 createNode()
-
                 index++
 
                 $(this).val('');
@@ -215,8 +215,9 @@ ul li.active a i.fa-chevron-right{
                 $('#complete').empty()
                 for (var i = 0; i < todo_list.length; i++) {
 
+                    console.log(current_list_id, todo_list[i].list_id)
                    
-
+                    if(current_list_id==todo_list[i].list_id){
 
 
                     if (todo_list[i].status == 'incomplete') {
@@ -247,7 +248,7 @@ ul li.active a i.fa-chevron-right{
                 }
 
 
-
+            }
 
             }
 
@@ -255,6 +256,7 @@ ul li.active a i.fa-chevron-right{
                 $(this).addClass("active").siblings().removeClass("active")
                 current_list_id=$(this).data("list-id");
                 console.log(current_list_id)
+                createNode()
             })
 
 
@@ -271,8 +273,7 @@ ul li.active a i.fa-chevron-right{
                 $(".to-do-list").append(html2)
                   
                 list_id_index++   
-                
-
+                $("#new-to-do-list").val('');
 
               
             })
