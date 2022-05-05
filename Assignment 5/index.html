@@ -28,6 +28,35 @@
             cursor: pointer;
             position: absolute;
         }
+
+
+        .nav-link {
+    display: block;
+    padding: 0 1rem;
+}
+.modal-body-p{
+    font-size: 14px; 
+    font-weight: 600;
+    line-height: 15px; 
+    margin-bottom: 2px;
+}
+
+a:hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+ 
+
+ul li a i.fa-chevron-right{
+    display: none;
+}
+
+ul li.active a i.fa-chevron-right{
+    display: inline;
+}
+
+
     </Style>
 </head>
 
@@ -56,12 +85,23 @@
 
                 </div>
 
-                <nav class="nav flex-column">
-                    <a class="nav-link active" href="#">Active <i class="fa fa-angle-right"></i> </a>
-                    <a class="nav-link" href="#">Link</a>
-                    <a class="nav-link" href="#">Link</a>
+                <ul class="nav flex-column to-do-list">
+                    <li class="nav-item active">
+                      <a class="nav-link " aria-current="page" href="javascript:;">Active <i class="fa fa-chevron-right"></i></a>
+                     
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="javascript:;">Link <i class="fa fa-chevron-right"></i></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="javascript:;">Link <i class="fa fa-chevron-right"></i></a>
+                    </li>
+                     
+                  </ul>
 
-                </nav>
+
+
+
             </div>
 
 
@@ -72,7 +112,7 @@
                     <div class="modal-content">
 
                         <div class="modal-body">
-                            <p style="font-size: 14px; font-weight: 600; line-height: 15px; margin-bottom: 2px;">New
+                            <p class="modal-body-p mb-1" style="">New
                                 To-Do List</p>
                             <input type="text" style="    line-height: 5px;" class="form-control" id="new-to-do-list"
                                 placeholder="Enter To-Do List" autofocus>
@@ -106,6 +146,7 @@
                         <ul class="nav nav-pills" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="pill" href="#all">All</a>
+                              
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="pill" href="#active">Active</a>
@@ -197,9 +238,29 @@
 
 
             }
-            $(document).on('click', '#btn-create-list', function () {
 
-                console.log( $("#new-to-do-list").val())
+            $(document).on('click', 'ul li', function(){
+                $(this).addClass("active").siblings().removeClass("active")
+            })
+
+
+
+
+            $(document).on('click', '#btn-create-list', function () {
+                var new_list=$("#new-to-do-list").val();
+
+                var html2= `   <li class="nav-item">
+                      <a class="nav-link  " aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
+                    </li>`
+               
+               
+                     
+                $(".to-do-list").append(html2)
+
+                
+
+
+              
             })
 
 
