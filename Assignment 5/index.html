@@ -16,6 +16,15 @@
             font-size: 15px
         }
 
+        .username-label{
+            font-size: 14px;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            
+        }
+        .fa-plus{
+            padding-left: 4px;
+        }
 
         ul li {
             position: relative;
@@ -31,32 +40,47 @@
 
 
         .nav-link {
-    display: block;
-    padding: 0 1rem;
-}
-.modal-body-p{
-    font-size: 14px; 
-    font-weight: 600;
-    line-height: 15px; 
-    margin-bottom: 2px;
-}
+            display: block;
+            padding: 0 1rem;
+        }
 
-a:hover {
-  background-color: blueviolet;
-  color: white;
-}
+        .modal-body-p {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 15px;
+            margin-bottom: 2px;
+        }
 
- 
-
-ul li a i.fa-chevron-right{
-    display: none;
-}
-
-ul li.active a i.fa-chevron-right{
-    display: inline;
-}
+        a:hover {
+            
+            color:blueviolet;
+        }
 
 
+
+        ul li a i.fa-chevron-right {
+            display: none;
+        }
+
+        ul li.active a i.fa-chevron-right {
+            display: inline;
+            
+        }
+        ul li.active a{
+            
+            font-weight: 600;
+            color: blueviolet;
+        }
+        ul li a{
+
+        color: black;
+        
+        }
+
+
+        a i{
+            padding-left: 4px;
+        }
     </Style>
 </head>
 
@@ -78,14 +102,14 @@ ul li.active a i.fa-chevron-right{
     <div class=" container mt-5">
         <div class="row">
             <div class="col-md-3  ">
-                <div class="username-label" style="padding: 0.5rem 1rem;">
+                <div class="username-label" style="">
                     Create List
                     <i class="fa fa-plus" style="color: blue;" data-toggle="modal" data-target="#exampleModal"></i>
 
 
                 </div>
 
-                <ul class="nav flex-column to-do-list">
+                <ul class="nav flex-column to-do-list mt-2">
                     <!--
                     <li class="nav-item active nav-list">
                       <a class="nav-link " aria-current="page" href="javascript:;">Active <i class="fa fa-chevron-right"></i></a>
@@ -115,9 +139,9 @@ ul li.active a i.fa-chevron-right{
                         <div class="modal-body">
                             <p class="modal-body-p mb-1" style="">New
                                 To-Do List</p>
-                            <input type="text" style="    line-height: 5px;" class="form-control" id="new-to-do-list"
+                            <input type="text" style="    line-height: 5px;" class="form-control mt-2" id="new-to-do-list"
                                 placeholder="Enter To-Do List" autofocus>
-                            <button type="button" id="btn-create-list" class="btn btn-primary mt-1"
+                            <button type="button" id="btn-create-list" class="btn btn-primary mt-3"
                                 style="font-size: 14px;   line-height: 15px;  " data-dismiss="modal">Create</button>
                         </div>
 
@@ -144,10 +168,10 @@ ul li.active a i.fa-chevron-right{
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <!-- Nav pills -->
-                        <ul class="nav nav-pills" role="tablist">
+                        <ul class="nav nav-pills p-1" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="pill" href="#all">All</a>
-                              
+
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="pill" href="#active">Active</a>
@@ -159,12 +183,12 @@ ul li.active a i.fa-chevron-right{
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div id="all" class="container tab-pane active  mt-5  "><br>
+                            <div id="all" class="container tab-pane active  mt-2  "><br>
                             </div>
-                            <div id="active" class="container tab-pane fade  mt-5"><br>
+                            <div id="active" class="container tab-pane fade  mt-2   "><br>
 
                             </div>
-                            <div id="complete" class="container tab-pane fade  mt-5"><br>
+                            <div id="complete" class="container tab-pane fade   mt-2   "><br>
 
                             </div>
                         </div>
@@ -183,7 +207,7 @@ ul li.active a i.fa-chevron-right{
 
     <script>
         $(document).ready(function () {
-            var list_id_index=0
+            var list_id_index = 0
             var current_list_id;
             var todo_list = []
             var index = todo_list.length
@@ -194,17 +218,17 @@ ul li.active a i.fa-chevron-right{
                 if (typeof current_list_id === "undefined") {
                     alert("Select List First")
                     $(this).val('');
-                }else{
-     
-                console.log(current_list_id)
-                todo_list.push({ 'list_id': current_list_id, 'idx': index, 'name': input, 'status': "incomplete" })
-                console.log(todo_list)
+                } else {
 
-                 
-                createNode()
-                index++
+                    console.log(current_list_id)
+                    todo_list.push({ 'list_id': current_list_id, 'idx': index, 'name': input, 'status': "incomplete" })
+                    console.log(todo_list)
 
-                $(this).val('');
+
+                    createNode()
+                    index++
+
+                    $(this).val('');
                 }
 
             })
@@ -216,45 +240,45 @@ ul li.active a i.fa-chevron-right{
                 for (var i = 0; i < todo_list.length; i++) {
 
                     console.log(current_list_id, todo_list[i].list_id)
-                   
-                    if(current_list_id==todo_list[i].list_id){
+
+                    if (current_list_id == todo_list[i].list_id) {
 
 
-                    if (todo_list[i].status == 'incomplete') {
+                        if (todo_list[i].status == 'incomplete') {
 
 
-                        var html = `<div data-id=${todo_list[i].idx} data-status=${todo_list[i].status}  class="row border align-items-center p-1 " style="line-height: 0px;">
-                                <input class="check" type="checkbox"/> 
+                            var html = `<div data-id=${todo_list[i].idx} data-status=${todo_list[i].status}  class="row border align-items-center p-2 " style="line-height: 0px;">
+                                <input class="check" style="pl-2" type="checkbox"/> 
                                 <p class="mt-3 pl-3">${todo_list[i].name}</p>
                                 <i class="fa fa-times  " aria-hidden="true"></i>
                                </div>`
 
-                        $('#all').append(html)
+                            $('#all').append(html)
 
-                        $('#active').append(html)
-                    }
+                            $('#active').append(html)
+                        }
 
-                    if (todo_list[i].status == 'complete') {
-                        var html1 = `<div data-id=${todo_list[i].idx} data-status=${todo_list[i].status}  class="row border align-items-center p-1 " style="line-height: 0px;">
-                                <input class="check" type="checkbox" checked/> 
+                        if (todo_list[i].status == 'complete') {
+                            var html1 = `<div data-id=${todo_list[i].idx} data-status=${todo_list[i].status}  class="row border align-items-center p-2 " style="line-height: 0px;">
+                                <input class="check" type="checkbox" checked/ > 
                                 <p class="mt-3 pl-3" style="text-decoration: line-through">${todo_list[i].name}</p>
                                 <i class="fa fa-times  " aria-hidden="true"></i>
                                </div>`
-                        $('#all').append(html1)
-                        $('#complete').append(html1)
+                            $('#all').append(html1)
+                            $('#complete').append(html1)
+                        }
+
+
                     }
 
-               
+
                 }
 
-
             }
 
-            }
-
-            $(document).on('click', '.nav-list', function(){
+            $(document).on('click', '.nav-list', function () {
                 $(this).addClass("active").siblings().removeClass("active")
-                current_list_id=$(this).data("list-id");
+                current_list_id = $(this).data("list-id");
                 console.log(current_list_id)
                 createNode()
             })
@@ -262,24 +286,30 @@ ul li.active a i.fa-chevron-right{
 
 
 
-            $(document).on('click', '#btn-create-list', function () {
-                var new_list=$("#new-to-do-list").val();
 
-                var html2= `   <li class="nav-item nav-list" data-list-id=${list_id_index}>
-                      <a class="nav-link  " aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
-                    </li>`
-                       
-                     
+            $('#new-to-do-list').change(function () {
+
+                $('#exampleModal').modal('hide');
+
+                var id = new Date().getTime()
+                var new_list = $("#new-to-do-list").val();
+
+                var html2 = `   <li class="nav-item nav-list" id=${id} data-list-id=${list_id_index}>
+      <a class="nav-link  " aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
+    </li>`
+
+
                 $(".to-do-list").append(html2)
-                  
-                list_id_index++   
-                $("#new-to-do-list").val('');
 
-              
+                list_id_index++
+                $("#new-to-do-list").val('');
+                $(`#${id}`).click()
+
             })
 
 
- 
+
+
 
 
             $(document).on('click', '.fa-times', function () {
