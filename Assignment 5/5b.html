@@ -329,6 +329,7 @@
                 current_list_id = id;
                 $(`#${current_list_id}`).siblings().hide()
                 $(`#${current_list_id}`).show()
+                $('.list-all').click()
 
 
             })
@@ -357,6 +358,7 @@
 
                     console.log(current_list_id, "Appended")
                     $(this).val('');
+                    $('.list-all').click()
 
                 }
 
@@ -373,17 +375,17 @@
 
             $('.list-active').click(function () {
 
-                $(`#${current_list_id}`).show()
-                $(`#${current_list_id}`).siblings().hide()
+                
+                $(`#${current_list_id}`).children().hide()
+                $(`#${current_list_id}`).children().not(".selected").show();
 
 
             })
 
             $('.list-complete').click(function () {
+                
                 $(`#${current_list_id}`).children().hide()
-                $(`#${current_list_id}`).children('input[name="check"]:checked').show()
-
-
+                $(`#${current_list_id}`).children().filter(".selected").show();
 
 
 
@@ -396,13 +398,33 @@
 
             $(document).on('click', '.fa-times', function () {
 
-                  $(this).parent().remove()
+                $(this).parent().remove()
 
 
+
+
+
+            });
+
+            $(document).on('click', '.check', function () {
+
+
+                if ($(this).is(":checked")) {
+                    $(this).parent().addClass("selected")
+            } else {
+                $(this).parent().removeClass("selected")
+            }
+
+            
 
                 
 
+
+
+
             });
+
+
 
         })
     </script>
