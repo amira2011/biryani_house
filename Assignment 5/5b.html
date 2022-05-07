@@ -11,23 +11,64 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <Style>
+    <style>
         .navbar-title {
-            font-size: 15px
+            font-size: 15px;
+            margin-left: 15px;
         }
 
-        .username-label{
+
+
+
+        .username-label {
             font-size: 14px;
             font-weight: 600;
             padding: 0.5rem 1rem;
-            
+            line-height: 14px;
+
         }
-        .fa-plus{
+
+        .fa-plus {
             padding-left: 4px;
         }
 
-        ul li {
-            position: relative;
+
+        a:hover {
+
+            color: blueviolet;
+        }
+
+        ul li a i.fa-chevron-right {
+            display: none;
+        }
+
+        ul li.active a i.fa-chevron-right {
+            display: inline;
+
+        }
+
+        ul li.active a {
+
+            font-weight: 600;
+            color: blueviolet;
+        }
+
+
+        ul li a {
+
+            color: black;
+
+        }
+
+        .list-link {
+            display: block;
+            padding: 3px 1rem;
+            font-size: 14px;
+        }
+
+        #to-do-item {
+            font-size: 14px;
+            line-height: 14px;
 
         }
 
@@ -37,53 +78,10 @@
             cursor: pointer;
             position: absolute;
         }
+    </style>
 
 
-        .nav-link {
-            display: block;
-            padding: 0 1rem;
-        }
-
-        .modal-body-p {
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 15px;
-            margin-bottom: 2px;
-        }
-
-        a:hover {
-            
-            color:blueviolet;
-        }
-
-
-
-        ul li a i.fa-chevron-right {
-            display: none;
-        }
-
-        ul li.active a i.fa-chevron-right {
-            display: inline;
-            
-        }
-        ul li.active a{
-            
-            font-weight: 600;
-            color: blueviolet;
-        }
-        ul li a{
-
-        color: black;
-        
-        }
-
-
-        a i{
-            padding-left: 4px;
-        }
-    </Style>
 </head>
-
 
 <body>
 
@@ -98,67 +96,77 @@
         </div>
     </nav>
 
+    <div class="container-fluid mt-5 ">
 
-    <div class=" container mt-5">
+
+
+
         <div class="row">
-            <div class="col-md-3  ">
-                <div class="username-label" >
+            <div class="col-md-3">
+
+                <div class="username-label">
+
                     Create List
                     <i class="fa fa-plus" style="color: blue;" data-toggle="modal" data-target="#exampleModal"></i>
 
-
                 </div>
 
-                <ul class="nav flex-column to-do-list mt-2">
-                    <!--
-                    <li class="nav-item active nav-list">
-                      <a class="nav-link " aria-current="page" href="javascript:;">Active <i class="fa fa-chevron-right"></i></a>
-                     
+
+
+                <ul class="nav flex-column to-do-list ">
+
+                    <li class="nav-item active nav-list" data-list-id="l1">
+                        <a class="nav-link list-link" aria-current="page" href="javascript:;">Places To Visit <i
+                                class="fa fa-chevron-right"></i></a>
+
                     </li>
-                    <li class="nav-item nav-list">
-                      <a class="nav-link" href="javascript:;">Link <i class="fa fa-chevron-right"></i></a>
+                    <li class="nav-item nav-list" data-list-id="l2">
+                        <a class="nav-link list-link" href="javascript:;">Movies To Watch <i
+                                class="fa fa-chevron-right"></i></a>
                     </li>
-                    <li class="nav-item nav-list">
-                      <a class="nav-link" href="javascript:;">Link <i class="fa fa-chevron-right"></i></a>
-                    </li>
-                     
-                  </ul>-->
+
+
+
+                </ul>
+
+
+
+
 
 
 
 
             </div>
+            <div class="col-md-9">
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
 
-                        <div class="modal-body">
-                            <p class="modal-body-p mb-1" >New
-                                To-Do List</p>
-                            <input type="text" style="    line-height: 5px;" class="form-control mt-2" id="new-to-do-list"
-                                placeholder="Enter To-Do List" autofocus>
-                            <button type="button" id="btn-create-list" class="btn btn-primary mt-3"
-                                style="font-size: 14px;   line-height: 15px;  " data-dismiss="modal">Create</button>
+                            <div class="modal-body">
+                                <p class="modal-body-p mb-1">New
+                                    To-Do List</p>
+                                <input type="text" style="    line-height: 5px;" class="form-control mt-2"
+                                    id="new-to-do-list" placeholder="Enter To-Do List" autofocus>
+                                <button type="button" id="btn-create-list" class="btn btn-primary mt-3"
+                                    style="font-size: 14px;   line-height: 15px;  " data-dismiss="modal">Create</button>
+                            </div>
+
                         </div>
-
                     </div>
                 </div>
-            </div>
+                <!-- Modal End -->
 
-
-
-            <div class="col-md-9  ">
 
                 <div class="row">
                     <div class="col-md-9 col-sm-9">
                         <input type="text" class="form-control" id="to-do-item" placeholder="Enter To-Do Item"
                             autofocus>
                     </div>
-                    <div class="col-md-3 col-sm-3 mt-1">
+                    <div class="col-md-3 col-sm-3 ">
                         <a href="javascript:;" class="btn btn-sm btn-primary" id="add-item">Add</a>
                     </div>
 
@@ -169,96 +177,129 @@
                     <div class="col-md-12">
                         <!-- Nav pills -->
                         <ul class="nav nav-pills p-1" role="tablist">
-                            <li class="nav-item list-all">
-                                <a class="nav-link active" data-toggle="pill" href="#all">All</a>
+                            <li class="nav-item">
+                                <a class="nav-link active list-all" data-toggle="pill" href="#all">All</a>
 
                             </li>
-                            <li class="nav-item list-active">
-                                <a class="nav-link" data-toggle="pill" href="#active">Active</a>
+                            <li class="nav-item">
+                                <a class="nav-link list-active" data-toggle="pill" href="#all">Active</a>
                             </li>
-                            <li class="nav-item list-complete">
-                                <a class="nav-link" data-toggle="pill" href="#complete">Completed</a>
+                            <li class="nav-item">
+                                <a class="nav-link list-complete" data-toggle="pill" href="#all">Completed</a>
                             </li>
                         </ul>
 
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div id="all" class="container tab-pane active  mt-2  "><br>
-                            </div>
-                            <div id="active" class="container tab-pane fade  mt-2   "><br>
+                        <!-- List  panes -->
+                        <div class="container tab-content">
+                            <div id="all" class="row  tab-pane active  mt-2  ">
+                                <div class="col-md-12" id="l1" style="display: none;">
+                                    <div data-id=1 data-status="not-completed"
+                                        class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" name="check" type="checkbox" />
+                                        <p class="mt-3 pl-3">BKK</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                    </div>
+                                    <div data-id=1 data-status="not-completed"
+                                        class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" name="check" type="checkbox" />
+                                        <p class="mt-3 pl-3">Dubai</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-12" id="l2" style="display: none;">
+                                    <div data-id=1 data-status="not-completed"
+                                        class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" name="check" type="checkbox" />
+                                        <p class="mt-3 pl-3">Dr. Strange</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                    </div>
+                                    <div data-id=1 data-status="not-completed"
+                                        class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" name="check" type="checkbox" />
+                                        <p class="mt-3 pl-3">Spiderman</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                    </div>
+
+
+
+                                </div>
 
                             </div>
-                            <div id="complete" class="container tab-pane fade   mt-2   "><br>
+
+                            <!--
+
+                            <div id="active" class="row tab-pane fade  mt-2 ">
+                                <div class="col-md-12" id="l3">
+                                    <div data-id=1 data-status="not-completed"  class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" type="checkbox"/> 
+                                        <p class="mt-3 pl-3">BKK</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                       </div>
+
+                                    
+                                </div> 
+
+                                <div class="col-md-12" id="l4" >
+                                    <div data-id=1 data-status="not-completed"  class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" type="checkbox"/> 
+                                        <p class="mt-3 pl-3">BKK</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                       </div>
+
+                                    
+                                </div> 
 
                             </div>
+                            <div id="complete" class="row tab-pane fade   mt-2 ">
+
+                            </div>
+
+                            -->
                         </div>
 
                     </div>
                 </div>
+
+
             </div>
+
+
+
+
         </div>
+
     </div>
 
+
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
-
     <script>
+
         $(document).ready(function () {
-            var list_id_index = 0
-            var current_list_id;
-            var todo_list = []
-            var index = todo_list.length
 
+            var current_list_id = "l1"
+            $(`#${current_list_id}`).show()
+            $(`#${current_list_id}`).siblings().hide()
 
-            $('#to-do-item').change(function () {
-
-                if (typeof current_list_id === "undefined") {
-                    alert("Select List First")
-                    $(this).val('');
-                }else{
-                var input = $(this).val();
-                $(this).val('');
-                createNode(input)
-                }
-            })
-
-            $('.list-all').click(function(e){
-
-               console.log(e)
-            })
-
-
-
-            function createNode(item) {
-
-                var idx = new Date().getTime()
-               
-                var html = `<div id=${idx} data-status="incomplete"  data-listid=${current_list_id} class="row border align-items-center p-2 " style="line-height: 0px;">
-                                <input class="check" style="pl-2" type="checkbox"/> 
-                                <p class="mt-3 pl-3">${item}</p>
-                                <i class="fa fa-times  " aria-hidden="true"></i>
-                               </div>`
-
-                            $('#all').append(html)
-
-                            $('#active').append(html)
-
-                
-
-            }
 
             $(document).on('click', '.nav-list', function () {
                 $(this).addClass("active").siblings().removeClass("active")
                 current_list_id = $(this).data("list-id");
+                $(`#${current_list_id}`).show()
+
+                $(`#${current_list_id}`).siblings().hide()
+
+
                 console.log(current_list_id)
-             
+
             })
-
-
-
 
 
             $('#new-to-do-list').change(function () {
@@ -268,16 +309,84 @@
                 var id = new Date().getTime()
                 var new_list = $("#new-to-do-list").val();
 
-                var html2 = `   <li class="nav-item nav-list" id=${id} data-list-id=${id}>
-      <a class="nav-link  " aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
-    </li>`
+                var html2 = `   <li class="nav-item nav-list ${id} "   data-list-id=${id}>
+                                <a class="nav-link  list-link" aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
+                                </li>`
 
 
                 $(".to-do-list").append(html2)
 
-                
+
                 $("#new-to-do-list").val('');
-                $(`#${id}`).click()
+                $(`.${id}`).click()
+
+                var html1 = `<div class="col-md-12" id=${id} style="display: none;">                                   
+      
+                                </div> `
+
+
+                $('#all').append(html1)
+                current_list_id = id;
+                $(`#${current_list_id}`).siblings().hide()
+                $(`#${current_list_id}`).show()
+
+
+            })
+
+
+
+            $('#to-do-item').change(function () {
+
+                var input = $(this).val();
+                console.log(current_list_id)
+                var idx = new Date().getTime()
+
+                if (typeof current_list_id === "undefined") {
+                    alert("Select List First")
+                    $(this).val('');
+                } else {
+
+
+                    var html = `<div data-id=${idx} data-status="not-completed"  class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" name="check" type="checkbox"/> 
+                                        <p class="mt-3 pl-3">${input}</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                       </div>`
+
+                    $(`#${current_list_id}`).append(html)
+
+                    console.log(current_list_id, "Appended")
+                    $(this).val('');
+
+                }
+
+            })
+
+
+
+            $('.list-all').click(function () {
+
+                $(`#${current_list_id}`).children().show()
+
+
+            })
+
+            $('.list-active').click(function () {
+
+                $(`#${current_list_id}`).show()
+                $(`#${current_list_id}`).siblings().hide()
+
+
+            })
+
+            $('.list-complete').click(function () {
+                $(`#${current_list_id}`).children().hide()
+                $(`#${current_list_id}`).children('input[name="check"]:checked').show()
+
+
+
+
+
 
             })
 
@@ -285,44 +394,17 @@
 
 
 
-
             $(document).on('click', '.fa-times', function () {
 
-                var id = $(this).parent().data("listid");
+                  $(this).parent().remove()
 
-                console.log(id)
 
-                $(this).parent().remove()
-                
 
-                 
                 
 
             });
 
-            $(document).on('click', '.check', function () {
-
-                var id = $(this).parent().data("id");
-
-
-               
-
-
-                console.log(id, "Complete", todo_list)
-                todo_list[index].status = "complete"
-                console.log(id, "Complete", todo_list)
-                createNode()
-
-
-
-
-
-
-            });
-
-
-
-        });
+        })
     </script>
 </body>
 
