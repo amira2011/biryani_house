@@ -339,10 +339,16 @@
                     return object.idx === id;
                 });
 
+                if ($(this).is(":checked")) {
+                    todo_list[index].status = "complete"
+            } else {
+                todo_list[index].status = "incomplete"
+            }
 
-                console.log(id, "Complete", todo_list)
-                todo_list[index].status = "complete"
-                console.log(id, "Complete", todo_list)
+
+
+
+ 
                 createNode()
 
 
