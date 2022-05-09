@@ -250,12 +250,19 @@
         $(document).ready(function () {
             var lists;
             var items;
-            console.log("ok")
+            var flag = 'first'
+
 
             load_list()
+
+
             function load_list() {
+
+                $('.to-do-list ').empty()
                 $.ajax({
-                    url: 'http://todo3.herokuapp.com/lists/',
+                    // url: 'http://todo3.herokuapp.com/lists/',
+
+                    url: 'http://127.0.0.1:3000/lists/',
                     type: "GET",
 
                     success: function (data) {
@@ -263,9 +270,9 @@
                         lists = data
 
 
-                        console.log(data)
+
                         for (let i = 0; i < data.length; i++) {
-                            console.log(data[i].id, data[i].name)
+
 
                             var list = `<li class="nav-item  nav-list" data-list-id=${data[i].id}>
                         <a class="nav-link list-link" aria-current="page" href="javascript:;">${data[i].name} 
@@ -275,8 +282,9 @@
 
 
                         }
-
-                        $('.to-do-list ').find("a").first().click()
+                        if (flag == 'first') {
+                            $('.to-do-list ').find("a").first().click()
+                        }
                     }
 
 
@@ -287,9 +295,6 @@
             }
 
 
-            var current_list_id = "l1"
-            $(`#${current_list_id}`).show()
-            $(`#${current_list_id}`).siblings().hide()
 
 
             $(document).on('click', '.nav-list', function () {
@@ -297,11 +302,11 @@
                 current_list_id = $(this).data("list-id");
                 $('#all').empty()
 
-                console.log("you Clicked Me")
+
 
                 $.ajax({
-                     url: `http://todo3.herokuapp.com/items/${current_list_id}`,
-                  //  url: `http://127.0.0.1:3000/items/${current_list_id}`,
+                    // url: `http://todo3.herokuapp.com/items/${current_list_id}`,
+                    url: `http://127.0.0.1:3000/items/${current_list_id}`,
                     type: "GET",
 
                     success: function (data) {
@@ -315,7 +320,7 @@
                             console.log(data[i].id, data[i].name)
 
 
-                            var listitem = `<div data-id=${data[i].id} data-status="not-completed"
+                            var listitem = `<div data-id=${data[i].id} data-currentlistid=${current_list_id}  data-status="not-completed"
                                         class="row border align-items-center p-2 " style="line-height: 0px;">
                                         <input class="check pl-2" name="check" type="checkbox" />
                                         <p class="mt-3 pl-3">${data[i].name}</p>
@@ -342,48 +347,86 @@
             })
 
 
-            $('#new-to-do-list').change(function () {
+            $("#btn-create-list").click(function (e) {
+                e.preventDefault();
+
+                addnewlist();
+            });
+
+            $("#new-to-do-list").keypress(function (e) {
+                if (e.which == 13) {
+                    addnewlist();
+                }
+            });
+
+
+
+
+            function addnewlist() {
 
                 $('#exampleModal').modal('hide');
+                console.log("#new-to-do-list")
 
-                var id = new Date().getTime()
                 var new_list = $("#new-to-do-list").val();
+                $("#new-to-do-list").val('')
 
-                var html2 = `   <li class="nav-item nav-list ${id} "   data-list-id=${id}>
-                                <a class="nav-link  list-link" aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
-                                </li>`
+                // url1 = `http://todo3.herokuapp.com/items/`;
+                url1 = `http://127.0.0.1:3000/lists/`;
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: url1,
+                        data: { name: new_list },
+                        success: function (data, status, jqXHR) {
+                            console.log("In Success", data.id)
+                            current_list_id = data.id
+                            if (jqXHR.status == 200) {
+
+                                current_list_id = data.id
+
+                            } else {
+                                console.log(status)
+
+                            }
+                        },
+
+                        error: function (jqXHR, status, error) {
+
+                            console.log(status)
+
+                        }
+
+                    }
+                );
+                flag = "Other"
+
+                load_list()
+
+                console.log("check id ", current_list_id)
+                console.log("#new-to-do-list")
+                $(`[data-list-id=${current_list_id}]`).click()
 
 
-                $(".to-do-list").append(html2)
 
 
-                $("#new-to-do-list").val('');
-                $(`.${id}`).click()
 
-                var html1 = `<div class="col-md-12" id=${id} style="display: none;">                                   
-      
-                                </div> `
+            }
 
 
-                $('#all').append(html1)
-                current_list_id = id;
-                $(`#${current_list_id}`).siblings().hide()
-                $(`#${current_list_id}`).show()
-                $('.list-all').click()
 
 
-            })
+
 
 
 
             $('#to-do-item').change(function () {
 
                 var input = $(this).val();
-               
-                
 
-                url1 = `http://todo3.herokuapp.com/items/`;
 
+
+                // url1 = `http://todo3.herokuapp.com/items/`;
+                url1 = `http://127.0.0.1:3000/items/`;
                 $.ajax(
                     {
                         type: "POST",
@@ -400,7 +443,7 @@
                         },
 
                         error: function (jqXHR, status, error) {
-                            
+
                             console.log(status)
 
                         }
@@ -409,10 +452,10 @@
                 );
 
 
-              
+
                 $(this).val('');
                 console.log(`[data-list-id=${current_list_id}]`)
-                $(`[data-list-id=${current_list_id}]`).click()   
+                $(`[data-list-id=${current_list_id}]`).click()
 
 
 
@@ -422,7 +465,7 @@
 
             $('.list-all').click(function () {
 
-                $(`#${current_list_id}`).children().show()
+                $('#all').children().show()
 
 
             })
@@ -430,16 +473,16 @@
             $('.list-active').click(function () {
 
 
-                $(`#${current_list_id}`).children().hide()
-                $(`#${current_list_id}`).children().not(".selected").show();
+                $('#all').children().hide()
+                $('#all').children().not(".selected").show();
 
 
             })
 
             $('.list-complete').click(function () {
 
-                $(`#${current_list_id}`).children().hide()
-                $(`#${current_list_id}`).children().filter(".selected").show();
+                $('#all').children().hide()
+                $('#all').children().filter(".selected").show();
 
 
 
@@ -452,7 +495,23 @@
 
             $(document).on('click', '.fa-times', function () {
 
-                $(this).parent().remove()
+                // $(this).parent().remove()
+                var item_id = $(this).parent().data("id");
+                console.log(item_id)
+
+
+                $.ajax({
+                    url: `http://127.0.0.1:3000/items/${item_id}`,
+                    type: 'DELETE',
+                    success: function (result) {
+                        console.log("Deleted")
+                        $(`[data-list-id=${current_list_id}]`).click()
+                    }
+                });
+
+
+
+
 
 
 
@@ -480,7 +539,18 @@
 
 
 
-        })
+            $(document).on('click', '.check', function () {
+
+
+                if ($(this).is(":checked")) {
+                    $(this).parent().addClass("selected")
+                } else {
+                    $(this).parent().removeClass("selected")
+                }
+
+            })
+
+            })
     </script>
 </body>
 
