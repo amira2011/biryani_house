@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .navbar-title {
+            font-size: 15px;
+            margin-left: 15px;
+        }
+
+
+
+
+        .username-label {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            line-height: 14px;
+
+        }
+
+        .fa-plus {
+            padding-left: 4px;
+        }
+
+
+        a:hover {
+
+            color: blueviolet;
+        }
+
+        ul li a i.fa-chevron-right {
+            display: none;
+        }
+
+        ul li.active a i.fa-chevron-right {
+            display: inline;
+
+        }
+
+        ul li.active a {
+
+            font-weight: 600;
+            color: blueviolet;
+        }
+
+
+        ul li a {
+
+            color: black;
+
+        }
+
+        .list-link {
+            display: block;
+            padding: 3px 1rem;
+            font-size: 14px;
+        }
+
+        #to-do-item {
+            font-size: 14px;
+            line-height: 14px;
+
+        }
+
+        .fa-times {
+            right: 40px;
+            color: red;
+            cursor: pointer;
+            position: absolute;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="javascript:;">
+
+                <span class="navbar-title">
+                    To-Do List
+                </span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-5 ">
+
+
+
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="username-label">
+
+                    Create List
+                    <i class="fa fa-plus" style="color: blue;" data-toggle="modal" data-target="#exampleModal"></i>
+
+                </div>
+
+
+
+                <ul class="nav flex-column to-do-list ">
+
+
+
+
+
+                </ul>
+
+
+
+
+
+
+
+
+            </div>
+            <div class="col-md-9">
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <p class="modal-body-p mb-1">New
+                                    To-Do List</p>
+                                <input type="text" style="    line-height: 5px;" class="form-control mt-2"
+                                    id="new-to-do-list" placeholder="Enter To-Do List" autofocus>
+                                <button type="button" id="btn-create-list" class="btn btn-primary mt-3"
+                                    style="font-size: 14px;   line-height: 15px;  " data-dismiss="modal">Create</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal End -->
+
+
+                <div class="row">
+                    <div class="col-md-9 col-sm-9">
+                        <input type="text" class="form-control" id="to-do-item" placeholder="Enter To-Do Item"
+                            autofocus>
+                    </div>
+                    <div class="col-md-3 col-sm-3 ">
+                        <a href="javascript:;" class="btn btn-sm btn-primary" id="add-item">Add</a>
+                    </div>
+
+
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <!-- Nav pills -->
+                        <ul class="nav nav-pills p-1" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active list-all" data-toggle="pill" href="#all">All</a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link list-active" data-toggle="pill" href="#all">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link list-complete" data-toggle="pill" href="#all">Completed</a>
+                            </li>
+                        </ul>
+
+                        <!-- List  panes -->
+                        <div class="container tab-content">
+                            <div id="all" class="row  tab-pane active  mt-2  ">
+
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+                        <!--
+
+                            <div id="active" class="row tab-pane fade  mt-2 ">
+                                <div class="col-md-12" id="l3">
+                                    <div data-id=1 data-status="not-completed"  class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" type="checkbox"/> 
+                                        <p class="mt-3 pl-3">BKK</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                       </div>
+
+                                    
+                                </div> 
+
+                                <div class="col-md-12" id="l4" >
+                                    <div data-id=1 data-status="not-completed"  class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" type="checkbox"/> 
+                                        <p class="mt-3 pl-3">BKK</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                       </div>
+
+                                    
+                                </div> 
+
+                            </div>
+                            <div id="complete" class="row tab-pane fade   mt-2 ">
+
+                            </div>
+
+                            -->
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    </div>
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            var lists;
+            var items;
+            console.log("ok")
+
+            load_list()
+            function load_list() {
+                $.ajax({
+                    url: 'http://todo3.herokuapp.com/lists/',
+                    type: "GET",
+
+                    success: function (data) {
+
+                        lists = data
+
+
+                        console.log(data)
+                        for (let i = 0; i < data.length; i++) {
+                            console.log(data[i].id, data[i].name)
+
+                            var list = `<li class="nav-item  nav-list" data-list-id=${data[i].id}>
+                        <a class="nav-link list-link" aria-current="page" href="javascript:;">${data[i].name} 
+                            <i class="fa fa-chevron-right"></i></a></li>`
+
+                            $('.to-do-list ').append(list)
+
+
+                        }
+
+                        $('.to-do-list ').find("a").first().click()
+                    }
+
+
+
+                });
+
+
+            }
+
+
+            var current_list_id = "l1"
+            $(`#${current_list_id}`).show()
+            $(`#${current_list_id}`).siblings().hide()
+
+
+            $(document).on('click', '.nav-list', function () {
+                $(this).addClass("active").siblings().removeClass("active")
+                current_list_id = $(this).data("list-id");
+                $('#all').empty()
+
+                console.log("you Clicked Me")
+
+                $.ajax({
+                     url: `http://todo3.herokuapp.com/items/${current_list_id}`,
+                  //  url: `http://127.0.0.1:3000/items/${current_list_id}`,
+                    type: "GET",
+
+                    success: function (data) {
+
+                        items = data
+
+
+                        console.log(data)
+
+                        for (let i = 0; i < data.length; i++) {
+                            console.log(data[i].id, data[i].name)
+
+
+                            var listitem = `<div data-id=${data[i].id} data-status="not-completed"
+                                        class="row border align-items-center p-2 " style="line-height: 0px;">
+                                        <input class="check pl-2" name="check" type="checkbox" />
+                                        <p class="mt-3 pl-3">${data[i].name}</p>
+                                        <i class="fa fa-times  " aria-hidden="true"></i>
+                                    </div>`
+
+                            $('#all').append(listitem)
+
+                        }
+
+
+
+
+                    }
+
+
+
+
+
+                });
+
+
+
+            })
+
+
+            $('#new-to-do-list').change(function () {
+
+                $('#exampleModal').modal('hide');
+
+                var id = new Date().getTime()
+                var new_list = $("#new-to-do-list").val();
+
+                var html2 = `   <li class="nav-item nav-list ${id} "   data-list-id=${id}>
+                                <a class="nav-link  list-link" aria-current="page" href="#">${new_list}<i class="fa fa-chevron-right"></i></a>
+                                </li>`
+
+
+                $(".to-do-list").append(html2)
+
+
+                $("#new-to-do-list").val('');
+                $(`.${id}`).click()
+
+                var html1 = `<div class="col-md-12" id=${id} style="display: none;">                                   
+      
+                                </div> `
+
+
+                $('#all').append(html1)
+                current_list_id = id;
+                $(`#${current_list_id}`).siblings().hide()
+                $(`#${current_list_id}`).show()
+                $('.list-all').click()
+
+
+            })
+
+
+
+            $('#to-do-item').change(function () {
+
+                var input = $(this).val();
+               
+                
+
+                url1 = `http://todo3.herokuapp.com/items/`;
+
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: url1,
+                        data: { name: input, status: "notcomplete", list_id: current_list_id },
+                        success: function (data, status, jqXHR) {
+                            if (jqXHR.status == 200) {
+                                console.log(data)
+
+                            } else {
+                                console.log(status)
+
+                            }
+                        },
+
+                        error: function (jqXHR, status, error) {
+                            
+                            console.log(status)
+
+                        }
+
+                    }
+                );
+
+
+              
+                $(this).val('');
+                console.log(`[data-list-id=${current_list_id}]`)
+                $(`[data-list-id=${current_list_id}]`).click()   
+
+
+
+            })
+
+
+
+            $('.list-all').click(function () {
+
+                $(`#${current_list_id}`).children().show()
+
+
+            })
+
+            $('.list-active').click(function () {
+
+
+                $(`#${current_list_id}`).children().hide()
+                $(`#${current_list_id}`).children().not(".selected").show();
+
+
+            })
+
+            $('.list-complete').click(function () {
+
+                $(`#${current_list_id}`).children().hide()
+                $(`#${current_list_id}`).children().filter(".selected").show();
+
+
+
+
+            })
+
+
+
+
+
+            $(document).on('click', '.fa-times', function () {
+
+                $(this).parent().remove()
+
+
+
+
+
+            });
+
+            $(document).on('click', '.check', function () {
+
+
+                if ($(this).is(":checked")) {
+                    $(this).parent().addClass("selected")
+                } else {
+                    $(this).parent().removeClass("selected")
+                }
+
+
+
+
+
+
+
+
+            });
+
+
+
+        })
+    </script>
+</body>
+
+</html>
