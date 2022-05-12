@@ -99,6 +99,11 @@
                     To-Do List
                 </span>
             </a>
+            <div class="ml-auto">
+            
+                <span  class="navbar-title navbar-brand"  id="clock">   </span>
+
+            </div>
         </div>
     </nav>
 
@@ -188,10 +193,11 @@
                         </ul>
 
                         <!-- List  panes -->
-                        <div class="container tab-content">
+                        <div class="col-md-12 tab-content">
                             <div id="all" class="tab-pane active  mt-2  ">
 
-                                load_list()
+                                 
+                              
                         </div>
 
                         <!--
@@ -252,6 +258,10 @@
             var items;
             var flag = 'first'
             var current_list_id
+            
+
+ 
+            setInterval(function() {$('#clock').text(new Date().toLocaleDateString()+" "+new Date().toLocaleTimeString())}, 1000);
 
             load_list()
 
@@ -314,7 +324,7 @@
 
                 $.ajax({
                     url: `http://todo3.herokuapp.com/items/${idx}`,
-                    // url: `http://127.0.0.1:3000/items/${idx}`,
+                 //    url: `http://127.0.0.1:3000/items/${idx}`,
                     type: "GET",
 
                     success: function (data) {
@@ -402,8 +412,8 @@
                 var new_list = $("#new-to-do-list").val();
                 $("#new-to-do-list").val('')
 
-                 url1 = `http://todo3.herokuapp.com/lists/`;
-                //url1 = `http://127.0.0.1:3000/lists/`;
+                url1 = `http://todo3.herokuapp.com/lists/`;
+               // url1 = `http://127.0.0.1:3000/lists/`;
                 $.ajax(
                     {
                         type: "POST",
@@ -460,7 +470,7 @@
 
                 $(this).val('');
 
-                 url1 = `http://todo3.herokuapp.com/items/`;
+              url1 = `http://todo3.herokuapp.com/items/`;
              //  url1 = `http://127.0.0.1:3000/items/`;
                 $.ajax(
                     {
@@ -531,7 +541,7 @@
 
                 $.ajax({
                     url: `http://todo3.herokuapp.com/lists/${current_list_id}`,
-                    //url: `http://127.0.0.1:3000/lists/${current_list_id}`,
+                   // url: `http://127.0.0.1:3000/lists/${current_list_id}`,
                     type: 'DELETE',
                     success: function (result) {
                         console.log("Deleted")
@@ -562,7 +572,7 @@
 
                 $.ajax({
                    url: `http://todo3.herokuapp.com/items/${item_id}`,
-                   // url: `http://127.0.0.1:3000/items/${item_id}`,
+                  //  url: `http://127.0.0.1:3000/items/${item_id}`,
                     type: 'DELETE',
                     success: function (result) {
                         console.log("Deleted")
