@@ -80,7 +80,7 @@
         }
 
 
-        .delete-list-link:hover{
+        .delete-list-link:hover {
             font-weight: 600;
 
         }
@@ -100,8 +100,8 @@
                 </span>
             </a>
             <div class="ml-auto">
-            
-                <span  class="navbar-title navbar-brand"  id="clock">   </span>
+
+                <span class="navbar-title navbar-brand" id="clock"> </span>
 
             </div>
         </div>
@@ -134,7 +134,7 @@
 
                 <ul class="nav flex-column delete-to-do-list mt-3 ">
 
-                </ul> 
+                </ul>
 
 
 
@@ -184,7 +184,7 @@
                                 <a class="nav-link active list-all" data-toggle="pill" href="#all">All</a>
 
                             </li>
-                            <li class="nav-item" style="line-height: 14px;"> 
+                            <li class="nav-item" style="line-height: 14px;">
                                 <a class="nav-link list-active" data-toggle="pill" href="#all">Active</a>
                             </li>
                             <li class="nav-item" style="line-height: 14px;">
@@ -196,11 +196,11 @@
                         <div class="col-md-12 tab-content">
                             <div id="all" class="tab-pane active  mt-2  ">
 
-                                 
-                              
-                        </div>
 
-                        <!--
+
+                            </div>
+
+                            <!--
 
                             <div id="active" class="row tab-pane fade  mt-2 ">
                                 <div class="col-md-12" id="l3">
@@ -229,18 +229,18 @@
                             </div>
 
                             -->
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
+
+
             </div>
 
 
+
+
         </div>
-
-
-
-
-    </div>
 
     </div>
 
@@ -258,10 +258,10 @@
             var items;
             var flag = 'first'
             var current_list_id
-            
 
- 
-            setInterval(function() {$('#clock').text(new Date().toLocaleDateString()+" "+new Date().toLocaleTimeString())}, 1000);
+
+
+            setInterval(function () { $('#clock').text(new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()) }, 1000);
 
             load_list()
 
@@ -271,9 +271,9 @@
                 $('.to-do-list ').empty()
                 $('.delete-to-do-list').empty()
                 $.ajax({
-                     url: 'https://todo3.herokuapp.com/lists/',
+                    url: 'https://todo3.herokuapp.com/lists/',
 
-                   // url: 'http://127.0.0.1:3000/lists/',
+                     // url: 'http://127.0.0.1:3000/lists/',
                     type: "GET",
 
                     success: function (data) {
@@ -295,18 +295,18 @@
                         }
 
                         if (flag == 'first') {
-                            current_list_id=$('.to-do-list ').find("li").first().data("list-id");
-                            console.log("On Load ", current_list_id )
+                            current_list_id = $('.to-do-list ').find("li").first().data("list-id");
+                            console.log("On Load ", current_list_id)
                             $(`[data-list-id=${current_list_id}]`).click()
-                        }else{
+                        } else {
                             $(`[data-list-id=${current_list_id}]`).click()
                         }
 
-                         list = `<li class="nav-item del-nav-list  " data-delete-list-id=${current_list_id}>
+                        list = `<li class="nav-item del-nav-list  " data-delete-list-id=${current_list_id}>
                         <a class=" text-danger nav-link delete-list-link" aria-current="page" href="javascript:;">Delete Current List  
                             <i class="fa fa-chevron-right"></i></a></li>`
 
-                            $('.delete-to-do-list').append(list)
+                        $('.delete-to-do-list').append(list)
 
 
                     }
@@ -318,13 +318,13 @@
 
             }
 
-            function display_list_items(idx){
+            function display_list_items(idx) {
 
                 $('#all').empty()
 
                 $.ajax({
-                    url: `http://todo3.herokuapp.com/items/${idx}`,
-                 //    url: `http://127.0.0.1:3000/items/${idx}`,
+                     url: `http://todo3.herokuapp.com/items/${idx}`,
+                     //   url: `http://127.0.0.1:3000/items/${idx}`,
                     type: "GET",
 
                     success: function (data) {
@@ -337,7 +337,7 @@
                         for (let i = 0; i < data.length; i++) {
                             console.log(data[i].id, data[i].name, data[i].status)
 
-                            if(data[i].status=='completed'){
+                            if (data[i].status == 'completed') {
 
                                 var listitem = `<div data-id=${data[i].id} data-currentlistid=${idx}  data-status="not-completed"
                                         class="row border align-items-center p-2 selected" style="line-height: 0px;">
@@ -346,9 +346,9 @@
                                         <i class="fa fa-times  " aria-hidden="true"></i>
                                     </div>`
 
-                            $('#all').append(listitem)
+                                $('#all').append(listitem)
 
-                            }else{
+                            } else {
 
                                 var listitem = `<div data-id=${data[i].id} data-currentlistid=${idx}  data-status="not-completed"
                                         class="row border align-items-center p-2 " style="line-height: 0px;">
@@ -357,17 +357,17 @@
                                         <i class="fa fa-times  " aria-hidden="true"></i>
                                     </div>`
 
-                            $('#all').append(listitem)
+                                $('#all').append(listitem)
 
                             }
-                            
+
 
                         }
                     }
 
                 });
 
-               
+
 
             }
 
@@ -376,17 +376,17 @@
             $(document).on('click', '.nav-list', function () {
                 $(this).addClass("active").siblings().removeClass("active")
                 current_list_id = $(this).data("list-id");
-               
+
                 display_list_items(current_list_id)
 
 
-               
+
 
 
             })
 
 
-            
+
 
 
             $("#btn-create-list").click(function (e) {
@@ -412,8 +412,8 @@
                 var new_list = $("#new-to-do-list").val();
                 $("#new-to-do-list").val('')
 
-                url1 = `http://todo3.herokuapp.com/lists/`;
-               // url1 = `http://127.0.0.1:3000/lists/`;
+               url1 = `http://todo3.herokuapp.com/lists/`;
+                  // url1 = `http://127.0.0.1:3000/lists/`;
                 $.ajax(
                     {
                         type: "POST",
@@ -422,7 +422,7 @@
                         success: function (data, status, jqXHR) {
                             console.log("In Success New List", data.id)
                             current_list_id = data.id
-                            
+
                             if (jqXHR.status == 200) {
 
                                 current_list_id = data.id
@@ -444,12 +444,12 @@
 
                     }
                 );
-             
-                
+
+
 
                 console.log("check id ", current_list_id)
                 console.log("#new-to-do-list")
-              
+
 
 
 
@@ -470,8 +470,8 @@
 
                 $(this).val('');
 
-              url1 = `http://todo3.herokuapp.com/items/`;
-             //  url1 = `http://127.0.0.1:3000/items/`;
+                url1 = `http://todo3.herokuapp.com/items/`;
+                  // url1 = `http://127.0.0.1:3000/items/`;
                 $.ajax(
                     {
                         type: "POST",
@@ -481,7 +481,7 @@
                             if (jqXHR.status == 200) {
                                 console.log(data)
                                 $(`[data-list-id=${current_list_id}]`).click()
-                               
+
                             } else {
                                 console.log(status)
 
@@ -499,9 +499,9 @@
 
 
 
-               
-               
- 
+
+
+
 
             })
 
@@ -536,30 +536,38 @@
 
 
             $(document).on('click', '.del-nav-list', function () {
-                
+
                 console.log(current_list_id)
 
-                $.ajax({
-                    url: `http://todo3.herokuapp.com/lists/${current_list_id}`,
-                   // url: `http://127.0.0.1:3000/lists/${current_list_id}`,
+                let text = "Are you Sure Want To Delete";
+                if (confirm(text) == true) {
+                    $.ajax({
+                  url: `http://todo3.herokuapp.com/lists/${current_list_id}`,
+                     //  url: `http://127.0.0.1:3000/lists/${current_list_id}`,
                     type: 'DELETE',
                     success: function (result) {
                         console.log("Deleted")
-                        flag= 'first'
+                        flag = 'first'
                         load_list()
                     },
-                    error: function()	{
+                    error: function () {
 
-                        alert("List contain Items. Please Delete Items First")
+                        alert("Something Else Happened")
                     }
-                    
-                    
+
+
                 })
-                });
+                } else {
+                    console.log("You canceled!");
+                }
+
+
+               
+            });
 
 
 
- 
+
 
 
 
@@ -571,8 +579,8 @@
 
 
                 $.ajax({
-                   url: `http://todo3.herokuapp.com/items/${item_id}`,
-                  //  url: `http://127.0.0.1:3000/items/${item_id}`,
+                     url: `http://todo3.herokuapp.com/items/${item_id}`,
+                  //    url: `http://127.0.0.1:3000/items/${item_id}`,
                     type: 'DELETE',
                     success: function (result) {
                         console.log("Deleted")
@@ -591,58 +599,58 @@
             });
 
             $(document).on('click', '.check', function () {
-                    var parent=$(this).parent()
-                    var name1= parent.find("p").first().html()
-                    var item_id = $(this).parent().data("id");
-                    var list_id1 = $(this).parent().data("currentlistid");
+                var parent = $(this).parent()
+                var name1 = parent.find("p").first().html()
+                var item_id = $(this).parent().data("id");
+                var list_id1 = $(this).parent().data("currentlistid");
 
                 if ($(this).is(":checked")) {
-                    
-                    var status1= "completed"
-                  
-                    console.log(item_id,list_id1,name,status1)
+
+                    var status1 = "completed"
+
+                    console.log(item_id, list_id1, name, status1)
                     $(this).parent().addClass("selected")
 
 
-                    
+
                     $.ajax({
-                   url: `http://todo3.herokuapp.com/items/${item_id}`,
-                  //  url: `http://127.0.0.1:3000/items/${item_id}`,
-                    type: 'PUT',
-                    data: {   status: "completed" },
-                    success: function (result) {
-                      
-                        console.log(result)
-                    }
-                });
+                        url: `http://todo3.herokuapp.com/items/${item_id}`,
+                      //    url: `http://127.0.0.1:3000/items/${item_id}`,
+                        type: 'PUT',
+                        data: { status: "completed" },
+                        success: function (result) {
+
+                            console.log(result)
+                        }
+                    });
 
 
 
- 
+
 
 
 
                 } else {
 
 
-                    
-                    var status1= "notcompleted"
-                  
-                    console.log(item_id,list_id1,name,status1)
+
+                    var status1 = "notcompleted"
+
+                    console.log(item_id, list_id1, name, status1)
                     $(this).parent().removeClass("selected")
 
 
-                    
+
                     $.ajax({
-                    url: `http://todo3.herokuapp.com/items/${item_id}`,
-                   // url: `http://127.0.0.1:3000/items/${item_id}`,
-                    type: 'PUT',
-                    data: {   status: "notcompleted" },
-                    success: function (result) {
-                      
-                        console.log(result)
-                    }
-                });
+                         url: `http://todo3.herokuapp.com/items/${item_id}`,
+                       // url: `http://127.0.0.1:3000/items/${item_id}`,
+                        type: 'PUT',
+                        data: { status: "notcompleted" },
+                        success: function (result) {
+
+                            console.log(result)
+                        }
+                    });
 
 
 
@@ -660,10 +668,10 @@
 
 
 
-            
 
-            })
+
+        })
     </script>
 </body>
 
-    </html>
+</html>
