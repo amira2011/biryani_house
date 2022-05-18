@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -18,9 +19,20 @@
 
         }
 
-        div {
-            border: 1px solid red;
-            ;
+        hr.solid {
+            border-top: 1px solid rgb(14, 2, 2);
+        }
+
+        #sidebar {
+
+            background-color: #f1eaea;
+        }
+
+        .container-fluid {
+
+            margin-top: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -31,19 +43,21 @@
             <a class="navbar-brand" href="javascript:;">
 
                 <span class="navbar-title">
-                    To-Do List
+                    Weather App
                 </span>
             </a>
 
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid ">
 
         <div class="row">
-            <div class="col-md-3">
+            <div id='sidebar' class="col-md-2">
                 <div class="row">
                     <div class="col-md-12">
                         My Locations
+                        <hr class="solid">
+
                     </div>
                 </div>
                 <div class="row">
@@ -52,90 +66,230 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-1">
-                        City
+            <div class="col-md-10">
+                <div class="  d-flex align-items-center">
+                    <div id="city" class="col-md-2">
+                         
                     </div>
                     <div class="col-md-1">
-                        Fabicon
+                        <i id="favourite" class="fa fa-star fa-lg" style="color:#d1b7b7"></i>
                     </div>
-                    <div class="col-md-2">
-                        <input id="autocomplete" placeholder="Eter Location" type="text">
+                    <div class="col-md-3">
+
+                        <div>
+
+                            <button class="btn btn-light" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Change Location
+                            </button>
+                        </div>
+
+
+
                     </div>
                 </div>
+                <div class="  d-flex align-items-center">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <p>Change Location</p>
+                                <input id="autocomplete" placeholder="Enter Location" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="row">
-                    <div class="col-md-2">
+                    <div id="temprature" class="col-md-2">
+
                     </div>
                     <div class="col-md-2">
+                        <div id=""> </div>
+                        <div id="humidity"> </div>
+                        <div id="wind"> </div>
                     </div>
                     <div class="col-md-2">
+                        <div id="min-temp"> </div>
+                        <div id="max-temp"> </div>
                     </div>
                     <div class="col-md-2">
+                        <div id="sunrise"> </div>
+                        <div id="sunset"> </div>
                     </div>
                     <div class="col-md-4">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-2">
-                    </div>
+                    <table id="forecastWeather"></table>
                 </div>
+
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
-    <script
-        src=" http://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=myAutoFunction"
-        async defer>
+    <script src=" http://maps.googleapis.com/maps/api/js?key=&libraries=places"
+         >
         </script>
 
     <script>
 
-        let searchedCity;
 
-        function myAutoFunction() {
-            searchedCity = new google.maps.places.Autocomplete(
 
-                document.getElementById("autocomplete"),
-                {
-                    types: ['(cities)'],
-                    fields: ['place_id', 'geometry', 'name']
-                }
-
-            )
-
-        }
 
 
         $(document).ready(function () {
 
-            $('#autocomplete').change(function () {
-                console.log(searchedCity.fields[0])
-                console.log(new Date(1652756400))
-                
-                console.log(new Date(1653080400))
+            var city;
+            var apiKey = ''
+            var latitude
+            var autocomplete;
+            var longitude;
+            var unit = 'metric'
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {
+                types: ['(regions)'],
+            });
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                //console.log(place)
+                city = place.formatted_address
+                // console.log(city)
+                $('#city').text(city)
+                $('#collapseExample').collapse("toggle");
+                $("#autocomplete").val('');
+                getCoordinates()
+            });
 
 
-            })
+            function getCoordinates() {
 
 
-        })
+                var url1 = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
+                console.log(url1)
 
-         
+                $.ajax({
+                    url: url1,
+
+
+                    type: "GET",
+
+                    success: function (data) {
+                        // console.log(data[0])
+                        latitude = data[0].lat
+                        longitude = data[0].lon
+                        current_weather()
+                    }
+
+                })
+
+
+            }
+
+            function current_weather() {
+
+                var url1 = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unit}`
+                console.log(url1)
+                $.ajax({
+                    url: url1,
+
+
+                    type: "GET",
+
+                    success: function (data) {
+                        console.log(data.main.temp)
+                        $('#temprature').text(data.main.temp)
+                        console.log(data.main.temp_min)
+                        console.log()
+                        $('#min-temp').text("Min Temp: "+data.main.temp_min)
+                        $('#max-temp').text("Max: "+data.main.temp_max)
+                        console.log(data.main.humidity)
+                        $('#humidity').text("Humidity: "+data.main.humidity+"%")
+                        $('#wind').text("Wind: "+data.wind.speed)
+                       
+                        console.log(data.wind.speed)
+                        console.log(data.sys.sunrise)
+                        var d1 = new Date(data.sys.sunrise * 1000)
+                        console.log(d1.getHours() + " " + d1.getMinutes())
+                        $('#sunrise').text("Sunrise: "+d1.getHours() + ":" + d1.getMinutes())
+                        console.log(data.sys.sunset)
+                        var d2 = new Date(data.sys.sunset * 1000)
+                        console.log(d2.getHours() + " " + d2.getMinutes())
+                        $('#sunset').text("Sunset: "+d2.getHours() + ":" + d2.getMinutes())
+
+                        console.log(data.coord)
+                        forecast()
+
+                    }
+
+                })
+
+
+            }
+
+
+            function forecast() {
+
+
+
+                var url1 = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unit}`
+                console.log(url1)
+
+                $.ajax({
+                    url: url1,
+
+
+                    type: "GET",
+
+                    success: function (data) {
+                        var table = '';
+                        for (var i = 0; i < data.list.length; i++) {
+                            var d1 = new Date(data.list[i].dt * 1000)
+                            var dayNum = d1.getDay()
+                            table += "<tr>";
+
+                            table += "<td>" + days[dayNum] + "</td>";
+                            table += "<td>" + d1.getHours() + ":00" + "</td>";
+                            table += "<td>" + data.list[i].main.temp_min + "</td>";
+                            table += "<td>" + data.list[i].main.temp_max + "</td>";
+
+
+                            table += "</tr>";
+                        }
+
+                        $("#forecastWeather").html(table);
+
+
+
+                    }
+
+                })
+
+
+
+            }
+
+
+
+        });
+
+
+
+
 
     </script>
 
