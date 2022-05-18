@@ -13,6 +13,10 @@
 
     <title>Document</title>
     <style>
+        body {
+            font-size: 14px;
+        }
+
         .navbar-title {
 
             font-size: 15px;
@@ -25,7 +29,7 @@
 
         #sidebar {
 
-            background-color: #f1eaea;
+            background-color: hsl(213, 31%, 96%);
         }
 
         .container-fluid {
@@ -33,6 +37,14 @@
             margin-top: 20px;
             margin-left: 10px;
             margin-right: 10px;
+        }
+
+        i {
+            color: #d1b7b7;
+        }
+
+        i.active {
+            color: #c3cf1b;
         }
     </style>
 </head>
@@ -69,42 +81,31 @@
             <div class="col-md-10">
                 <div class="  d-flex align-items-center">
                     <div id="city" class="col-md-2">
-                         
+
                     </div>
                     <div class="col-md-1">
-                        <i id="favourite" class="fa fa-star fa-lg" style="color:#d1b7b7"></i>
+                        <i id="favourite" class="fa fa-star fa-lg"></i>
                     </div>
                     <div class="col-md-3">
 
                         <div>
-
-                            <button class="btn btn-light" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Change Location
-                            </button>
-                        </div>
+                            </a>
+                            <ul class="dropdown-menu" id="myDropdown" aria-labelledby="navbarDropdown">
 
-
-
-                    </div>
-                </div>
-                <div class="  d-flex align-items-center">
-                    <div class="col-md-2">
-
-                    </div>
-                    <div class="col-md-1">
-
-                    </div>
-                    <div class="col-md-3">
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
                                 <p>Change Location</p>
                                 <input id="autocomplete" placeholder="Enter Location" type="text">
-                            </div>
-                        </div>
-                    </div>
 
+                            </ul>
+                        </div>
+
+
+
+                    </div>
                 </div>
+
 
                 <div class="row">
                     <div id="temprature" class="col-md-2">
@@ -130,6 +131,10 @@
                     <table id="forecastWeather"></table>
                 </div>
 
+
+
+
+
             </div>
         </div>
     </div>
@@ -140,9 +145,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <script src=" http://maps.googleapis.com/maps/api/js?key=&libraries=places"
-         >
-        </script>
+    <script src=" http://maps.googleapis.com/maps/api/js?key=&libraries=places">
+    </script>
 
     <script>
 
@@ -152,14 +156,15 @@
 
         $(document).ready(function () {
 
-            var city;
+            var city = 'Pune, Maharashtra, India';
             var apiKey = ''
-            var latitude
+            var latitude = 18.521428
             var autocomplete;
-            var longitude;
+            var longitude = 73.8544541;
             var unit = 'metric'
             var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
+            $('#city').text(city)
+            current_weather()
             autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {
                 types: ['(regions)'],
             });
@@ -168,13 +173,22 @@
                 var place = autocomplete.getPlace();
                 //console.log(place)
                 city = place.formatted_address
-                // console.log(city)
+                console.log(city)
                 $('#city').text(city)
-                $('#collapseExample').collapse("toggle");
+                $('#myDropdown').hide();
                 $("#autocomplete").val('');
                 getCoordinates()
             });
 
+            $(document).on('click', '#navbarDropdown', function () {
+
+               
+                $('#myDropdown').show();
+               
+
+
+
+            })
 
             function getCoordinates() {
 
@@ -189,7 +203,7 @@
                     type: "GET",
 
                     success: function (data) {
-                        // console.log(data[0])
+                        console.log(data[0])
                         latitude = data[0].lat
                         longitude = data[0].lon
                         current_weather()
@@ -215,21 +229,21 @@
                         $('#temprature').text(data.main.temp)
                         console.log(data.main.temp_min)
                         console.log()
-                        $('#min-temp').text("Min Temp: "+data.main.temp_min)
-                        $('#max-temp').text("Max: "+data.main.temp_max)
+                        $('#min-temp').text("Min Temp: " + data.main.temp_min)
+                        $('#max-temp').text("Max: " + data.main.temp_max)
                         console.log(data.main.humidity)
-                        $('#humidity').text("Humidity: "+data.main.humidity+"%")
-                        $('#wind').text("Wind: "+data.wind.speed)
-                       
+                        $('#humidity').text("Humidity: " + data.main.humidity + "%")
+                        $('#wind').text("Wind: " + data.wind.speed)
+
                         console.log(data.wind.speed)
                         console.log(data.sys.sunrise)
                         var d1 = new Date(data.sys.sunrise * 1000)
                         console.log(d1.getHours() + " " + d1.getMinutes())
-                        $('#sunrise').text("Sunrise: "+d1.getHours() + ":" + d1.getMinutes())
+                        $('#sunrise').text("Sunrise: " + d1.getHours() + ":" + d1.getMinutes())
                         console.log(data.sys.sunset)
                         var d2 = new Date(data.sys.sunset * 1000)
                         console.log(d2.getHours() + " " + d2.getMinutes())
-                        $('#sunset').text("Sunset: "+d2.getHours() + ":" + d2.getMinutes())
+                        $('#sunset').text("Sunset: " + d2.getHours() + ":" + d2.getMinutes())
 
                         console.log(data.coord)
                         forecast()
@@ -282,6 +296,21 @@
 
 
             }
+
+
+            $(document).on('click', '#favourite', function () {
+
+                console.log("You Clicked Me")
+
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active')
+                } else {
+                    $(this).addClass('active')
+                }
+
+
+
+            })
 
 
 
