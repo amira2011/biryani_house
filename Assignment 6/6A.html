@@ -16,7 +16,8 @@
         body {
             font-size: 14px;
         }
-       
+
+
 
         #temperature {
             font-family: Google Sans, arial, sans-serif;
@@ -33,7 +34,7 @@
 
         .navbar-title {
 
-            font-size: 15px;
+            font-size: 16px;
 
         }
 
@@ -46,12 +47,7 @@
             background-color: hsl(213, 31%, 96%);
         }
 
-        .container-fluid {
-
-            margin-top: 20px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
+        
 
         #favourite {
             color: #d1b7b7;
@@ -75,10 +71,51 @@
             color: red;
 
         }
+        .forecast-row{
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 12px;
+        }
+        .forecast{
+            padding: 5px;
+        }
 
+        .main-row{
+            margin-top: 25px;
+            margin-left: 5px;
+        }
         .nav-link {
 
             padding: 0px 0px;
+        }
+
+        .flist{
+            padding: 2px;
+        }
+
+        .world{
+            padding: 2px ;
+        }
+
+        .main{
+            padding-left: 20px;
+    padding-top: 10px
+        }
+
+        .fdiv{
+            margin-left: 10px;
+            padding-bottom: 20px;
+        }
+        .heading{
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        h6{
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .day{
+            font-size: 15px;
         }
     </style>
 </head>
@@ -97,7 +134,7 @@
     </nav>
     <div class="container-fluid ">
 
-        <div class="row">
+        <div class="row main-row">
             <div id='sidebar' class="col-md-2">
                 <div class="row">
                     <div class="col-md-12  mt-4   ">
@@ -115,31 +152,34 @@
                     <div class="col-md-12  mt-4   ">
                         <h6>Around The World</h6>
                         <hr class="solid" style="    margin: 15px 0;">
-                        <div class="nav  row   ">
+                        <div class="nav  row   " style="    margin-left: 2px;">
 
                             <li class="nav-item world nav-list" data-city='Las Vegas, NV, USA'>
-                                <a class="  list-link" style="text-decoration: none;" aria-current="page" href="javascript:;">Las Vegas
+                                <a class="  list-link" style="text-decoration: none;" aria-current="page"
+                                    href="javascript:;">Las Vegas
                                 </a>
                             </li>
                             <li class="nav-item world nav-list" data-city='Amsterdam, Netherlands'>
-                                <a class="  list-link" style="text-decoration: none;" aria-current="page" href="javascript:;">Amsterdam
+                                <a class="  list-link" style="text-decoration: none;" aria-current="page"
+                                    href="javascript:;">Amsterdam
                                 </a>
                             </li>
                             <li class="nav-item world nav-list" data-city='Bangkok, Thailand'>
-                                <a class="list-link" style="text-decoration: none;" aria-current="page" href="javascript:;">Bangkok
+                                <a class="list-link" style="text-decoration: none;" aria-current="page"
+                                    href="javascript:;">Bangkok
                                 </a>
                             </li>
-                            
 
-                                                        
+
+
 
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="col-md-10 p-3">
-                <div class="  d-flex align-items-center">
+            <div class="col-md-10 main"   >
+                <div class=" d-flex align-items-center ">
                     <div id="city" style="font-size: 17px;
                     font-weight: 600;">
 
@@ -151,7 +191,7 @@
 
                     <div style="padding-left: 10px;">
                         <a class=" btn btn-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                            aria-expanded="false" style="font-size: 12px;">
                             Change Location
                         </a>
                         <ul class="dropdown-menu" id="myDropdown" aria-labelledby="navbarDropdown">
@@ -202,482 +242,482 @@
                             <div id="sunrise"> </div>
                             <div id="sunset"> </div>
                         </div>
-                        <div class="col-md-4">
-                        </div>
+
                     </div>
                 </div>
-                
 
-                 
-                        <div class="w-auto  mt-5 d-flex flex-fill justify-content-evenly ">
-                            <div id='div0' class=" w-auto  align-self-start    p-1  pb-3   border" >
-                                <div class="row mt-3">
-                                    <div id='day0' class="col-md-12 d-flex justify-content-center">
-                                        Thursday
-                                    </div>
-                                </div>
-                                <div class="row w-auto ">
-                                    <div class="col-md-4">
-                                        Time
-                                    </div>
-                                    <div class="col-md-4">
-                                        Min
-                                    </div>
-                                    <div class="col-md-4">
-                                        Max
-                                    </div>
-                                </div>
-                                <hr class="solid" style="margin: 1px;">
-                            </div>
-                            <div id='div1' class="w-auto align-self-start   p-1     pb-3   border" >
-                                <div class="row mt-3">
-                                    <div id='day1' class="col-md-12 d-flex justify-content-center">
-                                        Thursday
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="col-md-4">
-                                        Time
-                                    </div>
-                                    <div class="col-md-4">
-                                        Min
-                                    </div>
-                                    <div class="col-md-4">
-                                        Max
-                                    </div>
-                                </div>
-                                <hr class="solid" style="margin: 1px;">
-                            </div>
-                            <div id='div2' class=" w-auto align-self-start  p-1 pb-3     border" >
-                                <div class="row mt-3">
-                                    <div id='day2' class="col-md-12 d-flex justify-content-center">
-                                        Thursday
-                                    </div>
-                                </div>
-                                <div class="row w-auto justify-content-center">
-                                    <div class="col-md-4">
-                                        Time
-                                    </div>
-                                    <div class="col-md-4">
-                                        Min
-                                    </div>
-                                    <div class="col-md-4">
-                                        Max
-                                    </div>
-                                </div>
-                                <hr class="solid" style="margin: 1px;">
-                            </div>
-                            <div id='div3' class=" w-auto align-self-start   p-1  pb-3    border" >
-                                <div class="row mt-3">
-                                    <div id='day3' class="col-md-12 d-flex justify-content-center">
-                                        Thursday
-                                    </div>
-                                </div>
-                                <div class="row w-auto">
-                                    <div class="col-md-4">
-                                        Time
-                                    </div>
-                                    <div class="col-md-4">
-                                        Min
-                                    </div>
-                                    <div class="col-md-4">
-                                        Max
-                                    </div>
-                                </div>
-                                <hr class="solid" style="margin: 1px;">
-                            </div>
-                            <div id='div4' class="w-auto align-self-start    p-1  pb-3   border" >
-                                <div class="row mt-3">
-                                    <div id='day4' class="col-md-12 d-flex justify-content-center">
-                                        Thursday
-                                    </div>
-                                </div>
-                                <div class="row w-auto">
-                                    <div class="col-md-4">
-                                        Time
-                                    </div>
-                                    <div class="col-md-4">
-                                        Min
-                                    </div>
-                                    <div class="col-md-4">
-                                        Max
-                                    </div>
-                                </div>
-                                <hr class="solid" style="margin: 1px;">
-                            </div>
-                            <div id='div5' class=" w-auto align-self-start  p-1   pb-3  border" >
-                                <div class="row mt-3">
-                                    <div id='day5' class="col-md-12 d-flex justify-content-center">
-                                        Thursday
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        Time
-                                    </div>
-                                    <div class="col-md-4">
-                                        Min
-                                    </div>
-                                    <div class="col-md-4">
-                                        Max
-                                    </div>
-                                </div>
-                                <hr class="solid" style="margin: 1px;">
+
+
+                <div class="  forecast-row  row  d-flex justify-content-evenly row-cols-7 flex-fill ">
+                    <div id='div0' class="   col align-self-start   fdiv       border">
+                        <div class="row mt-3">
+                            <div id='day0' class="col day d-flex justify-content-center">
+                                Thursday
                             </div>
                         </div>
-                   
+                        <div class="row w-auto heading">
+                            <div class="col-md-4">
+                                Time
+                            </div>
+                            <div class="col-md-4">
+                                Min
+                            </div>
+                            <div class="col-md-4">
+                                Max
+                            </div>
+                        </div>
+                        <hr class="solid" style="margin: 1px;">
+                    </div>
+                    <div id='div1' class="col align-self-start  fdiv           border">
+                        <div class="row mt-3">
+                            <div id='day1' class="col-md-12 d-flex day justify-content-center">
+                                Thursday
+                            </div>
+                        </div>
+                        <div class="row heading">
+                            <div class="col-md-4">
+                                Time
+                            </div>
+                            <div class="col-md-4">
+                                Min
+                            </div>
+                            <div class="col-md-4">
+                                Max
+                            </div>
+                        </div>
+                        <hr class="solid" style="margin: 1px;">
+                    </div>
+                    <div id='div2' class=" col align-self-start    fdiv    border">
+                        <div class="row mt-3">
+                            <div id='day2' class="col-md-12 d-flex day justify-content-center">
+                                Thursday
+                            </div>
+                        </div>
+                        <div class="row  heading justify-content-center">
+                            <div class="col-md-4">
+                                Time
+                            </div>
+                            <div class="col-md-4">
+                                Min
+                            </div>
+                            <div class="col-md-4">
+                                Max
+                            </div>
+                        </div>
+                        <hr class="solid" style="margin: 1px;">
+                    </div>
+                    <div id='div3' class="col align-self-start   fdiv    border">
+                        <div class="row mt-3">
+                            <div id='day3' class="col-md-12 d-flex day justify-content-center">
+                                Thursday
+                            </div>
+                        </div>
+                        <div class="row  heading">
+                            <div class="col-md-4">
+                                Time
+                            </div>
+                            <div class="col-md-4">
+                                Min
+                            </div>
+                            <div class="col-md-4">
+                                Max
+                            </div>
+                        </div>
+                        <hr class="solid" style="margin: 1px;">
+                    </div>
+                    <div id='div4' class="col align-self-start  fdiv     border">
+                        <div class="row mt-3">
+                            <div id='day4' class="col-md-12 d-flex day justify-content-center">
+                                Thursday
+                            </div>
+                        </div>
+                        <div class="row heading">
+                            <div class="col-md-4">
+                                Time
+                            </div>
+                            <div class="col-md-4">
+                                Min
+                            </div>
+                            <div class="col-md-4">
+                                Max
+                            </div>
+                        </div>
+                        <hr class="solid" style="margin: 1px;">
+                    </div>
+                    <div id='div5' class=" col align-self-start fdiv   border">
+                        <div class="row mt-3">
+                            <div id='day5' class="col-md-12 d-flex day justify-content-center">
+                                Thursday
+                            </div>
+                        </div>
+                        <div class="row heading">
+                            <div class="col-md-4">
+                                Time
+                            </div>
+                            <div class="col-md-4">
+                                Min
+                            </div>
+                            <div class="col-md-4">
+                                Max
+                            </div>
+                        </div>
+                        <hr class="solid" style="margin: 1px;">
+                    </div>
+                </div>
 
-             
-                 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
-    <script src=" http://maps.googleapis.com/maps/api/js?key=&libraries=places">
-    </script>
-
-    <script>
 
 
 
+                <script type="text/javascript"
+                    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                    crossorigin="anonymous"></script>
 
-        $(document).ready(function () {
+                <script
+                    src=" http://maps.googleapis.com/maps/api/js?key=&libraries=places">
+                    </script>
 
-            var city_list = []
-
-            var city = 'Pune';
-            var apiKey = ''
-            var latitude = 18.521428
-            var autocomplete;
-            var longitude = 73.8544541;
-            var unit = 'metric'
-            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            
-
- 
-            display_favourite()
-
-
-            $('#city').text('Pune, Maharashtra, India')
-            current_weather()
-           
-            if(city_list !== null && city_list !== undefined){
-
-            if (city_list.includes(city)) {
-                $('i').addClass('active')
-            }
-        }
-
-
-            function default_set() {
-                city = 'Pune, Maharashtra, India';
-                latitude = 18.521428
-                longitude = 73.8544541;
-            }
-
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {
-                types: ['(regions)'],
-            });
-
-            google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                var place = autocomplete.getPlace();
-                console.log(place)
-                city = place.name
-                console.log("Updated City", city)
-                $('i').removeClass('active')
-                $('#city').text(place.formatted_address)
-                if (city_list.includes(city)) {
-                    $('i').addClass('active')
-                }
-                $('#myDropdown').hide();
-                $("#autocomplete").val('');
-                getCoordinates()
-            });
-
-            $(document).on('click', '#navbarDropdown', function () {
-
-
-                $('#myDropdown').show();
+                <script>
 
 
 
 
-            })
 
-            function getCoordinates() {
+                    $(document).ready(function () {
+
+                        var city_list = []
+
+                        var city = 'Pune';
+                        var apiKey = ''
+                        var latitude = 18.521428
+                        var autocomplete;
+                        var longitude = 73.8544541;
+                        var unit = 'metric'
+                        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
-                var url1 = `https://api.openweathermap.org/geo/1.0/direct?q='${city}'&appid=${apiKey}`
-                   console.log(url1)
 
-                $.ajax({
-                    url: url1,
+                        display_favourite()
 
 
-                    type: "GET",
-
-                    success: function (data) {
-                        //  console.log(data[0])
-                        latitude = data[0].lat
-                        longitude = data[0].lon
+                        $('#city').text('Pune, Maharashtra, India')
                         current_weather()
-                    }
 
-                })
+                        if (city_list !== null && city_list !== undefined) {
 
-
-            }
-
-            function current_weather() {
-
-                var url1 = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unit}`
-                console.log('current', url1)
-                $.ajax({
-                    url: url1,
+                            if (city_list.includes(city)) {
+                                $('i').addClass('active')
+                            }
+                        }
 
 
-                    type: "GET",
+                        function default_set() {
+                            city = 'Pune, Maharashtra, India';
+                            latitude = 18.521428
+                            longitude = 73.8544541;
+                        }
 
-                    success: function (data) {
-                        //    console.log(data.main.temp)
-                        $('#temperature').text(data.main.temp)
-                        //   console.log(data.main.temp_min)
-                        //    console.log()
-                        $('#min-temp').text("Min Temp: " + data.main.temp_min)
-                        $('#max-temp').text("Max: " + data.main.temp_max)
-                        //  console.log(data.main.humidity)
-                        $('#humidity').text("Humidity: " + data.main.humidity + "%")
-                        $('#wind').text("Wind: " + data.wind.speed)
-                        var iconcode = data.weather[0].icon;
-                        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-                        $('#wicon').attr('src', iconurl);
-                        $('#description').text(data.weather[0].description)
+                        autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {
+                            types: ['(regions)'],
+                        });
 
-                        // console.log(data.wind.speed)
-                        //    console.log(data.sys.sunrise)
-                        var d1 = new Date(data.sys.sunrise * 1000)
-                        //   console.log(d1.getHours() + " " + d1.getMinutes())
-                        $('#sunrise').text("Sunrise: " + d1.getHours() + ":" + d1.getMinutes())
-                        //  console.log(data.sys.sunset)
-                        var d2 = new Date(data.sys.sunset * 1000)
-                        //   console.log(d2.getHours() + " " + d2.getMinutes())
-                        $('#sunset').text("Sunset: " + d2.getHours() + ":" + d2.getMinutes())
+                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                            var place = autocomplete.getPlace();
+                            console.log(place)
+                            city = place.name
+                            console.log("Updated City", city)
+                            $('i').removeClass('active')
+                            $('#city').text(place.formatted_address)
+                            if (city_list.includes(city)) {
+                                $('i').addClass('active')
+                            }
+                            $('#myDropdown').hide();
+                            $("#autocomplete").val('');
+                            getCoordinates()
+                        });
 
-                        //   console.log(data.coord)
-                        forecast()
-
-                    }
-
-                })
+                        $(document).on('click', '#navbarDropdown', function () {
 
 
-            }
-
-
-            function forecast() {
+                            $('#myDropdown').show();
 
 
 
-                var url1 = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unit}`
-                // console.log(url1)
 
-                $.ajax({
-                    url: url1,
+                        })
+
+                        function getCoordinates() {
 
 
-                    type: "GET",
+                            var url1 = `https://api.openweathermap.org/geo/1.0/direct?q='${city}'&appid=${apiKey}`
+                            console.log(url1)
 
-                    success: function (data) {
-                        $('.forecast').empty()
-                       $('.forecast-hr').remove()
-                        var index=0
-                        var d = new Date(data.list[0].dt * 1000)
-                        var num = d.getDay()
-                        $('#day0').text(days[num])
-                         
-                        for (var i = 0; i < data.list.length; i++) {
-                            var d1 = new Date(data.list[i].dt * 1000)
-                            var dayNum = d1.getDay()
+                            $.ajax({
+                                url: url1,
 
-                            var html=`                    
+
+                                type: "GET",
+
+                                success: function (data) {
+                                    //  console.log(data[0])
+                                    latitude = data[0].lat
+                                    longitude = data[0].lon
+                                    current_weather()
+                                }
+
+                            })
+
+
+                        }
+
+                        function current_weather() {
+
+                            var url1 = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unit}`
+                            console.log('current', url1)
+                            $.ajax({
+                                url: url1,
+
+
+                                type: "GET",
+
+                                success: function (data) {
+                                    //    console.log(data.main.temp)
+                                    $('#temperature').text(data.main.temp)
+                                    //   console.log(data.main.temp_min)
+                                    //    console.log()
+                                    $('#min-temp').text("Min Temp: " + Math.ceil(data.main.temp_min))
+                                    $('#max-temp').html("Max: " + Math.ceil(data.main.temp_max))
+                                    //  console.log(data.main.humidity)
+                                    $('#humidity').text("Humidity: " + data.main.humidity + "%")
+                                    $('#wind').text("Wind: " + data.wind.speed)
+                                    var iconcode = data.weather[0].icon;
+                                    var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+                                    $('#wicon').attr('src', iconurl);
+                                    $('#description').text(data.weather[0].description)
+
+                                    // console.log(data.wind.speed)
+                                    //    console.log(data.sys.sunrise)
+                                    var d1 = new Date(data.sys.sunrise * 1000)
+                                    //   console.log(d1.getHours() + " " + d1.getMinutes())
+                                    $('#sunrise').text("Sunrise: " + d1.getHours() + ":" + d1.getMinutes())
+                                    //  console.log(data.sys.sunset)
+                                    var d2 = new Date(data.sys.sunset * 1000)
+                                    //   console.log(d2.getHours() + " " + d2.getMinutes())
+                                    $('#sunset').text("Sunset: " + d2.getHours() + ":" + d2.getMinutes())
+
+                                    //   console.log(data.coord)
+                                    forecast()
+
+                                }
+
+                            })
+
+
+                        }
+
+
+                        function forecast() {
+
+
+
+                            var url1 = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unit}`
+                            // console.log(url1)
+
+                            $.ajax({
+                                url: url1,
+
+
+                                type: "GET",
+
+                                success: function (data) {
+                                    $('.forecast').remove()
+                                    $('.forecast-hr').remove()
+                                    var index = 0
+                                    var d = new Date(data.list[0].dt * 1000)
+                                    var num = d.getDay()
+                                    $('#day0').text(days[num])
+
+                                    for (var i = 0; i < data.list.length; i++) {
+                                        var d1 = new Date(data.list[i].dt * 1000)
+                                        var dayNum = d1.getDay()
+                                        
+                                        var html = `                    
                             
-                                    <div class="  w-auto row col-md-12  forecast   ">
-                                    <div class="    col-md-4    justify-content-center" style="font-weight:600;padding-left:10px; padding-top:2px">
+                                    <div class=" w-auto  row   forecast     ">
+                                    <div class="    d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
                                         ${d1.getHours()}:00
                                     </div>
-                                    <div class="    col-md-4    justify-content-center" style="padding:2px">
-                                        ${data.list[i].main.temp_min}
+                                    <div class="     d-flex col-md-4 justify-content-center     " style="padding-left:10px;padding:2px">
+                                        ${Math.ceil(data.list[i].main.temp_min)}<span>&#176;</span>
+
                                     </div>
-                                    <div class="    col-md-4      justify-content-center" style="padding:2px">
-                                        ${data.list[i].main.temp_max}
+                                    <div class="    d-flex col-md-4 justify-content-center   " style="padding-left:10px;padding:2px">
+                                        ${Math.ceil(data.list[i].main.temp_max)}<span>&#176;</span>
+
                                     </div>
                                     
                                 </div>
                              
                                 `
 
-                            if(num==dayNum){
+                                        if (num == dayNum) {
 
-                                    $(`#div${index}`).append(html)
-
-
-                            }else{
-
-                                index=index+1
-                                $(`#day${index}`).text(days[dayNum])
-                                num=dayNum
-                                $(`#div${index}`).append(html)
+                                            $(`#div${index}`).append(html)
 
 
+                                        } else {
+
+                                            index = index + 1
+                                            $(`#day${index}`).text(days[dayNum])
+                                            num = dayNum
+                                            $(`#div${index}`).append(html)
+
+
+                                        }
+
+                                        html = `<hr class="solid forecast-hr" style="margin:1px" >`
+                                        $(`#div${index}`).append(html)
+
+
+
+
+
+                                    }
+
+
+
+
+
+                                }
+
+                            })
+
+
+
+                        }
+
+
+                        $(document).on('click', '#favourite', function () {
+
+                            console.log("You Clicked Me")
+
+                            if ($(this).hasClass('active')) {
+                                $(this).removeClass('active')
+                                for (var i = 0; i < city_list.length; i++) {
+
+                                    if (city_list[i] === city) {
+                                        city_list.splice(i, 1);
+                                        i--;
+                                    }
+                                }
+
+                                // console.log(city_list)
+                                localStorage.setItem("myCityList", JSON.stringify(city_list));
+                                display_favourite()
+
+                            } else {
+                                $(this).addClass('active')
+                                if (city_list === null) {
+                                    city_list = []
+                                    city_list.push(city)
+                                    localStorage.setItem("myCityList", JSON.stringify(city_list));
+                                    display_favourite()
+
+                                }
+                                if (!city_list.includes(city)) {
+                                    city_list.push(city)
+                                    localStorage.setItem("myCityList", JSON.stringify(city_list));
+                                    display_favourite()
+                                }
+
+                                // console.log(city_list)
                             }
 
-                        html=`<hr class="solid forecast-hr" style="margin:1px" >`
-                        $(`#div${index}`).append(html)
-                           
 
 
+                        })
 
-                           
-                        }
+                        function display_favourite() {
+                            $('.fav-list').empty()
 
-                        
+                            var retrievedData = localStorage.getItem("myCityList");
+                            console.log(retrievedData)
+                            city_list = JSON.parse(retrievedData);
 
+                            if (city_list !== null && city_list !== undefined) {
+                                for (let i = 0; i < city_list.length; i++) {
+                                    console.log(city_list[i])
+                                    var dname = city_list[i].split(",")[0]
 
-
-                    }
-
-                })
-
-
-
-            }
-
-
-            $(document).on('click', '#favourite', function () {
-
-                console.log("You Clicked Me")
-
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active')
-                    for (var i = 0; i < city_list.length; i++) {
-
-                        if (city_list[i] === city) {
-                            city_list.splice(i, 1);
-                            i--;
-                        }
-                    }
-
-                    // console.log(city_list)
-                    localStorage.setItem("myCityList", JSON.stringify(city_list));
-                    display_favourite()
-
-                } else {
-                    $(this).addClass('active')
-                    if(city_list === null){
-                        city_list=[]
-                    city_list.push(city)
-                    localStorage.setItem("myCityList", JSON.stringify(city_list));
-                    display_favourite()
-
-                    }
-                    if (!city_list.includes(city)) {
-                        city_list.push(city)
-                        localStorage.setItem("myCityList", JSON.stringify(city_list));
-                        display_favourite()
-                    }
-
-                    // console.log(city_list)
-                }
-
-
-
-            })
-
-            function display_favourite() {
-                $('.fav-list').empty()
-
-                var retrievedData = localStorage.getItem("myCityList");
-                console.log(retrievedData)
-                city_list = JSON.parse(retrievedData);
-
-                if (city_list !== null && city_list !== undefined) {
-    for (let i = 0; i < city_list.length; i++) {
-                    console.log(city_list[i])
-                    var dname = city_list[i].split(",")[0]
-
-                    var list = `<div class="d-flex  align-items-center "><div class="nav-item  nav-list flist" data-cname='${city_list[i]}' >
+                                    var list = `<div class="d-flex  align-items-center "><div class="nav-item  nav-list flist" data-cname='${city_list[i]}' >
 <a class="nav-link list-link" aria-current="page" href="javascript:;">${dname} 
     </a></div> <i class="fa fa-times" aria-hidden="true" data-cityname='${city_list[i]}'></i></div>`
 
-                    $('.fav-list').append(list)
+                                    $('.fav-list').append(list)
 
 
-                }
-    
-}
+                                }
 
-               
-
-
-            }
-
-
-            $(document).on('click', '.flist', function () {
-
-                city = $(this).data("cname");
-                console.log(city)
-                $('#city').text(city)
-                $('#favourite').addClass("active")
-                getCoordinates()
-                //    console.log(this)
+                            }
 
 
 
-            })
-            $(document).on('click', '.world', function () {
 
-                city = $(this).data("city");
-                
-                console.log(city)
-                $('#city').text(city)
-               
-                getCoordinates()
-                //    console.log(this)
-                if (city_list.includes(city)) {
-                $('i').addClass('active')
-            }else{
-                $('i').removeClass('active')
+                        }
 
-            }
+
+                        $(document).on('click', '.flist', function () {
+
+                            city = $(this).data("cname");
+                            console.log(city)
+                            $('#city').text(city)
+                            $('#favourite').addClass("active")
+                            getCoordinates()
+                            //    console.log(this)
 
 
 
-            })
+                        })
+                        $(document).on('click', '.world', function () {
+
+                            city = $(this).data("city");
+
+                            console.log(city)
+                            $('#city').text(city)
+
+                            getCoordinates()
+                            //    console.log(this)
+                            if (city_list.includes(city)) {
+                                $('i').addClass('active')
+                            } else {
+                                $('i').removeClass('active')
+
+                            }
 
 
 
-            $(document).on('click', '.fa-times', function () {
-
-                city = $(this).data("cityname");
-                console.log(city)
-                for (var i = 0; i < city_list.length; i++) {
-
-                    if (city_list[i] === city) {
-                        city_list.splice(i, 1);
-                        i--;
-                    }
-                }
-                localStorage.setItem("myCityList", JSON.stringify(city_list));
-                display_favourite()
-                $('#favourite').removeClass('active')
-
-            })
+                        })
 
 
 
+                        $(document).on('click', '.fa-times', function () {
+
+                            city = $(this).data("cityname");
+                            console.log(city)
+                            for (var i = 0; i < city_list.length; i++) {
+
+                                if (city_list[i] === city) {
+                                    city_list.splice(i, 1);
+                                    i--;
+                                }
+                            }
+                            localStorage.setItem("myCityList", JSON.stringify(city_list));
+                            display_favourite()
+                            $('#favourite').removeClass('active')
+
+                        })
 
 
 
@@ -689,13 +729,16 @@
 
 
 
-        });
+
+
+
+                    });
 
 
 
 
 
-    </script>
+                </script>
 
 
 </body>
