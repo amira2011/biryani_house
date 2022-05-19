@@ -209,14 +209,14 @@
                 
 
                  
-                        <div class="  mt-5 d-flex justify-content-center">
-                            <div class="col-md-2 border" >
-                                <div class="row">
-                                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="w-auto  mt-5 d-flex flex-fill justify-content-evenly ">
+                            <div id='div0' class=" w-auto  align-self-start    p-1  pb-3   border" >
+                                <div class="row mt-3">
+                                    <div id='day0' class="col-md-12 d-flex justify-content-center">
                                         Thursday
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row w-auto ">
                                     <div class="col-md-4">
                                         Time
                                     </div>
@@ -227,15 +227,15 @@
                                         Max
                                     </div>
                                 </div>
-                                <hr class="solid" >
+                                <hr class="solid" style="margin: 1px;">
                             </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div id='div1' class="w-auto align-self-start   p-1     pb-3   border" >
+                                <div class="row mt-3">
+                                    <div id='day1' class="col-md-12 d-flex justify-content-center">
                                         Thursday
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row ">
                                     <div class="col-md-4">
                                         Time
                                     </div>
@@ -246,14 +246,15 @@
                                         Max
                                     </div>
                                 </div>
+                                <hr class="solid" style="margin: 1px;">
                             </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div id='div2' class=" w-auto align-self-start  p-1 pb-3     border" >
+                                <div class="row mt-3">
+                                    <div id='day2' class="col-md-12 d-flex justify-content-center">
                                         Thursday
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row w-auto justify-content-center">
                                     <div class="col-md-4">
                                         Time
                                     </div>
@@ -264,14 +265,15 @@
                                         Max
                                     </div>
                                 </div>
+                                <hr class="solid" style="margin: 1px;">
                             </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div id='div3' class=" w-auto align-self-start   p-1  pb-3    border" >
+                                <div class="row mt-3">
+                                    <div id='day3' class="col-md-12 d-flex justify-content-center">
                                         Thursday
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row w-auto">
                                     <div class="col-md-4">
                                         Time
                                     </div>
@@ -282,14 +284,15 @@
                                         Max
                                     </div>
                                 </div>
+                                <hr class="solid" style="margin: 1px;">
                             </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div id='div4' class="w-auto align-self-start    p-1  pb-3   border" >
+                                <div class="row mt-3">
+                                    <div id='day4' class="col-md-12 d-flex justify-content-center">
                                         Thursday
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row w-auto">
                                     <div class="col-md-4">
                                         Time
                                     </div>
@@ -300,10 +303,11 @@
                                         Max
                                     </div>
                                 </div>
+                                <hr class="solid" style="margin: 1px;">
                             </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div id='div5' class=" w-auto align-self-start  p-1   pb-3  border" >
+                                <div class="row mt-3">
+                                    <div id='day5' class="col-md-12 d-flex justify-content-center">
                                         Thursday
                                     </div>
                                 </div>
@@ -318,14 +322,13 @@
                                         Max
                                     </div>
                                 </div>
+                                <hr class="solid" style="margin: 1px;">
                             </div>
                         </div>
                    
 
-                <div class="row">
-                    <table id="forecastWeather"></table>
-                </div>
-                <hr class="solid" style="    margin: 15px 0;">
+             
+                 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -346,7 +349,7 @@
             var city_list = []
 
             var city = 'Pune';
-            var apiKey = ' '
+            var apiKey = ''
             var latitude = 18.521428
             var autocomplete;
             var longitude = 73.8544541;
@@ -488,22 +491,59 @@
                     type: "GET",
 
                     success: function (data) {
-                        var table = '';
+                        $('.forecast').empty()
+                       $('.forecast-hr').remove()
+                        var index=0
+                        var d = new Date(data.list[0].dt * 1000)
+                        var num = d.getDay()
+                        $('#day0').text(days[num])
+                         
                         for (var i = 0; i < data.list.length; i++) {
                             var d1 = new Date(data.list[i].dt * 1000)
                             var dayNum = d1.getDay()
-                            table += "<tr>";
 
-                            table += "<td>" + days[dayNum] + "</td>";
-                            table += "<td>" + d1.getHours() + ":00" + "</td>";
-                            table += "<td>" + data.list[i].main.temp_min + "</td>";
-                            table += "<td>" + data.list[i].main.temp_max + "</td>";
+                            var html=`                    
+                            
+                                    <div class="  w-auto row col-md-12  forecast   ">
+                                    <div class="    col-md-4    justify-content-center" style="font-weight:600;padding-left:10px; padding-top:2px">
+                                        ${d1.getHours()}:00
+                                    </div>
+                                    <div class="    col-md-4    justify-content-center" style="padding:2px">
+                                        ${data.list[i].main.temp_min}
+                                    </div>
+                                    <div class="    col-md-4      justify-content-center" style="padding:2px">
+                                        ${data.list[i].main.temp_max}
+                                    </div>
+                                    
+                                </div>
+                             
+                                `
+
+                            if(num==dayNum){
+
+                                    $(`#div${index}`).append(html)
 
 
-                            table += "</tr>";
+                            }else{
+
+                                index=index+1
+                                $(`#day${index}`).text(days[dayNum])
+                                num=dayNum
+                                $(`#div${index}`).append(html)
+
+
+                            }
+
+                        html=`<hr class="solid forecast-hr" style="margin:1px" >`
+                        $(`#div${index}`).append(html)
+                           
+
+
+
+                           
                         }
 
-                        $("#forecastWeather").html(table);
+                        
 
 
 
