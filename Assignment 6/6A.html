@@ -47,7 +47,7 @@
             background-color: hsl(213, 31%, 96%);
         }
 
-        
+
 
         #favourite {
             color: #d1b7b7;
@@ -71,55 +71,65 @@
             color: red;
 
         }
-        .forecast-row{
+
+        .forecast-row {
             margin-top: 30px;
             margin-right: 5px;
             font-size: 12px;
         }
-        .forecast{
+
+        .forecast {
             padding: 5px;
         }
 
-        .main-row{
+        .main-row {
             margin-top: 25px;
             margin-left: 5px;
         }
+
         .nav-link {
 
             padding: 0px 0px;
         }
-        
 
-        .flist{
+        #description {
+            text-transform: capitalize
+        }
+
+        .flist {
             padding: 2px;
         }
 
-        .world{
-            padding: 2px ;
+        .world {
+            padding: 2px;
         }
 
-        .main{
+        .main {
             padding-left: 20px;
-    padding-top: 10px
+            padding-top: 10px
         }
 
-        .fdiv{
+        .fdiv {
             margin-left: 10px;
             padding-bottom: 20px;
         }
-        .heading{
+
+        .heading {
             font-weight: 600;
             margin-top: 5px;
             padding: 5px;
         }
-        h6{
+
+        h6 {
             font-size: 14px;
             font-weight: 600;
         }
-        .day{
+
+        .day {
             font-size: 15px;
         }
-        .dropbox{
+
+        .dropbox {
             padding: 10px;
         }
     </style>
@@ -127,13 +137,16 @@
 
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="javascript:;">
+        <div class="container-fluid">
+            <div class="row" style="margin-left: 4px; padding: 1px;">
+                <a class="navbar-brand" href="javascript:;">
 
-                <span class="navbar-title">
-                    Weather App
-                </span>
-            </a>
+                    <span class="navbar-title">
+                        Weather App
+                    </span>
+                </a>
+
+            </div>
 
         </div>
     </nav>
@@ -183,7 +196,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10 main"   >
+            <div class="col-md-10 main">
                 <div class=" d-flex align-items-center ">
                     <div id="city" style="font-size: 17px;
                     font-weight: 600;">
@@ -194,15 +207,15 @@
                     </div>
 
 
-                    <div class="dropbox " style="padding: 10px;">
-                        <a class="   dropbox  dropdown-toggle btn btn-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="font-size: 12px;">
+                    <div class="dropbox dropbtn " style="padding: 10px;">
+                        <a class="   dropbox dropbtn  dropdown-toggle btn btn-light" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 12px;">
                             Change Location
                         </a>
-                        <div class="dropbox dropdown-menu" id="myDropdown" aria-labelledby="navbarDropdown" >
+                        <div class="dropbox dropbtn dropdown-menu" id="myDropdown" aria-labelledby="navbarDropdown">
 
-                            <p>Change Location</p>
-                            <input id="autocomplete" placeholder="Enter Location" type="text">
+                            <p class="dropbtn">Change Location</p>
+                            <input class ='dropbtn' id="autocomplete" placeholder="Enter Location" type="text">
 
                         </div>
                     </div>
@@ -261,17 +274,20 @@
                             </div>
                         </div>
                         <div class="w-auto row heading">
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Time
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Min
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Max
                             </div>
                         </div>
-                        <hr   style="margin: 1px;  border: 1px solid black; opacity: 1;">
+                        <hr style="margin: 1px;  border: 1px solid black; opacity: 1;">
                     </div>
                     <div id='div1' class="col align-self-start  fdiv           border">
                         <div class="row mt-3">
@@ -280,17 +296,20 @@
                             </div>
                         </div>
                         <div class="w-auto row heading">
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Time
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Min
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Max
                             </div>
                         </div>
-                        <hr   style="margin: 1px;  border: 1px solid black; opacity: 1;">
+                        <hr style="margin: 1px;  border: 1px solid black; opacity: 1;">
                     </div>
                     <div id='div2' class=" col align-self-start    fdiv    border">
                         <div class="row mt-3">
@@ -299,17 +318,20 @@
                             </div>
                         </div>
                         <div class="w-auto row heading">
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Time
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Min
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Max
                             </div>
                         </div>
-                        <hr   style="margin: 1px;  border: 1px solid black; opacity: 1;">
+                        <hr style="margin: 1px;  border: 1px solid black; opacity: 1;">
                     </div>
                     <div id='div3' class="col align-self-start   fdiv    border">
                         <div class="row mt-3">
@@ -318,17 +340,20 @@
                             </div>
                         </div>
                         <div class="w-auto row heading">
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Time
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Min
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Max
                             </div>
                         </div>
-                        <hr   style="margin: 1px;  border: 1px solid black; opacity: 1;">
+                        <hr style="margin: 1px;  border: 1px solid black; opacity: 1;">
                     </div>
                     <div id='div4' class="col align-self-start  fdiv     border">
                         <div class="row mt-3">
@@ -337,17 +362,20 @@
                             </div>
                         </div>
                         <div class="w-auto row heading">
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Time
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Min
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Max
                             </div>
                         </div>
-                        <hr   style="margin: 1px;  border: 1px solid black; opacity: 1;">
+                        <hr style="margin: 1px;  border: 1px solid black; opacity: 1;">
                     </div>
                     <div id='div5' class=" col align-self-start fdiv   border">
                         <div class="row mt-3">
@@ -356,17 +384,20 @@
                             </div>
                         </div>
                         <div class="w-auto row heading">
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Time
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Min
                             </div>
-                            <div class="d-flex col-md-4 justify-content-center   " style="font-weight:600;padding-left:10px; padding-top:2px">
+                            <div class="d-flex col-md-4 justify-content-center   "
+                                style="font-weight:600;padding-left:10px; padding-top:2px">
                                 Max
                             </div>
                         </div>
-                        <hr   style="margin: 1px;  border: 1px solid black; opacity: 1;">
+                        <hr style="margin: 1px;  border: 1px solid black; opacity: 1;">
                     </div>
                 </div>
 
@@ -381,7 +412,7 @@
                     crossorigin="anonymous"></script>
 
                 <script
-                    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCyJ3OKWh4xZ6izcZrmuZ7TP9h57TQiQ0M&libraries=places">
+                    src="http://maps.googleapis.com/maps/api/js?key=&libraries=places">
                     </script>
 
                 <script>
@@ -395,7 +426,7 @@
                         var city_list = []
 
                         var city = 'Pune, Maharashtra, India';
-                        var apiKey = '115d5b72959d48c7c29d5a172a0d8f7c'
+                        var apiKey = ''
                         var latitude = 18.521428
                         var autocomplete;
                         var longitude = 73.8544541;
@@ -443,15 +474,24 @@
                             getCoordinates()
                         });
 
-                        $(document).on('click', '#navbarDropdown', function () {
+                        $(document).on('click', '.dropbtn', function () {
 
 
-                            $('#myDropdown').toggle();
+                            $('#myDropdown').show();
 
 
 
 
                         })
+
+
+                        $(window).click(function (e) {
+                            if (!event.target.matches('.dropbtn')) {
+                                $('#myDropdown').hide();
+                                $("#autocomplete").val('');
+                            }
+                           
+                        });
 
                         function getCoordinates() {
 
@@ -547,7 +587,7 @@
                                     for (var i = 0; i < data.list.length; i++) {
                                         var d1 = new Date(data.list[i].dt * 1000)
                                         var dayNum = d1.getDay()
-                                        
+
                                         var html = `                    
                             
                                     <div class=" w-auto  row   forecast     ">
@@ -654,7 +694,7 @@
                             if (city_list !== null && city_list !== undefined) {
                                 for (let i = 0; i < city_list.length; i++) {
                                     console.log(city_list[i])
-                                   // var dname = city_list[i].split(",")[0]
+                                    // var dname = city_list[i].split(",")[0]
 
                                     var list = `<div class="d-flex  align-items-center "><div class="nav-item  nav-list flist" data-cname='${city_list[i]}' >
 <a class="nav-link list-link" aria-current="page" href="javascript:;">${city_list[i]} 
