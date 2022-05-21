@@ -119,6 +119,9 @@
         .day{
             font-size: 15px;
         }
+        .dropbox{
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -191,17 +194,17 @@
                     </div>
 
 
-                    <div style="padding-left: 10px;">
-                        <a class=" btn btn-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    <div class="dropbox " style="padding: 10px;">
+                        <a class="   dropbox  dropdown-toggle btn btn-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false" style="font-size: 12px;">
                             Change Location
                         </a>
-                        <ul class="dropdown-menu" id="myDropdown" aria-labelledby="navbarDropdown">
+                        <div class="dropbox dropdown-menu" id="myDropdown" aria-labelledby="navbarDropdown" >
 
                             <p>Change Location</p>
                             <input id="autocomplete" placeholder="Enter Location" type="text">
 
-                        </ul>
+                        </div>
                     </div>
 
 
@@ -268,7 +271,7 @@
                                 Max
                             </div>
                         </div>
-                        <hr class="solid" style="margin: 1px;">
+                        <hr   style="margin: 1px;  border: 1px solid black; opacity: 1;">
                     </div>
                     <div id='div1' class="col align-self-start  fdiv           border">
                         <div class="row mt-3">
@@ -378,7 +381,7 @@
                     crossorigin="anonymous"></script>
 
                 <script
-                    src="http://maps.googleapis.com/maps/api/js?key=&libraries=places">
+                    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCyJ3OKWh4xZ6izcZrmuZ7TP9h57TQiQ0M&libraries=places">
                     </script>
 
                 <script>
@@ -391,8 +394,8 @@
 
                         var city_list = []
 
-                        var city = 'Pune';
-                        var apiKey = ''
+                        var city = 'Pune, Maharashtra, India';
+                        var apiKey = '115d5b72959d48c7c29d5a172a0d8f7c'
                         var latitude = 18.521428
                         var autocomplete;
                         var longitude = 73.8544541;
@@ -428,7 +431,7 @@
                         google.maps.event.addListener(autocomplete, 'place_changed', function () {
                             var place = autocomplete.getPlace();
                             console.log(place)
-                            city = place.name
+                            city = place.formatted_address
                             console.log("Updated City", city)
                             $('i').removeClass('active')
                             $('#city').text(place.formatted_address)
@@ -443,7 +446,7 @@
                         $(document).on('click', '#navbarDropdown', function () {
 
 
-                            $('#myDropdown').show();
+                            $('#myDropdown').toggle();
 
 
 
@@ -651,10 +654,10 @@
                             if (city_list !== null && city_list !== undefined) {
                                 for (let i = 0; i < city_list.length; i++) {
                                     console.log(city_list[i])
-                                    var dname = city_list[i].split(",")[0]
+                                   // var dname = city_list[i].split(",")[0]
 
                                     var list = `<div class="d-flex  align-items-center "><div class="nav-item  nav-list flist" data-cname='${city_list[i]}' >
-<a class="nav-link list-link" aria-current="page" href="javascript:;">${dname} 
+<a class="nav-link list-link" aria-current="page" href="javascript:;">${city_list[i]} 
     </a></div> <i class="fa fa-times" aria-hidden="true" data-cityname='${city_list[i]}'></i></div>`
 
                                     $('.fav-list').append(list)
