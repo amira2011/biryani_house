@@ -18,10 +18,11 @@
         * {
             font-size: 14px;
             font-family: 'Montserrat', sans-serif;
+            
         }
 
         div {
-            border: 1px;
+            border: 1px solid;
         }
 
         .navbar-brand {
@@ -34,8 +35,8 @@
         }
 
         .logo {
-            height: 27%;
-            width: 27%;
+            height: 25%;
+            width: 25%;
             object-fit: contain;
         }
     </style>
@@ -45,7 +46,7 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand  " style="margin-left: 45px;" href="#">
 
                 Indian Railways
             </a>
@@ -54,7 +55,7 @@
 
 
 
-    <div class="container-fluid">
+    <div class="container ">
         <div class="row py-5">
             <div class="col-3 py-2">
                 <div style="text-align: center;">
@@ -65,20 +66,22 @@
                 <div class="row p-1">
                     <div class="fw-bold">Search Trains</div>
                     <div class="p-1 d-inline-flex  " style="font-size: 12px;">
-                         
+
                         <div><input type="text" id="station1" placeholder="Station Name"></div>
                         <div style="padding-left: 15px;"> <input type="text" id="station2" placeholder="Station Name">
                         </div>
 
                         <div style="padding-left: 15px;"> <input type="text" class="date-pick" id="datepicker"
                                 placeholder="Date"></div>
-                        <div style="padding-left: 15px;"> <input type="submit" class="btn btn-primary btn-sm"
-                                placeholder="Search "></div>
+                        <div style="padding-left: 15px;"> <button type="button" id="searchTrains" class="btn btn-primary">Search</button></div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div>
+            <button type="button" class="btn btn-primary">Search</button>
+        </div>
 
         <!-- Jquery JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -92,37 +95,116 @@
         <script>
             $(document).ready(function () {
 
-                var auto = `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/krd`
-
-                var availableTags = [
-                    "ActionScript",
-                    "Bootstrap",
-                    "C",
-                    "C++",
-                ];
-
+                
+                var station1_data = [];
+                var station2_data = [];
                 var date;
 
 
-               
-
-
-
                 $("#station1").autocomplete({
-                    source: availableTags
+                    minLength: 3,
+                    source: function (request, response) {
+                        var term = request.term;
+
+                         
+                        $.ajax({
+
+                            url: `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`,
+
+
+                            type: "GET",
+
+                            success: function (data) {
+
+                                station1_data = []
+                                //{ label: "Choice1", value: "value1" }
+                                for (let i = 0; i < data.Station.length; i++) {
+                                    station1_data.push({
+                                        label: data.Station[i].NameEn,
+                                        value: data.Station[i].StationCode
+                                    })
+                                    
+                                    // station_data.push({ "label": data.Station[i].NameEn, "value": data.Station[i].StationCode })
+                                }
+                                  //console.log('ok', station1_data)
+                                response(station1_data);
+                            }
+
+                        })
+                        
+                    }
+
                 });
+                 
+
+
+
+                $("#station2").autocomplete({
+                    minLength: 3,
+                    source: function (request, response) {
+                        var term = request.term;
+
+                         
+                        $.ajax({
+
+                            url: `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`,
+
+
+                            type: "GET",
+
+                            success: function (data) {
+
+                                station2_data = []
+                                //{ label: "Choice1", value: "value1" }
+                                for (let i = 0; i < data.Station.length; i++) {
+                                    station2_data.push({
+                                        label: data.Station[i].NameEn,
+                                        value: data.Station[i].StationCode
+                                    })
+                                    
+                                    // station_data.push({ "label": data.Station[i].NameEn, "value": data.Station[i].StationCode })
+                                }
+                             //     console.log('ok', station2_data)
+                                response(station2_data);
+                            }
+
+                        })
+                        
+                    }
+
+                });
+                 
+
+
+
+
 
 
                 $('.date-pick').datepicker({
                     onSelect: function (date) {
                         date = date
-                        console.log(date)
+                       // console.log(date)
                     },
 
                     inline: true,
 
                 });
 
+
+                $("#searchTrains").click(function(){
+
+                    let fromStationCd=$('#station1').val()
+                    let toStationCd=$('#station2').val()
+                    let dt=$('#datepicker').val()
+                    let x=dt.split("/")
+                    x=`${x[2]}${x[0]}${x[1]}`
+                  //  dt=new Date(dt)
+                  //  let x= `${dt.getFullYear()}${dt.getMonth()}${dt.getDate()}`
+                   let url1=`https://indianrailapi.com/api/v2/SeatAvailability/apikey/c9b14556386b178bd3170c2a8d2196d7/From/${fromStationCd}/To/${toStationCd}/Date/${x}/Server/1/Route/1/`
+                    console.log(url1)
+                    console.log(station1_data)
+                    console.log(station2_data)
+                })
 
 
             })
