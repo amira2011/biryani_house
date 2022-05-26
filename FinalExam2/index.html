@@ -21,7 +21,7 @@
         }
 
         div {
-            border: 1px solid;
+            border: 1px;
         }
 
         .navbar-brand {
@@ -54,7 +54,7 @@
 
 
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row py-5">
             <div class="col-3 py-2">
                 <div style="text-align: center;">
@@ -64,12 +64,16 @@
             <div class="col-9 py-2">
                 <div class="row p-1">
                     <div class="fw-bold">Search Trains</div>
-                    <div class="py-1 " style="font-size: 12px;">
-                        <input type="text" placeholder="Station Name">
-                        <input type="text" placeholder="Station Name">
+                    <div class="p-1 d-inline-flex  " style="font-size: 12px;">
+                         
+                        <div><input type="text" id="station1" placeholder="Station Name"></div>
+                        <div style="padding-left: 15px;"> <input type="text" id="station2" placeholder="Station Name">
+                        </div>
 
-                        <input type="text" class="date-pick" id="datepicker" placeholder="Date">
-                        <input type="submit" placeholder="Search ">
+                        <div style="padding-left: 15px;"> <input type="text" class="date-pick" id="datepicker"
+                                placeholder="Date"></div>
+                        <div style="padding-left: 15px;"> <input type="submit" class="btn btn-primary btn-sm"
+                                placeholder="Search "></div>
                     </div>
                 </div>
             </div>
@@ -87,20 +91,40 @@
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
         <script>
             $(document).ready(function () {
-               
+
+                var auto = `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/krd`
+
+                var availableTags = [
+                    "ActionScript",
+                    "Bootstrap",
+                    "C",
+                    "C++",
+                ];
+
                 var date;
-                $('.date-pick').datepicker({
-                    onSelect: function (date) {
-                       date=date
-                       console.log(date)
-                    },
-                    
-                    inline: true,
-                     
+
+
+               
+
+
+
+                $("#station1").autocomplete({
+                    source: availableTags
                 });
 
 
-                
+                $('.date-pick').datepicker({
+                    onSelect: function (date) {
+                        date = date
+                        console.log(date)
+                    },
+
+                    inline: true,
+
+                });
+
+
+
             })
         </script>
 
