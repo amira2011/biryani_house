@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+    <title>Indian Rail </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+        * {
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        div {
+            border: 1px solid;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+
+        }
+
+        body {
+            background-color: #d3d3d33b;
+        }
+
+        .logo {
+            height: 27%;
+            width: 27%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+
+                Indian Railways
+            </a>
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-3 py-2">
+                <div style="text-align: center;">
+                    <img class="logo p-1" src="logo.png" />
+                </div>
+            </div>
+            <div class="col-9 py-2">
+                <div class="row p-1">
+                    <div class="fw-bold">Search Trains</div>
+                    <div class="py-1 " style="font-size: 12px;">
+                        <input type="text" placeholder="Station Name">
+                        <input type="text" placeholder="Station Name">
+
+                        <input type="text" class="date-pick" id="datepicker" placeholder="Date">
+                        <input type="submit" placeholder="Search ">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Jquery JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <script>
+            $(document).ready(function () {
+               
+                var date;
+                $('.date-pick').datepicker({
+                    onSelect: function (date) {
+                       date=date
+                       console.log(date)
+                    },
+                    
+                    inline: true,
+                     
+                });
+
+
+                
+            })
+        </script>
+
+</body>
+
+</html>
