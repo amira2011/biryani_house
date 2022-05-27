@@ -21,9 +21,7 @@
 
         }
 
-        div {
-            border: 1px solid;
-        }
+         
 
         .navbar-brand {
             font-weight: 600;
@@ -35,8 +33,8 @@
         }
 
         .logo {
-            height: 25%;
-            width: 25%;
+            height: 85px;
+            width: 85px;
             object-fit: contain;
         }
     </style>
@@ -60,6 +58,20 @@
             <div class="col-3 py-2">
                 <div style="text-align: center;">
                     <img class="logo p-1" src="logo.png" />
+                    <ul class="nav flex-column my-3">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                      </ul>
                 </div>
             </div>
             <div class="col-9 py-2">
@@ -67,249 +79,315 @@
                     <div class="fw-bold">Search Trains</div>
                     <div class="p-1 d-inline-flex  " style="font-size: 12px;">
 
-                        <div><input type="text" id="station1" placeholder="Station Name"></div>
-                        <div style="padding-left: 15px;"> <input type="text" id="station2" placeholder="Station Name">
+                        <div class="p-1"><input type="text" id="station1" placeholder="Station Name"></div>
+                        <div class="p-1" style="padding-left: 15px;"> <input type="text" id="station2" placeholder="Station Name">
                         </div>
 
-                        <div style="padding-left: 15px;"> <input type="text" class="date-pick" id="datepicker"
+                        <div class="p-1"  style="padding-left: 15px;"> <input type="text" class="date-pick" id="datepicker"
                                 placeholder="Date"></div>
-                        <div style="padding-left: 15px;"> <button type="button" id="searchTrains"
+                                <div class="p-1" style="padding-left: 15px;"> <button type="button" id="searchTrains"
                                 class="btn btn-primary">Search</button></div>
                     </div>
+                </div>
+
+                <div class="row train-list">
+
+                    
                 </div>
             </div>
         </div>
 
         <div>
-           
-        <div class="mt-1">
-            <table id="example" class="table movie-table display" style="width:100%">
-                <thead>
-                    <tr>
-                        <th scope="col" data-column="original_title" data-order="desc">Title</th>
-                        <th scope="col" data-column="release_date" data-order="desc">Release Date</th>
-                        <th scope="col" data-column="vote_average" data-order="desc">Rating</th>
-                        <th scope="col" data-column="popularity" data-order="desc">Popularity</th>
-                        <th scope="col" data-column="idx" data-order="desc">Details</th>
-  
 
-                    </tr>
-                </thead>
-                <tbody class="movie-list" id="myTable">
+            <div class="mt-1">
+                <table id="example" class="table movie-table display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-column="original_title" data-order="desc">Title</th>
+                            <th scope="col" data-column="release_date" data-order="desc">Release Date</th>
+                            <th scope="col" data-column="vote_average" data-order="desc">Rating</th>
+                            <th scope="col" data-column="popularity" data-order="desc">Popularity</th>
+                            <th scope="col" data-column="idx" data-order="desc">Details</th>
 
 
-                </tbody>
-            </table>
+                        </tr>
+                    </thead>
+                    <tbody class="movie-list" id="myTable">
 
+
+                    </tbody>
+                </table>
+
+            </div>
         </div>
-        </div>
 
-        <!-- Jquery JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </div>
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
 
-        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-        <script>
-            $(document).ready(function () {
+    <!-- Jquery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
-                var station1_data = [];
-                var station2_data = [];
-                var date;
-                var meta_data = [];
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+</body>
+<script>
+    $(document).ready(function () {
 
-                $("#station1").autocomplete({
-                    minLength: 3,
-                    source: function (request, response) {
-                        var term = request.term;
 
+        var station1_data = [];
+        var station2_data = [];
+        var date;
+        var meta_data = [];
 
-                        $.ajax({
+        $("#station1").autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+                var term = request.term;
 
-                            url: `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`,
 
+                $.ajax({
 
-                            type: "GET",
+                    url: `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`,
 
-                            success: function (data) {
-                                console.log(`https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`)
 
-                                station1_data = []
-                                //{ label: "Choice1", value: "value1" }
-                                for (let i = 0; i < data.Station.length; i++) {
-                                    station1_data.push({
-                                        label: data.Station[i].NameEn,
-                                        value: data.Station[i].StationCode
-                                    })
+                    type: "GET",
 
-                                    // station_data.push({ "label": data.Station[i].NameEn, "value": data.Station[i].StationCode })
-                                }
-                                //console.log('ok', station1_data)
-                                response(station1_data);
-                            }
+                    success: function (data) {
+                        console.log(`https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`)
 
-                        })
+                        station1_data = []
+                        //{ label: "Choice1", value: "value1" }
+                        for (let i = 0; i < data.Station.length; i++) {
+                            station1_data.push({
+                                label: data.Station[i].NameEn,
+                                value: data.Station[i].StationCode
+                            })
 
-                    }
-
-                });
-
-
-
-
-                $("#station2").autocomplete({
-                    minLength: 3,
-                    source: function (request, response) {
-                        var term = request.term;
-
-
-                        $.ajax({
-
-                            url: `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`,
-
-
-                            type: "GET",
-
-                            success: function (data) {
-
-                                station2_data = []
-                                //{ label: "Choice1", value: "value1" }
-                                for (let i = 0; i < data.Station.length; i++) {
-                                    station2_data.push({
-                                        label: data.Station[i].NameEn,
-                                        value: data.Station[i].StationCode
-                                    })
-
-                                    // station_data.push({ "label": data.Station[i].NameEn, "value": data.Station[i].StationCode })
-                                }
-                                //     console.log('ok', station2_data)
-                                response(station2_data);
-                            }
-
-                        })
-
-                    }
-
-                });
-
-
-
-
-
-
-
-                $('.date-pick').datepicker({
-                    onSelect: function (date) {
-                        date = date
-                        // console.log(date)
-                    },
-
-                    inline: true,
-
-                });
-
-
-
-                $('#searchTrains').click(function (e) {
-                    e.preventDefault();
-                    $('#searchTrains').addClass("desabled")
-                    fetch_data();
-                });
-
-
-
-
-                function fetch_data() {
-                    let fromStationCd = $('#station1').val()
-                    let toStationCd = $('#station2').val()
-                    let dt = $('#datepicker').val()
-                    let x = dt.split("/")
-                    x = `${x[2]}${x[0]}${x[1]}`
-
-                    let url1 = `https://indianrailapi.com/api/v2/SeatAvailability/apikey/c9b14556386b178bd3170c2a8d2196d7/From/${fromStationCd}/To/${toStationCd}/Date/${x}/Server/1/Route/1/`
-
-
-                    $.ajax({
-                        url: url1,
-                        type: "GET",
-                        success: function (data, status, jqXHR) {
-
-
-
-                            //   let total_records = data.TotalTrains;
-
-                            if (data.ResponseCode == "200") {
-
-                                meta_data = [];
-                                $.each(data.Trains, function (idx, train) {
-
-                                    meta_data.push(
-                                        {
-                                            'ArrivalTime': train.ArrivalTime,
-                                            'AvailabileClass': train.AvailabileClass,
-                                            'Availability': train.Availability,
-                                            'DepartureTime': train.DepartureTime,
-                                            'Destination': train.Destination,
-                                            'Source': train.Source,
-                                            'TrainName': train.TrainName,
-                                            'TrainNo': train.TrainNo
-
-                                        }
-                                    )
-
-                                })
-                                buildTable(meta_data)
-
-                            }
-
-                            if (data.ResponseCode == "202") {
-                                console.log(data.Message)
-
-                            }
-
-
-
+                            // station_data.push({ "label": data.Station[i].NameEn, "value": data.Station[i].StationCode })
                         }
+                        //console.log('ok', station1_data)
+                        response(station1_data);
+                    }
+
+                })
+
+            }
+
+        });
 
 
 
-                    });
 
-                }
+        $("#station2").autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+                var term = request.term;
+
+
+                $.ajax({
+
+                    url: `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`,
+
+
+                    type: "GET",
+
+                    success: function (data) {
+
+                        station2_data = []
+                        //{ label: "Choice1", value: "value1" }
+                        for (let i = 0; i < data.Station.length; i++) {
+                            station2_data.push({
+                                label: data.Station[i].NameEn,
+                                value: data.Station[i].StationCode
+                            })
+
+                            // station_data.push({ "label": data.Station[i].NameEn, "value": data.Station[i].StationCode })
+                        }
+                        //     console.log('ok', station2_data)
+                        response(station2_data);
+                    }
+
+                })
+
+            }
+
+        });
 
 
 
-                function buildTable(data) {
 
-                    var Table = document.getElementById("myTable");
-                    Table.innerHTML = "";
 
-                    for (var i = 0; i < data.length; i++) {
 
-                        var html = `  <tr style="line-height: 2px;font-size: 14px;"> \
-        <td>${data[i].ArrivalTime}</td>\
-        <td>${data[i].AvailabileClass}</td>\
-        <td>${data[i].DepartureTime}</td>\
-        <td>${data[i].TrainName}</td>\
-        <td>${data[i].Availability}</td>\
-    </tr>`;
-                        Table.innerHTML += html
+
+        $('.date-pick').datepicker({
+            onSelect: function (date) {
+                date = date
+                // console.log(date)
+            },
+
+            inline: true,
+
+        });
+
+
+
+        $('#searchTrains').click(function (e) {
+            e.preventDefault();
+            $('#searchTrains').addClass("desabled")
+            fetch_data();
+        });
+
+
+
+
+        function fetch_data() {
+            let fromStationCd = $('#station1').val()
+            let toStationCd = $('#station2').val()
+            let dt = $('#datepicker').val()
+            let x = dt.split("/")
+            x = `${x[2]}${x[0]}${x[1]}`
+
+            let url1 = `https://indianrailapi.com/api/v2/SeatAvailability/apikey/c9b14556386b178bd3170c2a8d2196d7/From/${fromStationCd}/To/${toStationCd}/Date/${x}/Server/1/Route/1/`
+
+
+            $.ajax({
+                url: url1,
+                type: "GET",
+                success: function (data, status, jqXHR) {
+
+
+
+                    //   let total_records = data.TotalTrains;
+
+                    if (data.ResponseCode == "200") {
+
+                        meta_data = [];
+                        $.each(data.Trains, function (idx, train) {
+
+                            let end = new Date(train.ArrivalTime)
+                            let start = new Date(train.DepartureTime)
+                            var diff = new Date(end.getTime() - start.getTime());
+
+                            console.log(diff)
+                            meta_data.push(
+                                {
+                                    'ArrivalTime': end,
+                                    'AvailabileClass': train.AvailabileClass,
+                                    'Availability': train.Availability,
+                                    'DepartureTime': start,
+                                    'Destination': train.Destination,
+                                    'Source': train.Source,
+                                    'TrainName': train.TrainName,
+                                    'TrainNo': train.TrainNo,
+                                    'Duration': diff
+                                }
+                            )
+
+                        })
+                        buildTable(meta_data)
+
+                    }
+
+                    if (data.ResponseCode == "202") {
+                        console.log(data.Message)
 
                     }
 
 
+
                 }
 
 
 
+            });
+
+        }
 
 
-            })
-        </script>
+
+        function buildTable(data) {
+
+           
+
+            for (var i = 0; i < data.length; i++) {
+
+               
+
+
+
+
+              var html1= ` <div class="row" style="background-color: white;">
+				<div class="col">
+                    <img src="https://www.pikpng.com/pngl/m/11-118636_melbourne-train-logo-server-icon-png-blue-clipart.png"   width="25" height="25">
+
+				</div>
+				<div class="col-md-2">
+					<div class="row">
+						<div class="col-md-12">
+                            ${data[i].DepartureTime.getUTCHours()}:  ${data[i].DepartureTime.getUTCMinutes()}-${data[i].ArrivalTime.getUTCHours()}:${data[i].ArrivalTime.getUTCMinutes()}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+                            ${data[i].TrainName}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="row">
+						<div class="col-md-12">
+                            Train#
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+                            ${data[i].TrainNo}  
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="row">
+						<div class="col-md-12">
+                            ${((data[i].Duration.getUTCDate() - 1) * 24) + data[i].Duration.getUTCHours()}h:${data[i].Duration.getUTCMinutes()}m
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+                            ${data[i].Source}-${data[i].Destination} 
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="row">
+						<div class="col-md-12">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+				</div>
+			</div>`
+
+            $(".train-list").append(html1);
+
+            }
+
+
+        }
+
+
+
+
+
+    })
+</script>
 
 </body>
 
