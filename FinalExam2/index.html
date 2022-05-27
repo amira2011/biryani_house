@@ -320,23 +320,22 @@
 
 
 
-              var html1= ` <div class="row" style="background-color: white;">
-				<div class="col">
-                    <img src="https://www.pikpng.com/pngl/m/11-118636_melbourne-train-logo-server-icon-png-blue-clipart.png"   width="25" height="25">
+              var html1= ` <div class="row d-flex" style="background-color: white; margin-top:5px">
+				<div class="col d-inline-flex">
+                    <img src="https://www.pikpng.com/pngl/m/11-118636_melbourne-train-logo-server-icon-png-blue-clipart.png"   width="30px" height="30">
 
 				</div>
-				<div class="col-md-2">
-					<div class="row">
+				<div class="col">
+					 
 						<div class="col-md-12">
                             ${data[i].DepartureTime.getUTCHours()}:  ${data[i].DepartureTime.getUTCMinutes()}-${data[i].ArrivalTime.getUTCHours()}:${data[i].ArrivalTime.getUTCMinutes()}
 						</div>
-					</div>
-					<div class="row">
+					 
+					 
 						<div class="col-md-12">
                             ${data[i].TrainName}
 						</div>
-					</div>
-				</div>
+ 				</div>
 				<div class="col-md-2">
 					<div class="row">
 						<div class="col-md-12">
