@@ -99,7 +99,7 @@
                 var station1_data = [];
                 var station2_data = [];
                 var date;
-
+                var meta_data=[];
 
                 $("#station1").autocomplete({
                     minLength: 3,
@@ -191,20 +191,63 @@
                 });
 
 
-                $("#searchTrains").click(function(){
 
+                $('#searchTrains').click(function (e) {
+                e.preventDefault();
+                fetch_data();
+            });
+
+ 
+
+
+            function fetch_data() {
                     let fromStationCd=$('#station1').val()
                     let toStationCd=$('#station2').val()
                     let dt=$('#datepicker').val()
                     let x=dt.split("/")
                     x=`${x[2]}${x[0]}${x[1]}`
-                  //  dt=new Date(dt)
-                  //  let x= `${dt.getFullYear()}${dt.getMonth()}${dt.getDate()}`
+                 
                    let url1=`https://indianrailapi.com/api/v2/SeatAvailability/apikey/c9b14556386b178bd3170c2a8d2196d7/From/${fromStationCd}/To/${toStationCd}/Date/${x}/Server/1/Route/1/`
-                    console.log(url1)
-                    console.log(station1_data)
-                    console.log(station2_data)
-                })
+                   
+
+                    $.ajax({
+                    url: url1,
+                    type: "GET",
+                    success: function (data) {
+                                           
+                       meta_data = data.Trains;
+                       
+                       let total_records = data.TotalTrains;
+                        console.log( meta_data)
+                       /*
+                        $.each(meta_data, function (idx, movie) {
+                            my_table_data.push({ 'original_title': movie.original_title, 'release_date': movie.release_date, 'vote_average': movie.vote_average, 'popularity': movie.popularity, 'id': idx })
+                        })
+
+
+                        buildTable(my_table_data)
+
+                        pagination()
+
+                        progress_bar()
+
+*/
+
+
+                    }
+
+
+
+                });
+
+
+
+
+
+            }
+
+
+                 
 
 
             })
