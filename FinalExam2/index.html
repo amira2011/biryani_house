@@ -21,6 +21,9 @@
 
         }
 
+        div{
+            border :1px solid
+        }
          
 
         .navbar-brand {
@@ -35,6 +38,12 @@
         .logo {
             height: 85px;
             width: 85px;
+            object-fit: contain;
+        }
+
+        #wicon{
+            height: 25px;
+            width: 25px;
             object-fit: contain;
         }
     </style>
@@ -90,36 +99,14 @@
                     </div>
                 </div>
 
-                <div class="row train-list">
+                <div class="  train-list">
 
                     
                 </div>
             </div>
         </div>
 
-        <div>
-
-            <div class="mt-1">
-                <table id="example" class="table movie-table display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th scope="col" data-column="original_title" data-order="desc">Title</th>
-                            <th scope="col" data-column="release_date" data-order="desc">Release Date</th>
-                            <th scope="col" data-column="vote_average" data-order="desc">Rating</th>
-                            <th scope="col" data-column="popularity" data-order="desc">Popularity</th>
-                            <th scope="col" data-column="idx" data-order="desc">Details</th>
-
-
-                        </tr>
-                    </thead>
-                    <tbody class="movie-list" id="myTable">
-
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
+        
 
     </div>
 
@@ -320,59 +307,41 @@
 
 
 
-              var html1= ` <div class="row d-flex" style="background-color: white; margin-top:5px">
-				<div class="col d-inline-flex">
-                    <img src="https://www.pikpng.com/pngl/m/11-118636_melbourne-train-logo-server-icon-png-blue-clipart.png"   width="30px" height="30">
+          
+            var html1=`   
+                    <div class="d-flex p-2 my-2 bg-white ">
+                        <div id="icon" class="  p-2 d-flex  align-items-center" >
 
-				</div>
-				<div class="col">
-					 
-						<div class="col-md-12">
-                            ${data[i].DepartureTime.getUTCHours()}:  ${data[i].DepartureTime.getUTCMinutes()}-${data[i].ArrivalTime.getUTCHours()}:${data[i].ArrivalTime.getUTCMinutes()}
-						</div>
-					 
-					 
-						<div class="col-md-12">
-                            ${data[i].TrainName}
-						</div>
- 				</div>
-				<div class="col-md-2">
-					<div class="row">
-						<div class="col-md-12">
-                            Train#
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-                            ${data[i].TrainNo}  
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="row">
-						<div class="col-md-12">
-                            ${((data[i].Duration.getUTCDate() - 1) * 24) + data[i].Duration.getUTCHours()}h:${data[i].Duration.getUTCMinutes()}m
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-                            ${data[i].Source}-${data[i].Destination} 
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="row">
-						<div class="col-md-12">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-				</div>
-			</div>`
+
+                            <img id="wicon" src="https://www.pikpng.com/pngl/m/11-118636_melbourne-train-logo-server-icon-png-blue-clipart.png" alt="Train icon">
+
+                        </div>
+                        
+                       
+
+
+                        <div class="  p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
+                            <div id="time" style="padding: 2px;"> ${data[i].DepartureTime.getUTCHours()}:  ${data[i].DepartureTime.getUTCMinutes()}-${data[i].ArrivalTime.getUTCHours()}:${data[i].ArrivalTime.getUTCMinutes()} </div>
+                            <div id="trainName" style="padding: 2px;">  ${data[i].TrainName} </div>
+                            
+                        </div>
+                        <div class="  p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
+                            <div id="min-temp" style="padding: 2px;">  Train# </div>
+                            <div id="max-temp" style="padding: 2px;"> ${data[i].TrainNo}  </div>
+                        </div>
+                        <div class="  p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
+                            <div id="sunrise" style="padding: 2px;"> ${((data[i].Duration.getUTCDate() - 1) * 24) + data[i].Duration.getUTCHours()}h:${data[i].Duration.getUTCMinutes()}m </div>
+                            <div id="sunset" style="padding: 2px;"> ${data[i].Source}-${data[i].Destination}  </div>
+                        </div>
+
+                    </div>
+                `
+
+
+
+
+
+
 
             $(".train-list").append(html1);
 
