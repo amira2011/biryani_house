@@ -28,7 +28,7 @@
         }
 
         div {
-            border: 1px   ;
+            border: 1px solid;
         }
 
 
@@ -38,6 +38,34 @@
         }
 
 
+        ul li a i.fa-chevron-right {
+            display: none;
+        }
+
+        ul li.active a i.fa-chevron-right {
+            display: inline;
+
+        }
+         
+
+        
+
+       
+        a:hover{
+            color: red;
+        }
+         
+        ul li{
+            list-style: none;
+            padding: 2px;
+        }
+
+        .navlink {
+           
+            text-decoration: none;
+            font-size: 14px;
+            
+        }
 
         .logo {
             height: 85px;
@@ -56,8 +84,8 @@
 <body>
 
     <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <div class="col-md-2 col-12 py-2 ml-5" style="margin-left: 20px;">
+        <div class="container ">
+            <div class="col-md-2 col-12 py-2 ml-5" style="margin-left: 25px;">
                 <a class="navbar-brand  " href="#">
 
                     Indian Railways
@@ -70,60 +98,68 @@
 
     <div class="container ">
         <div class="row py-5">
-            <div class="col-12 col-md-2 py-2">
-                <div style="text-align: center;">
-                    <img class="logo p-1" src="logo.png" />
-                    <ul class="nav flex-column my-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Active</a>
+            <div class="col-12 col-md-2 py-2  justify-content-center">
+
+                <div class="d-flex flex-column  ">
+                    <div><img class="logo p-1" src="logo.png" style="    margin-left: 33px;" /></div>
+                    
+                    <ul class="flex-column my-3" style="    margin-left: 24px;">
+                        <li class=" active">
+                            <a class="navlink  active" aria-current="page" href="#">Home
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                        <li class=" ">
+                            <a class=" navlink" href="#">Link
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                        <li class="">
+                            <a class="navlink" href="#">Link
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
-            <div class="col-10 py-2">
-                <div class="train-search-div"> 
-                <div class="row  ">
-                    <div class="fw-bold d-flex flex-lg-row    align-items-center flex-column">Search Trains</div>
-                    <div class="  d-flex flex-lg-row    align-items-center flex-column  " style="font-size: 12px;">
+            <div class="col-9 py-2 " style="margin-left: 25px;">
+                <div class="train-search-div">
+                    <div class="row  ">
+                        <div class="fw-bold d-flex flex-lg-row    align-items-center flex-column">Search Trains</div>
+                        <div class="  d-flex flex-lg-row    align-items-center flex-column  " style="font-size: 12px;">
 
-                        <div class="py-2 justify-content-center"><input type="text" id="station1"
-                                placeholder="Station Name"></div>
-                        <div class="p-2"> <input type="text" id="station2" placeholder="Station Name">
+                            <div class="py-2 justify-content-center"><input type="text" id="station1"
+                                    placeholder="Station Name"></div>
+                            <div class="p-2"> <input type="text" id="station2" placeholder="Station Name">
+                            </div>
+
+                            <div class="p-2"> <input type="text" class="date-pick" id="datepicker" placeholder="Date">
+                            </div>
+                            <div class="p-1" style="padding-left: 25px;"> <button type="button" id="searchTrains"
+                                    class="btn btn-primary btn-sm">Search</button></div>
+                        </div>
+                    </div>
+
+                    <div class="searchBar mt-5 mb-2">
+                        <div> <i class="fa fa-spinner fa-spin spinner" style="display: none; font-size: 15px;"></i>
                         </div>
 
-                        <div class="p-2"> <input type="text" class="date-pick" id="datepicker" placeholder="Date"></div>
-                        <div class="p-1" style="padding-left: 25px;"> <button type="button" id="searchTrains"
-                                class="btn btn-primary btn-sm">Search</button></div>
+                        <label for="sort">Sort By </label>
+                        <select name="sort" id="sort">
+                            <option selected="selected">Best Available</option>
+                            <option>Duration</option>
+                            <option>Cheapest</option>
+                            <option>Departure (Early First)</option>
+                            <option>Departure (Late First)</option>
+                            <option>Arrival (Early First)</option>
+                            <option>Arrival (Late First)</option>
+                        </select>
                     </div>
-                </div>
-
-                <div class="searchBar mt-5 mb-2">
-                    <div> <i class="fa fa-spinner fa-spin spinner" style="display: none; font-size: 15px;"></i></div>
-                   
-                    <label for="sort">Sort By </label>
-                    <select name="sort" id="sort">
-                        <option selected="selected">Best Available</option>
-                        <option >Duration</option>
-                        <option>Cheapest</option>
-                        <option>Departure (Early First)</option>
-                        <option>Departure (Late First)</option>
-                        <option>Arrival (Early First)</option>
-                        <option>Arrival (Late First)</option>
-                    </select>
-                </div>
-                <div class="  train-list">
+                    <div class="  train-list">
 
 
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,7 +192,7 @@
                 let str = ui.item.value
                 let criteria = str.replace(/[\])}[{(]/g, '');
 
-                
+
 
                 if (criteria == 'Best Available') {
 
@@ -192,7 +228,7 @@
 
                 if (criteria == `Arrival Late First`) {
 
-                    sortData('ArrivalTime', 'desc' , 'yes')
+                    sortData('ArrivalTime', 'desc', 'yes')
                 }
 
 
@@ -200,84 +236,82 @@
         }
         );
 
-        function defaultSort(){
+        function defaultSort() {
 
-            let column1='Duration'
-            let column2='isAvailabe'
+            let column1 = 'Duration'
+            let column2 = 'isAvailabe'
 
             meta_data.sort((a, b) => {
-                    let fa = a[column1]
-                    let fb = b[column1]
-                    let fc = a[column2]
-                    let fd = b[column2]  
-                        //console.log(typeof fa, fb)
-                        if(fc == fd)
-                          {
-                          return (fa < fb) ? -1 : (fa > fb) ? 1 : 0;
-                         }
-                         else{
-                            return (fc > fd) ? -1 : 1;
-                           }
-                        
-                    
-                }); 
-                showTrains(meta_data)
+                let fa = a[column1]
+                let fb = b[column1]
+                let fc = a[column2]
+                let fd = b[column2]
+                //console.log(typeof fa, fb)
+                if (fc == fd) {
+                    return (fa < fb) ? -1 : (fa > fb) ? 1 : 0;
+                }
+                else {
+                    return (fc > fd) ? -1 : 1;
+                }
+
+
+            });
+            showTrains(meta_data)
 
 
 
         }
-        
+
 
         function sortData(column, order, isDate) {
 
-            if(isDate==='yes')
-             {
+            if (isDate === 'yes') {
                 // console.log("Date",column,order,isDate )
-                 if(order==='asc'){
+                if (order === 'asc') {
                     meta_data.sort((a, b) => {
-                    let fa = new Date(a[column]),
-                        fb = new Date(b[column]);
+                        let fa = new Date(a[column]),
+                            fb = new Date(b[column]);
                         //console.log(typeof fa, column, order)
 
-                    if (fa < fb) {
-                        return -1;
-                    }
-                    if (fa > fb) {
-                        return 1;
-                    }
-                    return 0;
-                });
+                        if (fa < fb) {
+                            return -1;
+                        }
+                        if (fa > fb) {
+                            return 1;
+                        }
+                        return 0;
+                    });
 
-                 }else{
+                } else {
 
                     meta_data.sort((a, b) => {
-                    let fa = new Date(a[column]),
-                        fb = new Date(b[column]);
+                        let fa = new Date(a[column]),
+                            fb = new Date(b[column]);
                         //console.log(typeof fa, column, order)
 
-                    if (fa > fb) {
-                        return -1;
-                    }
-                    if (fa < fb) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                    
-
-                 }
-
-                
-                
-
-             }else{
+                        if (fa > fb) {
+                            return -1;
+                        }
+                        if (fa < fb) {
+                            return 1;
+                        }
+                        return 0;
+                    });
 
 
-              //  console.log("No Date",column,order,isDate )
+                }
+
+
+
+
+            } else {
+
+
+                //  console.log("No Date",column,order,isDate )
                 meta_data.sort((a, b) => {
                     let fa = a[column],
                         fb = b[column];
-                        //console.log(typeof fa, fb)
+                    //console.log(typeof fa, fb)
 
                     if (fa < fb) {
                         return -1;
@@ -286,302 +320,302 @@
                         return 1;
                     }
                     return 0;
-                });    
-             }
- 
+                });
+            }
+
 
             showTrains(meta_data)
 
         }
 
-       
+
         var meta_data = [
 
-         
-    {
-        "ArrivalTime": "2022-05-30T23:22:00.000Z",
-        "AvailabileClass": "2S,SL,3A,2A",
-        "Availability": [
+
             {
-                "ClassCode": "SL",
-                "Fare": "160",
-                "Status": "PQWL87/WL67",
-                "UpdateOn": "5 DAYS AGO"
+                "ArrivalTime": "2022-05-30T23:22:00.000Z",
+                "AvailabileClass": "2S,SL,3A,2A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "160",
+                        "Status": "PQWL87/WL67",
+                        "UpdateOn": "5 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "95",
+                        "Status": "AVAILABLE-0009",
+                        "UpdateOn": "5 DAYS AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-30T19:30:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "PUDUCHERRY EXP",
+                "TrainNo": "11005",
+                "Duration": "1970-01-01T03:52:00.000Z",
+                "Fare": 95,
+                "isAvailabe": true
             },
             {
-                "ClassCode": "2S",
-                "Fare": "95",
-                "Status": "AVAILABLE-0009",
-                "UpdateOn": "5 DAYS AGO"
+                "ArrivalTime": "2022-05-31T11:37:00.000Z",
+                "AvailabileClass": "2S,SL,CC,3A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "160",
+                        "Status": "RLWL10/WL9",
+                        "UpdateOn": "3 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "3A",
+                        "Fare": "505",
+                        "Status": "AVAILABLE-0008",
+                        "UpdateOn": "10 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "CC",
+                        "Fare": "350",
+                        "Status": "AVAILABLE-0023",
+                        "UpdateOn": "A DAY AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "95",
+                        "Status": "AVAILABLE-0009",
+                        "UpdateOn": "12 HRS AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-31T07:10:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "KOYNA EXPRESS",
+                "TrainNo": "11029",
+                "Duration": "1970-01-01T04:27:00.000Z",
+                "Fare": 95,
+                "isAvailabe": true
+            },
+            {
+                "ArrivalTime": "2022-05-30T22:37:00.000Z",
+                "AvailabileClass": "2S,SL,3A,2A,1A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "160",
+                        "Status": "GNWL178/WL118",
+                        "UpdateOn": "A DAY AGO"
+                    },
+                    {
+                        "ClassCode": "3A",
+                        "Fare": "505",
+                        "Status": "AVAILABLE-0048",
+                        "UpdateOn": "A MONTH AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "95",
+                        "Status": "GNWL36/WL28",
+                        "UpdateOn": "A DAY AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-30T18:45:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "MAHALAXMI EXP",
+                "TrainNo": "17411",
+                "Duration": "1970-01-01T03:52:00.000Z",
+                "Fare": 95,
+                "isAvailabe": true
+            },
+            {
+                "ArrivalTime": "2022-05-31T00:22:00.000Z",
+                "AvailabileClass": "2S,SL,3A,2A,1A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "160",
+                        "Status": "RLWL6/WL4",
+                        "UpdateOn": "5 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "1A",
+                        "Fare": "1175",
+                        "Status": "RLWL1/WL1",
+                        "UpdateOn": "13 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "2A",
+                        "Fare": "710",
+                        "Status": "AVAILABLE-0009",
+                        "UpdateOn": "12 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "3A",
+                        "Fare": "505",
+                        "Status": "RLWL4/WL4",
+                        "UpdateOn": "5 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "95",
+                        "Status": "BOOKING CLOSED",
+                        "UpdateOn": "5 DAYS AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-30T20:20:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "AII SBC G NAWAJ",
+                "TrainNo": "16531",
+                "Duration": "1970-01-01T04:02:00.000Z",
+                "Fare": 95,
+                "isAvailabe": true
+            },
+            {
+                "ArrivalTime": "2022-05-31T04:52:00.000Z",
+                "AvailabileClass": "2S,SL,3A,2A,1A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "190",
+                        "Status": "RLWL44/WL36",
+                        "UpdateOn": "8 HRS AGO"
+                    },
+                    {
+                        "ClassCode": "1A",
+                        "Fare": "1255",
+                        "Status": "AVAILABLE-0001",
+                        "UpdateOn": "8 HRS AGO"
+                    },
+                    {
+                        "ClassCode": "2A",
+                        "Fare": "760",
+                        "Status": "RLWL9/WL9",
+                        "UpdateOn": "8 HRS AGO"
+                    },
+                    {
+                        "ClassCode": "3A",
+                        "Fare": "555",
+                        "Status": "RLWL10/WL10",
+                        "UpdateOn": "8 HRS AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "110",
+                        "Status": "RLWL5/WL5",
+                        "UpdateOn": "8 HRS AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-31T01:10:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "NZM MYS SF EXP",
+                "TrainNo": "12782",
+                "Duration": "1970-01-01T03:42:00.000Z",
+                "Fare": 110,
+                "isAvailabe": true
+            },
+            {
+                "ArrivalTime": "2022-05-31T15:12:00.000Z",
+                "AvailabileClass": "2S,SL,3A,2A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "190",
+                        "Status": "RLWL76/WL66",
+                        "UpdateOn": "2 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "3A",
+                        "Fare": "555",
+                        "Status": "RLWL32/WL22",
+                        "UpdateOn": "2 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "110",
+                        "Status": "RLWL15/WL15",
+                        "UpdateOn": "A DAY AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-31T11:40:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "GOA EXPRESS",
+                "TrainNo": "12780",
+                "Duration": "1970-01-01T03:32:00.000Z",
+                "Fare": 110,
+                "isAvailabe": false
+            },
+            {
+                "ArrivalTime": "2022-05-31T22:17:00.000Z",
+                "AvailabileClass": "2S,SL,3A,2A,1A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "160",
+                        "Status": "GNWL57/WL50",
+                        "UpdateOn": "7 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "3A",
+                        "Fare": "505",
+                        "Status": "GNWL34/WL32",
+                        "UpdateOn": "2 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "95",
+                        "Status": "GNWL15/WL13",
+                        "UpdateOn": "A DAY AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-31T18:25:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "DR HUBBALLI EXP",
+                "TrainNo": "17318",
+                "Duration": "1970-01-01T03:52:00.000Z",
+                "Fare": 95,
+                "isAvailabe": false
+            },
+            {
+                "ArrivalTime": "2022-05-31T03:12:00.000Z",
+                "AvailabileClass": "2S,SL,3A,2A",
+                "Availability": [
+                    {
+                        "ClassCode": "SL",
+                        "Fare": "160",
+                        "Status": "RLWL135/WL126",
+                        "UpdateOn": "2 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "3A",
+                        "Fare": "505",
+                        "Status": "RLWL41/WL23",
+                        "UpdateOn": "2 DAYS AGO"
+                    },
+                    {
+                        "ClassCode": "2S",
+                        "Fare": "95",
+                        "Status": "BOOKING CLOSED",
+                        "UpdateOn": "2 DAYS AGO"
+                    }
+                ],
+                "DepartureTime": "2022-05-30T22:50:00.000Z",
+                "Destination": "KRD",
+                "Source": "PUNE",
+                "TrainName": "MAHARASHTRA EXP",
+                "TrainNo": "11040",
+                "Duration": "1970-01-01T04:22:00.000Z",
+                "Fare": 95,
+                "isAvailabe": false
             }
-        ],
-        "DepartureTime": "2022-05-30T19:30:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "PUDUCHERRY EXP",
-        "TrainNo": "11005",
-        "Duration": "1970-01-01T03:52:00.000Z",
-        "Fare": 95,
-        "isAvailabe": true
-    },
-    {
-        "ArrivalTime": "2022-05-31T11:37:00.000Z",
-        "AvailabileClass": "2S,SL,CC,3A",
-        "Availability": [
-            {
-                "ClassCode": "SL",
-                "Fare": "160",
-                "Status": "RLWL10/WL9",
-                "UpdateOn": "3 DAYS AGO"
-            },
-            {
-                "ClassCode": "3A",
-                "Fare": "505",
-                "Status": "AVAILABLE-0008",
-                "UpdateOn": "10 DAYS AGO"
-            },
-            {
-                "ClassCode": "CC",
-                "Fare": "350",
-                "Status": "AVAILABLE-0023",
-                "UpdateOn": "A DAY AGO"
-            },
-            {
-                "ClassCode": "2S",
-                "Fare": "95",
-                "Status": "AVAILABLE-0009",
-                "UpdateOn": "12 HRS AGO"
-            }
-        ],
-        "DepartureTime": "2022-05-31T07:10:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "KOYNA EXPRESS",
-        "TrainNo": "11029",
-        "Duration": "1970-01-01T04:27:00.000Z",
-        "Fare": 95,
-        "isAvailabe": true
-    },
-    {
-        "ArrivalTime": "2022-05-30T22:37:00.000Z",
-        "AvailabileClass": "2S,SL,3A,2A,1A",
-        "Availability": [
-            {
-                "ClassCode": "SL",
-                "Fare": "160",
-                "Status": "GNWL178/WL118",
-                "UpdateOn": "A DAY AGO"
-            },
-            {
-                "ClassCode": "3A",
-                "Fare": "505",
-                "Status": "AVAILABLE-0048",
-                "UpdateOn": "A MONTH AGO"
-            },
-            {
-                "ClassCode": "2S",
-                "Fare": "95",
-                "Status": "GNWL36/WL28",
-                "UpdateOn": "A DAY AGO"
-            }
-        ],
-        "DepartureTime": "2022-05-30T18:45:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "MAHALAXMI EXP",
-        "TrainNo": "17411",
-        "Duration": "1970-01-01T03:52:00.000Z",
-        "Fare": 95,
-        "isAvailabe": true
-    },
-    {
-        "ArrivalTime": "2022-05-31T00:22:00.000Z",
-        "AvailabileClass": "2S,SL,3A,2A,1A",
-        "Availability": [
-            {
-                "ClassCode": "SL",
-                "Fare": "160",
-                "Status": "RLWL6/WL4",
-                "UpdateOn": "5 DAYS AGO"
-            },
-            {
-                "ClassCode": "1A",
-                "Fare": "1175",
-                "Status": "RLWL1/WL1",
-                "UpdateOn": "13 DAYS AGO"
-            },
-            {
-                "ClassCode": "2A",
-                "Fare": "710",
-                "Status": "AVAILABLE-0009",
-                "UpdateOn": "12 DAYS AGO"
-            },
-            {
-                "ClassCode": "3A",
-                "Fare": "505",
-                "Status": "RLWL4/WL4",
-                "UpdateOn": "5 DAYS AGO"
-            },
-            {
-                "ClassCode": "2S",
-                "Fare": "95",
-                "Status": "BOOKING CLOSED",
-                "UpdateOn": "5 DAYS AGO"
-            }
-        ],
-        "DepartureTime": "2022-05-30T20:20:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "AII SBC G NAWAJ",
-        "TrainNo": "16531",
-        "Duration": "1970-01-01T04:02:00.000Z",
-        "Fare": 95,
-        "isAvailabe": true
-    },
-    {
-        "ArrivalTime": "2022-05-31T04:52:00.000Z",
-        "AvailabileClass": "2S,SL,3A,2A,1A",
-        "Availability": [
-            {
-                "ClassCode": "SL",
-                "Fare": "190",
-                "Status": "RLWL44/WL36",
-                "UpdateOn": "8 HRS AGO"
-            },
-            {
-                "ClassCode": "1A",
-                "Fare": "1255",
-                "Status": "AVAILABLE-0001",
-                "UpdateOn": "8 HRS AGO"
-            },
-            {
-                "ClassCode": "2A",
-                "Fare": "760",
-                "Status": "RLWL9/WL9",
-                "UpdateOn": "8 HRS AGO"
-            },
-            {
-                "ClassCode": "3A",
-                "Fare": "555",
-                "Status": "RLWL10/WL10",
-                "UpdateOn": "8 HRS AGO"
-            },
-            {
-                "ClassCode": "2S",
-                "Fare": "110",
-                "Status": "RLWL5/WL5",
-                "UpdateOn": "8 HRS AGO"
-            }
-        ],
-        "DepartureTime": "2022-05-31T01:10:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "NZM MYS SF EXP",
-        "TrainNo": "12782",
-        "Duration": "1970-01-01T03:42:00.000Z",
-        "Fare": 110,
-        "isAvailabe": true
-    },
-    {
-        "ArrivalTime": "2022-05-31T15:12:00.000Z",
-        "AvailabileClass": "2S,SL,3A,2A",
-        "Availability": [
-            {
-                "ClassCode": "SL",
-                "Fare": "190",
-                "Status": "RLWL76/WL66",
-                "UpdateOn": "2 DAYS AGO"
-            },
-            {
-                "ClassCode": "3A",
-                "Fare": "555",
-                "Status": "RLWL32/WL22",
-                "UpdateOn": "2 DAYS AGO"
-            },
-            {
-                "ClassCode": "2S",
-                "Fare": "110",
-                "Status": "RLWL15/WL15",
-                "UpdateOn": "A DAY AGO"
-            }
-        ],
-        "DepartureTime": "2022-05-31T11:40:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "GOA EXPRESS",
-        "TrainNo": "12780",
-        "Duration": "1970-01-01T03:32:00.000Z",
-        "Fare": 110,
-        "isAvailabe": false
-    },
-    {
-        "ArrivalTime": "2022-05-31T22:17:00.000Z",
-        "AvailabileClass": "2S,SL,3A,2A,1A",
-        "Availability": [
-            {
-                "ClassCode": "SL",
-                "Fare": "160",
-                "Status": "GNWL57/WL50",
-                "UpdateOn": "7 DAYS AGO"
-            },
-            {
-                "ClassCode": "3A",
-                "Fare": "505",
-                "Status": "GNWL34/WL32",
-                "UpdateOn": "2 DAYS AGO"
-            },
-            {
-                "ClassCode": "2S",
-                "Fare": "95",
-                "Status": "GNWL15/WL13",
-                "UpdateOn": "A DAY AGO"
-            }
-        ],
-        "DepartureTime": "2022-05-31T18:25:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "DR HUBBALLI EXP",
-        "TrainNo": "17318",
-        "Duration": "1970-01-01T03:52:00.000Z",
-        "Fare": 95,
-        "isAvailabe": false
-    },
-    {
-        "ArrivalTime": "2022-05-31T03:12:00.000Z",
-        "AvailabileClass": "2S,SL,3A,2A",
-        "Availability": [
-            {
-                "ClassCode": "SL",
-                "Fare": "160",
-                "Status": "RLWL135/WL126",
-                "UpdateOn": "2 DAYS AGO"
-            },
-            {
-                "ClassCode": "3A",
-                "Fare": "505",
-                "Status": "RLWL41/WL23",
-                "UpdateOn": "2 DAYS AGO"
-            },
-            {
-                "ClassCode": "2S",
-                "Fare": "95",
-                "Status": "BOOKING CLOSED",
-                "UpdateOn": "2 DAYS AGO"
-            }
-        ],
-        "DepartureTime": "2022-05-30T22:50:00.000Z",
-        "Destination": "KRD",
-        "Source": "PUNE",
-        "TrainName": "MAHARASHTRA EXP",
-        "TrainNo": "11040",
-        "Duration": "1970-01-01T04:22:00.000Z",
-        "Fare": 95,
-        "isAvailabe": false
-    }
- 
 
 
-        ] ;
+
+        ];
 
         $("#station1").autocomplete({
             minLength: 3,
@@ -689,29 +723,26 @@
 
         $('#searchTrains').click(function (e) {
             e.preventDefault();
-            
 
 
-            if ($('#station1').val() == '' )
-              { 
-                 alert("Plase Enter From Station");  	
-                 return false;      
-             }  	
-             else if ($('#station2').val() == '' )
-              { 
-                alert("Plase Enter To Station");  	
-                 return false;      
-             } 
-             else if($('#datepicker').val() == '' )
-              { 
-                alert("Plase Enter Date");  	
-                 return false;      
-             }
-             else{
+
+            if ($('#station1').val() == '') {
+                alert("Plase Enter From Station");
+                return false;
+            }
+            else if ($('#station2').val() == '') {
+                alert("Plase Enter To Station");
+                return false;
+            }
+            else if ($('#datepicker').val() == '') {
+                alert("Plase Enter Date");
+                return false;
+            }
+            else {
                 fetch_data()
-             }
+            }
 
-           
+
         });
 
 
@@ -747,7 +778,7 @@
 
                         meta_data = [];
                         $.each(data.Trains, function (idx, train) {
-                            let isAvailable=false
+                            let isAvailable = false
                             let end = new Date(train.ArrivalTime)
                             let start = new Date(train.DepartureTime)
                             let diff = new Date(end.getTime() - start.getTime());
@@ -757,13 +788,13 @@
                                 if (min > parseInt(repo.Fare)) {
                                     min = parseInt(repo.Fare)
                                 }
-                                if(repo.Status.includes("AVAILABLE")){
-                                    isAvailable=true
+                                if (repo.Status.includes("AVAILABLE")) {
+                                    isAvailable = true
                                 }
 
                             })
-                            if(min==1000000){
-                                min='NA'
+                            if (min == 1000000) {
+                                min = 'NA'
                             }
                             //  console.log("min", train.TrainName, min)
                             //console.log(diff)
@@ -799,7 +830,7 @@
 
                 },
 
-                error: function(  jqXHR,  textStatus,  errorThrown ){
+                error: function (jqXHR, textStatus, errorThrown) {
                     alert(textStatus)
                 }
 
@@ -811,7 +842,7 @@
 
 
         defaultSort()
- 
+
         function showTrains(data) {
             $('.spinner').hide()
             $('#searchTrains').removeClass("disabled")
