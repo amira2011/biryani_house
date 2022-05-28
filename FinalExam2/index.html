@@ -57,7 +57,7 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-            <div class="col-md-2 col-12 py-2">
+            <div class="col-md-2 col-12 py-2 ml-5" style="margin-left: 20px;">
                 <a class="navbar-brand  " href="#">
 
                     Indian Railways
@@ -107,6 +107,8 @@
                 </div>
 
                 <div class="searchBar mt-5 mb-2">
+                    <div> <i class="fa fa-spinner fa-spin spinner" style="display: none; font-size: 15px;"></i></div>
+                   
                     <label for="sort">Sort By </label>
                     <select name="sort" id="sort">
                         <option selected="selected">Best Available</option>
@@ -687,14 +689,37 @@
 
         $('#searchTrains').click(function (e) {
             e.preventDefault();
-            $('#searchTrains').addClass("desabled")
-            fetch_data();
+            
+
+
+            if ($('#station1').val() == '' )
+              { 
+                 alert("Plase Enter From Station");  	
+                 return false;      
+             }  	
+             else if ($('#station2').val() == '' )
+              { 
+                alert("Plase Enter To Station");  	
+                 return false;      
+             } 
+             else if($('#datepicker').val() == '' )
+              { 
+                alert("Plase Enter Date");  	
+                 return false;      
+             }
+             else{
+                fetch_data()
+             }
+
+           
         });
 
 
 
 
         function fetch_data() {
+            $('#searchTrains').addClass("disabled")
+            $('.spinner').show()
             let fromStationCd = $('#station1').val()
             let toStationCd = $('#station2').val()
             let dt = $('#datepicker').val()
@@ -766,12 +791,16 @@
                     }
 
                     if (data.ResponseCode == "202") {
-                        console.log(data.Message)
+                        alert(data.Message)
 
                     }
 
 
 
+                },
+
+                error: function(  jqXHR,  textStatus,  errorThrown ){
+                    alert(textStatus)
                 }
 
 
@@ -784,7 +813,8 @@
         defaultSort()
  
         function showTrains(data) {
-
+            $('.spinner').hide()
+            $('#searchTrains').removeClass("disabled")
             //   console.log(data)
             $(".train-list").empty()
 
