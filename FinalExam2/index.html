@@ -1527,6 +1527,9 @@
                             <div id="sunrise" style="font-size:12px; "> fare starting from </div>
                             <div id="price"  ><i class="fa fa-rupee" style="font-size:20px; "> </i> ${data[i].Fare}  </div>
                         </div>
+                        <div class="    col-1 justify-content-center  p-2 d-flex  align-items-center"
+                            <i class="fa fa-angle-down"></i>
+                        </div>
 
                     </div>
                     <div class="train${i}" style="display:none">
@@ -1562,7 +1565,7 @@
 
         $(document).on('click', '.train', function () {
             
-            $(this).siblings().show()
+            $(this).siblings().slideDown("slow");
              
         })
 
