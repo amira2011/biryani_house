@@ -1490,8 +1490,8 @@
 
 
           
-            var html1=`   
-                    <div class="d-flex p-2 my-2 bg-light " >
+            var html1=`<div  id=train${i}">
+                    <div class="d-flex p-2 my-2 bg-light train " >
                         <div id="icon" class="  p-2 d-flex  align-items-center" >
 
 
@@ -1515,17 +1515,33 @@
                             <div id="sunrise" style="padding: 2px;"> ${((new Date(data[i].Duration).getUTCDate() - 1) * 24) + new Date(data[i].Duration).getUTCHours()}h:${new Date(data[i].Duration).getUTCMinutes()}m </div>
                             <div id="sunset" style="padding: 2px;"> ${data[i].Source}-${data[i].Destination}  </div>
                         </div>
+                         
 
+                    </div>
+                    <div class="train${i}" style="display:none">
+                    </div>
                     </div>
                 `
 
+               
 
-
-
+          
 
 
 
             $(".train-list").append(html1);
+            $.each(data[i].Availability, function(idx, repo) {
+                var html = `<div class='train-available' id=${i} >\
+                    <a href='javascript:;' >${repo.ClassCode}</a>\
+                    <a href='javascript:;' >${repo.Fare}</a>\
+                    <a href='javascript:;' >${repo.UpdateOn}</a>\
+                    <a href='javascript:;' >${repo.Status}</a></div>`;
+                $(`.train${i}`).append(html);
+            })
+
+
+
+
 
             }
 
@@ -1533,6 +1549,11 @@
         }
 
 
+        $(document).on('click', '.train', function () {
+            console.log("you clicked me", this)
+            $(this).siblings().show()
+             
+        })
 
 
 
