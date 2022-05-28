@@ -16,7 +16,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
         * {
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Montserrat', sans-serif;
 
         }
@@ -28,7 +28,7 @@
         }
 
         div {
-            border: 1px  ;
+            border: 1px   ;
         }
 
 
@@ -90,6 +90,7 @@
                 </div>
             </div>
             <div class="col-10 py-2">
+                <div class="train-search-div"> 
                 <div class="row  ">
                     <div class="fw-bold d-flex flex-lg-row    align-items-center flex-column">Search Trains</div>
                     <div class="  d-flex flex-lg-row    align-items-center flex-column  " style="font-size: 12px;">
@@ -108,9 +109,9 @@
                 <div class="searchBar mt-5 mb-2">
                     <label for="sort">Sort By </label>
                     <select name="sort" id="sort">
-                        <option selected="selected">Duration</option>
+                        <option selected="selected">Best Available</option>
+                        <option >Duration</option>
                         <option>Cheapest</option>
-                       
                         <option>Departure (Early First)</option>
                         <option>Departure (Late First)</option>
                         <option>Arrival (Early First)</option>
@@ -120,6 +121,7 @@
                 <div class="  train-list">
 
 
+                </div>
                 </div>
             </div>
         </div>
@@ -152,6 +154,12 @@
                 let str = ui.item.value
                 let criteria = str.replace(/[\])}[{(]/g, '');
 
+                
+
+                if (criteria == 'Best Available') {
+
+                    defaultSort()
+                }
 
                 if (criteria == 'Cheapest') {
 
@@ -190,6 +198,32 @@
         }
         );
 
+        function defaultSort(){
+
+            let column1='Duration'
+            let column2='isAvailabe'
+
+            meta_data.sort((a, b) => {
+                    let fa = a[column1]
+                    let fb = b[column1]
+                    let fc = a[column2]
+                    let fd = b[column2]  
+                        //console.log(typeof fa, fb)
+                        if(fc == fd)
+                          {
+                          return (fa < fb) ? -1 : (fa > fb) ? 1 : 0;
+                         }
+                         else{
+                            return (fc > fd) ? -1 : 1;
+                           }
+                        
+                    
+                }); 
+                showTrains(meta_data)
+
+
+
+        }
         
 
         function sortData(column, order, isDate) {
@@ -235,6 +269,8 @@
                 
 
              }else{
+
+
               //  console.log("No Date",column,order,isDate )
                 meta_data.sort((a, b) => {
                     let fa = a[column],
@@ -259,1194 +295,291 @@
        
         var meta_data = [
 
+         
+    {
+        "ArrivalTime": "2022-05-30T23:22:00.000Z",
+        "AvailabileClass": "2S,SL,3A,2A",
+        "Availability": [
             {
-                "ArrivalTime": "2022-05-31T01:34:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "AVAILABLE-0001",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1255",
-                        "Status": "GNWL4/WL4",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "GNWL18/WL13",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "GNWL38/WL30",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "AVAILABLE-0018",
-                        "UpdateOn": "2 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T22:45:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "LATUR CSMT EXP",
-                "TrainNo": "22108",
-                "Duration": "1970-01-01T02:49:00.000Z",
-                "Fare": 105
+                "ClassCode": "SL",
+                "Fare": "160",
+                "Status": "PQWL87/WL67",
+                "UpdateOn": "5 DAYS AGO"
             },
             {
-                "ArrivalTime": "2022-05-31T14:45:00.000Z",
-                "AvailabileClass": "2S,SL,3E,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "18 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "AVAILABLE-0002",
-                        "UpdateOn": "3 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL1/WL1",
-                        "UpdateOn": "6 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL2/WL1",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "AN HOUR AGO"
-                    },
-                    {
-                        "ClassCode": "3E",
-                        "Fare": "505",
-                        "Status": "AVAILABLE-0007",
-                        "UpdateOn": "3 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T10:35:00.000Z",
-                "Destination": "CSMT",
-                "Source": "PUNE",
-                "TrainName": "UDYAN EXPRESS",
-                "TrainNo": "11302",
-                "Duration": "1970-01-01T04:10:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-30T23:00:00.000Z",
-                "AvailabileClass": "3A",
-                "Availability": [
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "1100",
-                        "Status": "AVAILABLE-0003",
-                        "UpdateOn": "20 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T19:00:00.000Z",
-                "Destination": "BSR",
-                "Source": "PUNE",
-                "TrainName": "PUNE JP SF SPL",
-                "TrainNo": "01401",
-                "Duration": "1970-01-01T04:00:00.000Z",
-                "Fare": 1100
-            },
-            {
-                "ArrivalTime": "2022-05-31T00:52:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "GNWL293/WL163",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "GNWL7/WL5",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "AVAILABLE-0001",
-                        "UpdateOn": "19 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "AVAILABLE-0007",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "GNWL125/WL104",
-                        "UpdateOn": "12 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T22:05:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "MAHALAXMI EXP",
-                "TrainNo": "17412",
-                "Duration": "1970-01-01T02:47:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T08:50:00.000Z",
-                "AvailabileClass": "3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1665",
-                        "Status": "PQWL9/WL7",
-                        "UpdateOn": "2 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "1345",
-                        "Status": "PQWL9/WL5",
-                        "UpdateOn": "2 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "1025",
-                        "Status": "AVAILABLE-0002",
-                        "UpdateOn": "2 DAYS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T05:40:00.000Z",
-                "Destination": "BSR",
-                "Source": "PUNE",
-                "TrainName": "NZM DURONTO SPL",
-                "TrainNo": "12263",
-                "Duration": "1970-01-01T03:10:00.000Z",
-                "Fare": 1025
-            },
-            {
-                "ArrivalTime": "2022-05-31T21:27:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "RLWL85/WL68",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "AVAILABLE-0001",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL29/WL24",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "RLWL58/WL41",
-                        "UpdateOn": "2 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T18:20:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "KONARK EXPRESS",
-                "TrainNo": "11020",
-                "Duration": "1970-01-01T03:07:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-30T22:45:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "RLWL107/WL81",
-                        "UpdateOn": "7 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "RLWL11/WL8",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL11/WL6",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL26/WL21",
-                        "UpdateOn": "16 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "RLWL69/WL67",
-                        "UpdateOn": "2 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T19:20:00.000Z",
-                "Destination": "LTT",
-                "Source": "PUNE",
-                "TrainName": "VISAKHAPATNAM LTT SPECIAL",
-                "TrainNo": "18519",
-                "Duration": "1970-01-01T03:25:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T00:20:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "RLWL55/WL51",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "RLWL9/WL3",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "RLWL10/WL9",
-                        "UpdateOn": "5 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "RLWL43/WL32",
-                        "UpdateOn": "4 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T20:30:00.000Z",
-                "Destination": "CSMT",
-                "Source": "PUNE",
-                "TrainName": "MS  CSMT EXP",
-                "TrainNo": "22158",
-                "Duration": "1970-01-01T03:50:00.000Z",
-                "Fare": 105
-            },
-            {
-                "ArrivalTime": "2022-05-31T00:32:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "GNWL98/WL83",
-                        "UpdateOn": "16 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "GNWL2/WL2",
-                        "UpdateOn": "15 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "GNWL19/WL9",
-                        "UpdateOn": "16 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "GNWL40/WL23",
-                        "UpdateOn": "16 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T20:58:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "PVR DR EXPRESS",
-                "TrainNo": "11028",
-                "Duration": "1970-01-01T03:34:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T00:07:00.000Z",
-                "AvailabileClass": "2S,SL,3E,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "GNWL201/WL133",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1255",
-                        "Status": "GNWL7/WL6",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "GNWL19/WL14",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "GNWL29/WL11",
-                        "UpdateOn": "20 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "100",
-                        "Status": "GNWL71/WL66",
-                        "UpdateOn": "5 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3E",
-                        "Fare": "555",
-                        "Status": "GNWL30/WL9",
-                        "UpdateOn": "4 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T21:25:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "SIDDHESHWAR EXP",
-                "TrainNo": "12116",
-                "Duration": "1970-01-01T02:42:00.000Z",
-                "Fare": 100
-            },
-            {
-                "ArrivalTime": "2022-05-31T04:25:00.000Z",
-                "AvailabileClass": "2S,CC",
-                "Availability": [
-                    {
-                        "ClassCode": "CC",
-                        "Fare": "325",
-                        "Status": "GNWL23/WL20",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "GNWL121/WL107",
-                        "UpdateOn": "24 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T00:35:00.000Z",
-                "Destination": "CSMT",
-                "Source": "PUNE",
-                "TrainName": "SINHAGAD EXP",
-                "TrainNo": "11010",
-                "Duration": "1970-01-01T03:50:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T04:55:00.000Z",
-                "AvailabileClass": "2S,CC,EC",
-                "Availability": [
-                    {
-                        "ClassCode": "CC",
-                        "Fare": "375",
-                        "Status": "GNWL40/WL32",
-                        "UpdateOn": "24 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "GNWL126/WL96",
-                        "UpdateOn": "24 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "EC",
-                        "Fare": "995",
-                        "Status": "GNWL10/WL7",
-                        "UpdateOn": "3 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T01:45:00.000Z",
-                "Destination": "CSMT",
-                "Source": "PUNE",
-                "TrainName": "DECCAN QUEEN EX",
-                "TrainNo": "12124",
-                "Duration": "1970-01-01T03:10:00.000Z",
-                "Fare": 105
-            },
-            {
-                "ArrivalTime": "2022-05-31T07:38:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "RLWL63/WL51",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL2/WL2",
-                        "UpdateOn": "7 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL7/WL7",
-                        "UpdateOn": "8 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "80",
-                        "Status": "RLWL50/WL47",
-                        "UpdateOn": "14 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T04:50:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "CBE LTT EXP",
-                "TrainNo": "11014",
-                "Duration": "1970-01-01T02:48:00.000Z",
-                "Fare": 80
-            },
-            {
-                "ArrivalTime": "2022-05-31T09:07:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "PQWL13/WL9",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "PQWL31/WL19",
-                        "UpdateOn": "5 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "95",
-                        "Status": "PQWL80/WL73",
-                        "UpdateOn": "2 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T06:20:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "MAS LTT EXPRESS",
-                "TrainNo": "12164",
-                "Duration": "1970-01-01T02:47:00.000Z",
-                "Fare": 95
-            },
-            {
-                "ArrivalTime": "2022-05-31T12:38:00.000Z",
-                "AvailabileClass": "2S,CC,EC",
-                "Availability": [
-                    {
-                        "ClassCode": "CC",
-                        "Fare": "265",
-                        "Status": "GNWL14/WL11",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "80",
-                        "Status": "GNWL93/WL82",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "EC",
-                        "Fare": "915",
-                        "Status": "GNWL6/WL6",
-                        "UpdateOn": "41 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T09:45:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "DECCAN EXPRESS",
-                "TrainNo": "11008",
-                "Duration": "1970-01-01T02:53:00.000Z",
-                "Fare": 80
-            },
-            {
-                "ArrivalTime": "2022-05-31T14:20:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "GNWL146/WL87",
-                        "UpdateOn": "20 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "GNWL22/WL8",
-                        "UpdateOn": "6 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "GNWL75/WL47",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "GNWL61/WL53",
-                        "UpdateOn": "3 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T10:00:00.000Z",
-                "Destination": "BSR",
-                "Source": "PUNE",
-                "TrainName": "DAUND INDORE EXPRESS",
-                "TrainNo": "22943",
-                "Duration": "1970-01-01T04:20:00.000Z",
-                "Fare": 105
-            },
-            {
-                "ArrivalTime": "2022-05-31T13:37:00.000Z",
-                "AvailabileClass": "2S,SL,CC,3A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "RLWL24/WL21",
-                        "UpdateOn": "19 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL3/WL2",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "CC",
-                        "Fare": "265",
-                        "Status": "RLWL18/WL13",
-                        "UpdateOn": "AN HOUR AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "75",
-                        "Status": "RLWL55/WL53",
-                        "UpdateOn": "AN HOUR AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T10:20:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "KOYNA EXPRESS",
-                "TrainNo": "11030",
-                "Duration": "1970-01-01T03:17:00.000Z",
-                "Fare": 75
-            },
-            {
-                "ArrivalTime": "2022-05-31T14:23:00.000Z",
-                "AvailabileClass": "2S,SL,3E,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "RLWL60/WL57",
-                        "UpdateOn": "21 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL3/WL3",
-                        "UpdateOn": "5 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL2/WL2",
-                        "UpdateOn": "5 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "80",
-                        "Status": "RLWL48/WL38",
-                        "UpdateOn": "5 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3E",
-                        "Fare": "505",
-                        "Status": "RLWL5/WL5",
-                        "UpdateOn": "5 DAYS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T11:10:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "KIK LTT EXPRESS",
-                "TrainNo": "11018",
-                "Duration": "1970-01-01T03:13:00.000Z",
-                "Fare": 80
-            },
-            {
-                "ArrivalTime": "2022-05-31T14:49:00.000Z",
-                "AvailabileClass": "2S,CC",
-                "Availability": [
-                    {
-                        "ClassCode": "CC",
-                        "Fare": "385",
-                        "Status": "GNWL31/WL24",
-                        "UpdateOn": "4 MINS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "GNWL62/WL44",
-                        "UpdateOn": "3 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T12:25:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "INTERCITY EXP",
-                "TrainNo": "12128",
-                "Duration": "1970-01-01T02:24:00.000Z",
-                "Fare": 105
-            },
-            {
-                "ArrivalTime": "2022-05-31T15:38:00.000Z",
-                "AvailabileClass": "2S,CC",
-                "Availability": [
-                    {
-                        "ClassCode": "CC",
-                        "Fare": "345",
-                        "Status": "GNWL25/WL20",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "GNWL65/WL56",
-                        "UpdateOn": "3 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T13:05:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "INDRAYANI EXP",
-                "TrainNo": "22106",
-                "Duration": "1970-01-01T02:33:00.000Z",
-                "Fare": 105
-            },
-            {
-                "ArrivalTime": "2022-05-30T22:46:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "RLWL76/WL64",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1255",
-                        "Status": "RLWL1/WL1",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "RLWL2/WL1",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "RLWL11/WL11",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "RT CLS DELETED",
-                        "UpdateOn": "40 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T19:55:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "GDG CSMT EXP",
-                "TrainNo": "11140",
-                "Duration": "1970-01-01T02:51:00.000Z",
-                "Fare": 105
-            },
-            {
-                "ArrivalTime": "2022-05-31T00:00:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "RLWL83/WL69",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL2/WL2",
-                        "UpdateOn": "3 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL20/WL17",
-                        "UpdateOn": "3 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "4 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T20:40:00.000Z",
-                "Destination": "DR",
-                "Source": "PUNE",
-                "TrainName": "CHALUKYA EXP",
-                "TrainNo": "11006",
-                "Duration": "1970-01-01T03:20:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T00:43:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "GNWL185/WL114",
-                        "UpdateOn": "19 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "GNWL2/WL1",
-                        "UpdateOn": "19 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "GNWL12/WL7",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "GNWL40/WL27",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "38 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T21:40:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "UBL DR EXPRESS",
-                "TrainNo": "17317",
-                "Duration": "1970-01-01T03:03:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T03:20:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "RLWL64/WL46",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL5/WL5",
-                        "UpdateOn": "6 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL11/WL10",
-                        "UpdateOn": "2 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "2 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T23:40:00.000Z",
-                "Destination": "BSR",
-                "Source": "PUNE",
-                "TrainName": "VIVEK EXPRESS",
-                "TrainNo": "19567",
-                "Duration": "1970-01-01T03:40:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T05:52:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "RLWL80/WL62",
-                        "UpdateOn": "5 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "RLWL9/WL9",
-                        "UpdateOn": "5 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "95",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "2 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T02:50:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "MAS CSMT EXP",
-                "TrainNo": "22160",
-                "Duration": "1970-01-01T03:02:00.000Z",
-                "Fare": 95
-            },
-            {
-                "ArrivalTime": "2022-05-30T23:25:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "RLWL4/WL3",
-                        "UpdateOn": "18 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "RLWL8/WL6",
-                        "UpdateOn": "6 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "95",
-                        "Status": "RT CLS DELETED",
-                        "UpdateOn": "2 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T19:45:00.000Z",
-                "Destination": "CSMT",
-                "Source": "PUNE",
-                "TrainName": "HUSSAIN SAGAR",
-                "TrainNo": "12702",
-                "Duration": "1970-01-01T03:40:00.000Z",
-                "Fare": 95
-            },
-            {
-                "ArrivalTime": "2022-05-31T00:30:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "175",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "16 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "760",
-                        "Status": "RLWL12/WL10",
-                        "UpdateOn": "6 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "555",
-                        "Status": "RLWL19/WL13",
-                        "UpdateOn": "8 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "105",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "7 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-30T20:50:00.000Z",
-                "Destination": "BSR",
-                "Source": "PUNE",
-                "TrainName": "RAJKOT SF EXP",
-                "TrainNo": "22718",
-                "Duration": "1970-01-01T03:40:00.000Z",
-                "Fare": 105
-            },
-            {
-                "ArrivalTime": "2022-05-31T06:30:00.000Z",
-                "AvailabileClass": "3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "RLWL1/WL1",
-                        "UpdateOn": "21 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL28/WL21",
-                        "UpdateOn": "5 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL113/WL84",
-                        "UpdateOn": "2 DAYS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T03:00:00.000Z",
-                "Destination": "BSR",
-                "Source": "PUNE",
-                "TrainName": "BARMER AC EXP",
-                "TrainNo": "14805",
-                "Duration": "1970-01-01T03:30:00.000Z",
-                "Fare": 505
-            },
-            {
-                "ArrivalTime": "2022-05-31T07:35:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "4 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL4/WL4",
-                        "UpdateOn": "2 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL8/WL8",
-                        "UpdateOn": "3 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "RT CLS DELETED",
-                        "UpdateOn": "30 MINS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T03:45:00.000Z",
-                "Destination": "CSMT",
-                "Source": "PUNE",
-                "TrainName": "MUMBAI EXP",
-                "TrainNo": "17032",
-                "Duration": "1970-01-01T03:50:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T12:47:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL1/WL1",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "RLWL6/WL2",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "90",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "A DAY AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T09:55:00.000Z",
-                "Destination": "TNA",
-                "Source": "PUNE",
-                "TrainName": "NCJ CSMT EXPRESS",
-                "TrainNo": "16340",
-                "Duration": "1970-01-01T02:52:00.000Z",
-                "Fare": 90
-            },
-            {
-                "ArrivalTime": "2022-05-31T17:10:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "2 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "RLWL5/WL5",
-                        "UpdateOn": "2 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "RLWL26/WL22",
-                        "UpdateOn": "2 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "2 DAYS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "80",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "20 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T13:20:00.000Z",
-                "Destination": "BSR",
-                "Source": "PUNE",
-                "TrainName": "JODHPUR EXP",
-                "TrainNo": "16508",
-                "Duration": "1970-01-01T03:50:00.000Z",
-                "Fare": 80
-            },
-            {
-                "ArrivalTime": "2022-05-31T03:30:00.000Z",
-                "AvailabileClass": "2S,SL,3A,2A,1A",
-                "Availability": [
-                    {
-                        "ClassCode": "SL",
-                        "Fare": "145",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "14 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "1A",
-                        "Fare": "1175",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "2A",
-                        "Fare": "710",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "A DAY AGO"
-                    },
-                    {
-                        "ClassCode": "3A",
-                        "Fare": "505",
-                        "Status": "BOOKING CLOSED",
-                        "UpdateOn": "14 HRS AGO"
-                    },
-                    {
-                        "ClassCode": "2S",
-                        "Fare": "65",
-                        "Status": "RT CLS DELETED",
-                        "UpdateOn": "5 HRS AGO"
-                    }
-                ],
-                "DepartureTime": "2022-05-31T00:50:00.000Z",
-                "Destination": "PNVL",
-                "Source": "PUNE",
-                "TrainName": "NED PNVL EXP",
-                "TrainNo": "17614",
-                "Duration": "1970-01-01T02:40:00.000Z",
-                "Fare": 65
+                "ClassCode": "2S",
+                "Fare": "95",
+                "Status": "AVAILABLE-0009",
+                "UpdateOn": "5 DAYS AGO"
             }
+        ],
+        "DepartureTime": "2022-05-30T19:30:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "PUDUCHERRY EXP",
+        "TrainNo": "11005",
+        "Duration": "1970-01-01T03:52:00.000Z",
+        "Fare": 95,
+        "isAvailabe": true
+    },
+    {
+        "ArrivalTime": "2022-05-31T11:37:00.000Z",
+        "AvailabileClass": "2S,SL,CC,3A",
+        "Availability": [
+            {
+                "ClassCode": "SL",
+                "Fare": "160",
+                "Status": "RLWL10/WL9",
+                "UpdateOn": "3 DAYS AGO"
+            },
+            {
+                "ClassCode": "3A",
+                "Fare": "505",
+                "Status": "AVAILABLE-0008",
+                "UpdateOn": "10 DAYS AGO"
+            },
+            {
+                "ClassCode": "CC",
+                "Fare": "350",
+                "Status": "AVAILABLE-0023",
+                "UpdateOn": "A DAY AGO"
+            },
+            {
+                "ClassCode": "2S",
+                "Fare": "95",
+                "Status": "AVAILABLE-0009",
+                "UpdateOn": "12 HRS AGO"
+            }
+        ],
+        "DepartureTime": "2022-05-31T07:10:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "KOYNA EXPRESS",
+        "TrainNo": "11029",
+        "Duration": "1970-01-01T04:27:00.000Z",
+        "Fare": 95,
+        "isAvailabe": true
+    },
+    {
+        "ArrivalTime": "2022-05-30T22:37:00.000Z",
+        "AvailabileClass": "2S,SL,3A,2A,1A",
+        "Availability": [
+            {
+                "ClassCode": "SL",
+                "Fare": "160",
+                "Status": "GNWL178/WL118",
+                "UpdateOn": "A DAY AGO"
+            },
+            {
+                "ClassCode": "3A",
+                "Fare": "505",
+                "Status": "AVAILABLE-0048",
+                "UpdateOn": "A MONTH AGO"
+            },
+            {
+                "ClassCode": "2S",
+                "Fare": "95",
+                "Status": "GNWL36/WL28",
+                "UpdateOn": "A DAY AGO"
+            }
+        ],
+        "DepartureTime": "2022-05-30T18:45:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "MAHALAXMI EXP",
+        "TrainNo": "17411",
+        "Duration": "1970-01-01T03:52:00.000Z",
+        "Fare": 95,
+        "isAvailabe": true
+    },
+    {
+        "ArrivalTime": "2022-05-31T00:22:00.000Z",
+        "AvailabileClass": "2S,SL,3A,2A,1A",
+        "Availability": [
+            {
+                "ClassCode": "SL",
+                "Fare": "160",
+                "Status": "RLWL6/WL4",
+                "UpdateOn": "5 DAYS AGO"
+            },
+            {
+                "ClassCode": "1A",
+                "Fare": "1175",
+                "Status": "RLWL1/WL1",
+                "UpdateOn": "13 DAYS AGO"
+            },
+            {
+                "ClassCode": "2A",
+                "Fare": "710",
+                "Status": "AVAILABLE-0009",
+                "UpdateOn": "12 DAYS AGO"
+            },
+            {
+                "ClassCode": "3A",
+                "Fare": "505",
+                "Status": "RLWL4/WL4",
+                "UpdateOn": "5 DAYS AGO"
+            },
+            {
+                "ClassCode": "2S",
+                "Fare": "95",
+                "Status": "BOOKING CLOSED",
+                "UpdateOn": "5 DAYS AGO"
+            }
+        ],
+        "DepartureTime": "2022-05-30T20:20:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "AII SBC G NAWAJ",
+        "TrainNo": "16531",
+        "Duration": "1970-01-01T04:02:00.000Z",
+        "Fare": 95,
+        "isAvailabe": true
+    },
+    {
+        "ArrivalTime": "2022-05-31T04:52:00.000Z",
+        "AvailabileClass": "2S,SL,3A,2A,1A",
+        "Availability": [
+            {
+                "ClassCode": "SL",
+                "Fare": "190",
+                "Status": "RLWL44/WL36",
+                "UpdateOn": "8 HRS AGO"
+            },
+            {
+                "ClassCode": "1A",
+                "Fare": "1255",
+                "Status": "AVAILABLE-0001",
+                "UpdateOn": "8 HRS AGO"
+            },
+            {
+                "ClassCode": "2A",
+                "Fare": "760",
+                "Status": "RLWL9/WL9",
+                "UpdateOn": "8 HRS AGO"
+            },
+            {
+                "ClassCode": "3A",
+                "Fare": "555",
+                "Status": "RLWL10/WL10",
+                "UpdateOn": "8 HRS AGO"
+            },
+            {
+                "ClassCode": "2S",
+                "Fare": "110",
+                "Status": "RLWL5/WL5",
+                "UpdateOn": "8 HRS AGO"
+            }
+        ],
+        "DepartureTime": "2022-05-31T01:10:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "NZM MYS SF EXP",
+        "TrainNo": "12782",
+        "Duration": "1970-01-01T03:42:00.000Z",
+        "Fare": 110,
+        "isAvailabe": true
+    },
+    {
+        "ArrivalTime": "2022-05-31T15:12:00.000Z",
+        "AvailabileClass": "2S,SL,3A,2A",
+        "Availability": [
+            {
+                "ClassCode": "SL",
+                "Fare": "190",
+                "Status": "RLWL76/WL66",
+                "UpdateOn": "2 DAYS AGO"
+            },
+            {
+                "ClassCode": "3A",
+                "Fare": "555",
+                "Status": "RLWL32/WL22",
+                "UpdateOn": "2 DAYS AGO"
+            },
+            {
+                "ClassCode": "2S",
+                "Fare": "110",
+                "Status": "RLWL15/WL15",
+                "UpdateOn": "A DAY AGO"
+            }
+        ],
+        "DepartureTime": "2022-05-31T11:40:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "GOA EXPRESS",
+        "TrainNo": "12780",
+        "Duration": "1970-01-01T03:32:00.000Z",
+        "Fare": 110,
+        "isAvailabe": false
+    },
+    {
+        "ArrivalTime": "2022-05-31T22:17:00.000Z",
+        "AvailabileClass": "2S,SL,3A,2A,1A",
+        "Availability": [
+            {
+                "ClassCode": "SL",
+                "Fare": "160",
+                "Status": "GNWL57/WL50",
+                "UpdateOn": "7 DAYS AGO"
+            },
+            {
+                "ClassCode": "3A",
+                "Fare": "505",
+                "Status": "GNWL34/WL32",
+                "UpdateOn": "2 DAYS AGO"
+            },
+            {
+                "ClassCode": "2S",
+                "Fare": "95",
+                "Status": "GNWL15/WL13",
+                "UpdateOn": "A DAY AGO"
+            }
+        ],
+        "DepartureTime": "2022-05-31T18:25:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "DR HUBBALLI EXP",
+        "TrainNo": "17318",
+        "Duration": "1970-01-01T03:52:00.000Z",
+        "Fare": 95,
+        "isAvailabe": false
+    },
+    {
+        "ArrivalTime": "2022-05-31T03:12:00.000Z",
+        "AvailabileClass": "2S,SL,3A,2A",
+        "Availability": [
+            {
+                "ClassCode": "SL",
+                "Fare": "160",
+                "Status": "RLWL135/WL126",
+                "UpdateOn": "2 DAYS AGO"
+            },
+            {
+                "ClassCode": "3A",
+                "Fare": "505",
+                "Status": "RLWL41/WL23",
+                "UpdateOn": "2 DAYS AGO"
+            },
+            {
+                "ClassCode": "2S",
+                "Fare": "95",
+                "Status": "BOOKING CLOSED",
+                "UpdateOn": "2 DAYS AGO"
+            }
+        ],
+        "DepartureTime": "2022-05-30T22:50:00.000Z",
+        "Destination": "KRD",
+        "Source": "PUNE",
+        "TrainName": "MAHARASHTRA EXP",
+        "TrainNo": "11040",
+        "Duration": "1970-01-01T04:22:00.000Z",
+        "Fare": 95,
+        "isAvailabe": false
+    }
+ 
 
 
-        ]
-            ;
+        ] ;
 
         $("#station1").autocomplete({
             minLength: 3,
@@ -1589,7 +722,7 @@
 
                         meta_data = [];
                         $.each(data.Trains, function (idx, train) {
-
+                            let isAvailable=false
                             let end = new Date(train.ArrivalTime)
                             let start = new Date(train.DepartureTime)
                             let diff = new Date(end.getTime() - start.getTime());
@@ -1599,6 +732,10 @@
                                 if (min > parseInt(repo.Fare)) {
                                     min = parseInt(repo.Fare)
                                 }
+                                if(repo.Status.includes("AVAILABLE")){
+                                    isAvailable=true
+                                }
+
                             })
                             if(min==1000000){
                                 min='NA'
@@ -1616,13 +753,14 @@
                                     'TrainName': train.TrainName,
                                     'TrainNo': train.TrainNo,
                                     'Duration': diff,
-                                    'Fare': min
+                                    'Fare': min,
+                                    'isAvailabe': isAvailable
                                 }
                             )
 
                         })
                         console.log(meta_data)
-                        sortData('Duration', 'asc', 'no')
+                        defaultSort()
                         showTrains(meta_data)
 
                     }
@@ -1643,9 +781,8 @@
         }
 
 
-        sortData('Duration', 'asc', 'no')
-        showTrains(meta_data)
-
+        defaultSort()
+ 
         function showTrains(data) {
 
             //   console.log(data)
@@ -1671,32 +808,35 @@
                         </div>
                         
                        
-                        <div class="    p-2 d-flex  col flex-grow-1  flex-column" style="padding-left: 30px; color:#7e7e7e">
-                            <div id="time" style="padding: 2px;"> ${(new Date(data[i].DepartureTime)).toLocaleString()}-${(new Date(data[i].ArrivalTime)).toLocaleString()} </div>
+                        <div class="    p-2 d-flex   col-3   flex-column" style="margin-left: 21px; color:#7e7e7e">
+                            <div id="time" class="fw-bold" style="    color: black; padding: 2px;"> ${(new Date(data[i].DepartureTime)).toLocaleTimeString()}-${(new Date(data[i].ArrivalTime)).toLocaleTimeString()} </div>
                             <div id="trainName" style="padding: 2px;"> ${data[i].TrainName}  </div>
                             
                         </div>
 
+
+
                          
-                        <div class="   col-2 p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
-                            <div id="min-temp" style="padding: 2px;">  Train# </div>
+                        <div class="   col-2 p-2 d-flex align-items-center flex-column" style="padding-left: 30px; color:#7e7e7e">
+                            <div id="min-temp" class="fw-bold" style="padding: 2px;    color: black;">  Train# </div>
                             <div id="max-temp" style="padding: 2px;"> ${data[i].TrainNo}  </div>
                         </div>
-                        <div class="    col-2 p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
-                            <div id="sunrise" style="padding: 2px;"> ${((new Date(data[i].Duration).getUTCDate() - 1) * 24) + new Date(data[i].Duration).getUTCHours()}h:${new Date(data[i].Duration).getUTCMinutes()}m </div>
+                        <div class="    col-2 p-2 d-flex flex-grow-1 flex-column" style="padding-left: 30px; color:#7e7e7e">
+                            <div id="sunrise" class="fw-bold" style="padding: 2px;    color: black;"> ${((new Date(data[i].Duration).getUTCDate() - 1) * 24) + new Date(data[i].Duration).getUTCHours()}h:${new Date(data[i].Duration).getUTCMinutes()}m </div>
                             <div id="sunset" style="padding: 2px;"> ${data[i].Source}-${data[i].Destination}  </div>
                         </div>
                         <div class="    col-2 p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
                             <div id="sunrise" style="font-size:12px; "> fare starting from </div>
-                            <div id="price"  ><i class="fa fa-rupee" style="font-size:20px; "> </i> ${data[i].Fare}  </div>
+                            <div id="price" class="fw-bold" style="    color: black;" ><i class="fa fa-rupee" style="font-size:20px; "> </i> ${data[i].Fare}  </div>
                         </div>
                         <div class="    col-1 justify-content-center  p-2 d-flex  align-items-center">
-                            <i class="fa fa-angle-down"></i>
+                            <i style="font-size: 30px;" class="fa fa-angle-down"></i>
+                            <i style="font-size: 30px; display:none" class="fa fa-angle-up"></i>
                         </div>
 
                     </div>
                     <div  class="row   justify-content-center p-3" style="display:none">
-                        <div class="col-auto">
+                        <div class="p-2 col-auto">
                         <table   class="table train-table table-responsive " style="width:400px">
                            <thead>
                                   <tr>
@@ -1712,7 +852,7 @@
                         </tbody>
                       </table>
                       </div>
-                      <div class="col-auto">
+                      <div class="p-2 col-auto">
                         <button type="button" class="btn btn-primary">Primary</button>
 
                         </div>
@@ -1751,6 +891,8 @@
         $(document).on('click', '.train', function () {
 
             $(this).siblings().slideToggle("fast");
+            $(this).find(".fa-angle-down").toggle()
+            $(this).find(".fa-angle-up").toggle()
 
         })
 
