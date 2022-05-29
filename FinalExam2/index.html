@@ -1180,6 +1180,8 @@
             $(this).find(".fa-angle-down").toggle()
             $(this).find(".fa-angle-up").toggle()
             $(this).parent().toggleClass("divactive")
+
+            
              
         })
 
@@ -1191,6 +1193,11 @@
             $(this).siblings().removeClass('active')
             $(`#${div_id}`).siblings().hide()
             $(`#${div_id}`).show()
+
+            $('#train-schedule').val('')
+
+            $('#train-station-1').val('')
+             
         })
 
         $(document).on('click', '.modal-btn', function (e) {
@@ -1301,6 +1308,9 @@
 
            let url2=`https://indianrailapi.com/api/v2/TrainNumberToName/apikey/c9b14556386b178bd3170c2a8d2196d7/TrainNumber/${tno}/`
 
+
+           console.log(url1)
+           console.log(url2)
            $.ajax({
                 url: url2,
                 type: "GET",
