@@ -1203,6 +1203,7 @@
         $(document).on('click', '.modal-btn', function (e) {
                  
                 e.preventDefault();
+                $(`#myTable1`).empty()
                 $('.spinner1').show()
                 let trainName=$(this).data('tname')
                 let trainNum=$(this).data('tno')
@@ -1215,7 +1216,7 @@
                 url: url1,
                 type: "GET",
                 success: function (data, status, jqXHR) {
-                    $(`#myTable1`).empty()
+                    
                     $('.spinner1').hide()
                     console.log(data)
                     $.each(data.Route, function (idx, train) {
