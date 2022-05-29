@@ -21,15 +21,18 @@
 
         }
 
+       
+
+ 
+
+
         #price {
             font-family: Google Sans, arial, sans-serif;
             font-weight: 400;
             font-size: 24px;
         }
 
-        div {
-            border: 1px  ;
-        }
+
 
 
         .navbar-brand {
@@ -38,33 +41,40 @@
         }
 
 
-        ul li a i.fa-chevron-right {
+        div a i.fa-chevron-right {
             display: none;
         }
 
-        ul li.active a i.fa-chevron-right {
+        div.active i.fa-chevron-right {
             display: inline;
 
         }
-         
 
-        
+        div.active a {
+            color: blue;
+            font-weight: 600;
+        }
 
-       
-        a:hover{
+        div a {
+            color: black
+        }
+
+
+
+        a:hover {
             color: red;
         }
-         
-        ul li{
+
+        ul li {
             list-style: none;
             padding: 2px;
         }
 
         .navlink {
-           
+
             text-decoration: none;
             font-size: 14px;
-            
+
         }
 
         .logo {
@@ -79,20 +89,18 @@
             object-fit: contain;
         }
 
-        input:focus { 
-            
-             outline: none !important;
-             border-color: #719ECE;
-             box-shadow: 0 0 6px #719ECE;
- }
- .divactive{
-             outline: none !important;
-             border-color: #719ECE;
-             box-shadow: 0 0 6px #719ECE;
- }
+        input:focus {
 
- 
- 
+            outline: none !important;
+            border-color: #719ECE;
+            box-shadow: 0 0 6px #719ECE;
+        }
+
+        .divactive {
+            outline: none !important;
+            border-color: #719ECE;
+            box-shadow: 0 0 6px #719ECE;
+        }
     </style>
 </head>
 
@@ -113,34 +121,38 @@
 
     <div class="container ">
         <div class="row py-5">
-            <div class="col-12 col-md-2 py-2  justify-content-center">
+            <div class="col-12 col-md-2 py-2  mb-3  ">
+                <div class="row" style="font-size: 12px;">
+                    <div class="p-1 bd-highlight d-flex justify-content-center"><img class="logo p-1"
+                            src="https://st.adda247.com/https://wpassets.adda247.com/wp-content/uploads/multisite/sites/5/2020/01/11073651/L3zNCNHo.jpg" />
+                    </div>
+                    <div class="p-1 bd-highlight d-flex justify-content-center divlink active" data-id="train-div-0"><a
+                            class="navlink  " aria-current="page" href="#">Home
+                            <i class="fa fa-chevron-right"></i>
+                        </a></div>
 
-                <div class="d-flex flex-column  ">
-                    <div><img class="logo p-1" src="logo.png" style="    margin-left: 33px;" /></div>
-                    
-                    <ul class="flex-column my-3" style="    margin-left: 24px;">
-                        <li class=" active">
-                            <a class="navlink  active" aria-current="page" href="#">Home
-                                <i class="fa fa-chevron-right"></i>
-                            </a>
-                        </li>
-                        <li class=" ">
-                            <a class=" navlink" href="#">Link
-                                <i class="fa fa-chevron-right"></i>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a class="navlink" href="#">Link
-                                <i class="fa fa-chevron-right"></i>
-                            </a>
-                        </li>
+                    <div class="p-1 bd-highlight d-flex justify-content-center divlink  " data-id="train-div-1"><a
+                            class="navlink  " aria-current="page" href="#">Train Schedule
+                            <i class="fa fa-chevron-right"></i>
+                        </a></div>
 
-                    </ul>
+                    <div class="p-1 bd-highlight d-flex justify-content-center divlink " data-id="train-div-2"><a
+                            class="navlink  " aria-current="page" href="#">Train Stations
+                            <i class="fa fa-chevron-right"></i>
+                        </a></div>
+
+                    <div class="p-1 bd-highlight d-flex justify-content-center divlink " data-id="train-div-3"><a
+                            class="navlink  " aria-current="page" href="#">PNR Check
+                            <i class="fa fa-chevron-right"></i>
+                        </a></div>
+
+
                 </div>
+
             </div>
             <div class="col-9 py-2 " style="margin-left: 25px;">
-                <div class="train-search-div">
-                    <div class="row  ">
+                <div id="train-div-0" class="train-div trainactive">
+                    <div>
                         <div class="fw-bold d-flex flex-lg-row    align-items-center flex-column">Search Trains</div>
                         <div class="  d-flex flex-lg-row    align-items-center flex-column  " style="font-size: 12px;">
 
@@ -153,12 +165,13 @@
                             </div>
                             <div class="p-1" style="padding-left: 25px;"> <button type="button" id="searchTrains"
                                     class="btn btn-primary btn-sm">Search</button></div>
+                                    <div> <i class="fa fa-spinner fa-spin spinner" style="display: none; font-size: 15px;"></i>
+                                    </div>
                         </div>
                     </div>
 
                     <div class="searchBar mt-5 mb-2">
-                        <div> <i class="fa fa-spinner fa-spin spinner" style="display: none; font-size: 15px;"></i>
-                        </div>
+                        
 
                         <label for="sort">Sort By </label>
                         <select name="sort" id="sort">
@@ -174,7 +187,139 @@
                     <div class="  train-list">
 
 
+
+
+
                     </div>
+
+                    <div>
+
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Train Schedule</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="modal1">
+                                         <h5 class="tname" style="font-weight: 600"></h5>
+                                         <i class="fa fa-spinner fa-spin spinner1" style="display: none; font-size: 15px;"></i>
+                                         <div  class="row   justify-content-center p-3"  >
+                                         <div class="p-2 col-auto align-items-center">
+                                            <table   class="table train-schedule-table table-responsive " style="width: auto;">
+                                               <thead>
+                                                      <tr>
+                                                               <th scope="col">#</th>
+                                                               <th scope="col">Station</th>
+                                                                <th scope="col">Arrival</th>
+                                                                <th scope="col">Departure</th>
+                                                               <th scope="col">Distance</th>
+                                                                <th scope="col">Day</th>
+                                          
+                      
+                    
+                                                     </tr>
+                                              </thead>
+                                            <tbody    id="myTable1">
+                                            </tbody>
+                                          </table>
+                                          </div>
+                                          </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div id="train-div-1" class="train-div p-2" style="display:none">
+                    <div class="d-flex p-2 align-items-center  ">
+                    <div class="p-2"> <input type="text" id="train-schedule" placeholder="Enter Train No">
+                    </div>
+                    <div class="p-2"> <button type="button" id="train-schedule-btn" class="btn btn-primary btn-sm">Search</button></div>
+                    <div class="p-2">
+                    <i class="fa fa-spinner fa-spin spinner2" style="display: none; font-size: 14px;"></i>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div  class="row     "  >
+                        <div id="tname1" style="font-size:15px; font-weight: 600; margin: 5px;"></div>
+                        <div class="table-responsive-md">
+                           <table   class="table train-schedule-table1   "  >
+                              <thead>
+                                     <tr>
+                                              <th scope="col">#</th>
+                                              <th scope="col">Station</th>
+                                               <th scope="col">Arrival</th>
+                                               <th scope="col">Departure</th>
+                                              <th scope="col">Distance</th>
+                                               <th scope="col">Day</th>
+                         
+     
+   
+                                    </tr>
+                             </thead>
+                           <tbody    id="myTable2">
+                           </tbody>
+                         </table>
+                         </div>
+                         </div> 
+                </div>
+                </div>
+                <div id="train-div-2" class="train-div p-2" style="display:none">
+                    
+                    
+                    <div class="d-flex p-2 align-items-center  ">
+                        <div class="p-2"> <input type="text" id="train-station-1" placeholder="Enter Station Name">
+                        </div>
+                        <div class="p-2"> <button type="button" id="train-station-btn" class="btn btn-primary btn-sm">Search</button></div>
+                        <div class="p-2">
+                        <i class="fa fa-spinner fa-spin spinner3" style="display: none; font-size: 14px;"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div  class="row     "  >
+                            
+                            <div id="msg24" style="font-size:13px; margin: 5px;"></div>
+                            <div class="table-responsive-md">
+                               <table   class="table train-station-table1   "  >
+                                  <thead>
+                                         <tr>
+                                                  <th scope="col">Train#</th>
+                                                  <th scope="col">Name Name</th>
+                                                   <th scope="col">Arrival</th>
+                                                   <th scope="col">Departure</th>
+                                                  <th scope="col">Platform</th>
+                                                   <th scope="col">Delay</th>
+                             
+         
+       
+                                        </tr>
+                                 </thead>
+                               <tbody    id="myTable3">
+                               </tbody>
+                             </table>
+                             </div>
+                             </div> 
+                    </div>
+
+                </div>
+                <div id="train-div-3" class="train-div" style="display:none">
+                    train-div-3
                 </div>
             </div>
         </div>
@@ -202,146 +347,6 @@
         var station2_data = [];
         var stationCode = [];
         var date;
-        $("#sort").selectmenu({
-            select: function (event, ui) {
-                let str = ui.item.value
-                let criteria = str.replace(/[\])}[{(]/g, '');
-
-
-
-                if (criteria == 'Best Available') {
-
-                    defaultSort()
-                }
-
-                if (criteria == 'Cheapest') {
-
-                    sortData('Fare', 'asc', 'no')
-                }
-
-                if (criteria == 'Duration') {
-
-                    sortData('Duration', 'asc', 'no')
-                }
-
-
-
-                if (criteria == `Departure Early First`) {
-
-                    sortData('DepartureTime', 'asc', 'yes')
-                }
-
-                if (criteria == `Departure Late First`) {
-
-                    sortData('DepartureTime', 'desc', 'yes')
-                }
-
-                if (criteria == `Arrival Early First`) {
-
-                    sortData('ArrivalTime', 'asc', 'yes')
-                }
-
-                if (criteria == `Arrival Late First`) {
-
-                    sortData('ArrivalTime', 'desc', 'yes')
-                }
-
-
-            }
-        }
-        );
-
-        function defaultSort() {
-
-            let column1 = 'Duration'
-            let column2 = 'isAvailabe'
-
-            meta_data.sort((a, b) => {
-                let fa = a[column1]
-                let fb = b[column1]
-                let fc = a[column2]
-                let fd = b[column2]
-                //console.log(typeof fa, fb)
-                if (fc == fd) {
-                    return (fa < fb) ? -1 : (fa > fb) ? 1 : 0;
-                }
-                else {
-                    return (fc > fd) ? -1 : 1;
-                }
-
-
-            });
-            showTrains(meta_data)
-
-
-
-        }
-
-
-        function sortData(column, order, isDate) {
-
-            if (isDate === 'yes') {
-                // console.log("Date",column,order,isDate )
-                if (order === 'asc') {
-                    meta_data.sort((a, b) => {
-                        let fa = new Date(a[column]),
-                            fb = new Date(b[column]);
-                        //console.log(typeof fa, column, order)
-
-                        if (fa < fb) {
-                            return -1;
-                        }
-                        if (fa > fb) {
-                            return 1;
-                        }
-                        return 0;
-                    });
-
-                } else {
-
-                    meta_data.sort((a, b) => {
-                        let fa = new Date(a[column]),
-                            fb = new Date(b[column]);
-                        //console.log(typeof fa, column, order)
-
-                        if (fa > fb) {
-                            return -1;
-                        }
-                        if (fa < fb) {
-                            return 1;
-                        }
-                        return 0;
-                    });
-
-
-                }
-
-
-
-
-            } else {
-
-
-                //  console.log("No Date",column,order,isDate )
-                meta_data.sort((a, b) => {
-                    let fa = a[column],
-                        fb = b[column];
-                    //console.log(typeof fa, fb)
-
-                    if (fa < fb) {
-                        return -1;
-                    }
-                    if (fa > fb) {
-                        return 1;
-                    }
-                    return 0;
-                });
-            }
-
-
-            showTrains(meta_data)
-
-        }
 
 
         var meta_data = [
@@ -632,6 +637,199 @@
 
         ];
 
+
+
+
+        $("#sort").selectmenu({
+            select: function (event, ui) {
+                let str = ui.item.value
+                let criteria = str.replace(/[\])}[{(]/g, '');
+
+
+
+                if (criteria == 'Best Available') {
+
+                    defaultSort()
+                }
+
+                if (criteria == 'Cheapest') {
+
+                    sortData('Fare', 'asc', 'no')
+                }
+
+                if (criteria == 'Duration') {
+
+                    sortData('Duration', 'asc', 'no')
+                }
+
+
+
+                if (criteria == `Departure Early First`) {
+
+                    sortData('DepartureTime', 'asc', 'yes')
+                }
+
+                if (criteria == `Departure Late First`) {
+
+                    sortData('DepartureTime', 'desc', 'yes')
+                }
+
+                if (criteria == `Arrival Early First`) {
+
+                    sortData('ArrivalTime', 'asc', 'yes')
+                }
+
+                if (criteria == `Arrival Late First`) {
+
+                    sortData('ArrivalTime', 'desc', 'yes')
+                }
+
+
+            }
+        }
+        );
+
+        function defaultSort() {
+
+            let column1 = 'Duration'
+            let column2 = 'isAvailabe'
+
+            meta_data.sort((a, b) => {
+                let fa = a[column1]
+                let fb = b[column1]
+                let fc = a[column2]
+                let fd = b[column2]
+                //console.log(typeof fa, fb)
+                if (fc == fd) {
+                    return (fa < fb) ? -1 : (fa > fb) ? 1 : 0;
+                }
+                else {
+                    return (fc > fd) ? -1 : 1;
+                }
+
+
+            });
+            showTrains(meta_data)
+
+
+
+        }
+
+
+        function sortData(column, order, isDate) {
+
+            if (isDate === 'yes') {
+                // console.log("Date",column,order,isDate )
+                if (order === 'asc') {
+                    meta_data.sort((a, b) => {
+                        let fa = new Date(a[column]),
+                            fb = new Date(b[column]);
+                        //console.log(typeof fa, column, order)
+
+                        if (fa < fb) {
+                            return -1;
+                        }
+                        if (fa > fb) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+
+                } else {
+
+                    meta_data.sort((a, b) => {
+                        let fa = new Date(a[column]),
+                            fb = new Date(b[column]);
+                        //console.log(typeof fa, column, order)
+
+                        if (fa > fb) {
+                            return -1;
+                        }
+                        if (fa < fb) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+
+
+                }
+
+
+
+
+            } else {
+
+
+                //  console.log("No Date",column,order,isDate )
+                meta_data.sort((a, b) => {
+                    let fa = a[column],
+                        fb = b[column];
+                    //console.log(typeof fa, fb)
+
+                    if (fa < fb) {
+                        return -1;
+                    }
+                    if (fa > fb) {
+                        return 1;
+                    }
+                    return 0;
+                });
+            }
+
+
+            showTrains(meta_data)
+
+        }
+
+
+        var trainOnStation=[]
+
+
+        $('#train-station-1').autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+                var term = request.term;
+
+
+                $.ajax({
+
+                    url: `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`,
+
+
+                    type: "GET",
+
+                    success: function (data) {
+                        console.log(`https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCodeOrName/${term}`)
+
+                       let  station3_data = []
+                        //{ label: "Choice1", value: "value1" }
+                        for (let i = 0; i < data.Station.length; i++) {
+                            
+                            trainOnStation.push({
+                                label: data.Station[i].NameEn,
+                                value: data.Station[i].StationCode
+
+                            })
+                            
+                            station3_data.push({
+                                label: data.Station[i].NameEn,
+
+                            })
+                             
+                        }
+                         
+                        response(station3_data);
+                    }
+
+                })
+
+            }
+
+        });
+
+
+
+
         $("#station1").autocomplete({
             minLength: 3,
             source: function (request, response) {
@@ -672,7 +870,7 @@
 
         });
 
-        $('[data-toggle="tooltip"]').tooltip();   
+        $('[data-toggle="tooltip"]').tooltip();
 
 
         $("#station2").autocomplete({
@@ -729,7 +927,7 @@
                 date = date
                 // console.log(date)
             },
-             minDate: 0,
+            minDate: 0,
             inline: true,
 
         });
@@ -740,21 +938,21 @@
             e.preventDefault();
 
             let dt = $('#datepicker').val()
-           
-            let a= $('#station1').val()
+
+            let a = $('#station1').val()
             let obj1 = stationCode.find(o => o.label === a);
-            console.log(a, obj1 ,typeof(obj1) )
+            console.log(a, obj1, typeof (obj1))
 
-            let b= $('#station2').val()
+            let b = $('#station2').val()
             let obj2 = stationCode.find(o => o.label === b);
-            console.log(a, obj1 ,typeof(obj1) )
+            console.log(a, obj1, typeof (obj1))
 
 
-            if ((a == '' ) || obj1 == undefined || typeof(obj1) == 'undefined') {
+            if ((a == '') || obj1 == undefined || typeof (obj1) == 'undefined') {
                 alert("Plase Enter Valid From Station");
                 return false;
             }
-            else  if ((b == '' ) || obj2 == undefined || typeof(obj2) == 'undefined') {
+            else if ((b == '') || obj2 == undefined || typeof (obj2) == 'undefined') {
                 alert("Plase Enter valid To Station");
                 return false;
             }
@@ -763,7 +961,7 @@
                 return false;
             }
             else {
-                fetch_data(a,b,dt)
+                fetch_data(a, b, dt)
             }
 
 
@@ -772,10 +970,10 @@
 
 
 
-        function fetch_data(fromStationCd,toStationCd,dt) {
+        function fetch_data(fromStationCd, toStationCd, dt) {
             $('#searchTrains').addClass("disabled")
             $('.spinner').show()
-             
+
             //   console.log(stationCode)
 
             let obj1 = stationCode.find(o => o.label === fromStationCd);
@@ -845,7 +1043,7 @@
 
                     if (data.ResponseCode == "202") {
                         alert(data.Message)
-
+                        defaultSort()
                     }
 
 
@@ -854,6 +1052,7 @@
 
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(textStatus)
+                    defaultSort()
                 }
 
 
@@ -891,8 +1090,8 @@
                         </div>
                         
                        
-                        <div class="    p-2 d-flex   col-3   flex-column" style="margin-left: 21px; color:#7e7e7e" data-toggle="tooltip" title="${(new Date(data[i].DepartureTime)).toLocaleString()}--${(new Date(data[i].ArrivalTime)).toLocaleString()}">
-                            <div id="time" class="fw-bold" style="    color: black; padding: 2px;"> ${(new Date(data[i].DepartureTime)).toLocaleTimeString()}-${(new Date(data[i].ArrivalTime)).toLocaleTimeString()} </div>
+                        <div class="    p-2 d-flex   col-3   flex-column" style="margin-left: 21px; color:#7e7e7e" data-toggle="tooltip" title="${(new Date(data[i].DepartureTime)).toLocaleString()} -- ${(new Date(data[i].ArrivalTime)).toLocaleString()}">
+                            <div id="time" class="fw-bold" style="    color: black; padding: 2px;"> ${(new Date(data[i].DepartureTime)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${(new Date(data[i].ArrivalTime)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} </div>
                             <div id="trainName" style="padding: 2px;"> ${data[i].TrainName}  </div>
                             
                         </div>
@@ -905,7 +1104,7 @@
                             <div id="max-temp" style="padding: 2px;"> ${data[i].TrainNo}  </div>
                         </div>
                         <div class="    col-2 p-2 d-flex flex-grow-1 flex-column" style="padding-left: 30px; color:#7e7e7e"  >
-                            <div id="sunrise" class="fw-bold" style="padding: 2px;    color: black;" > ${((new Date(data[i].Duration).getUTCDate() - 1) * 24) + new Date(data[i].Duration).getUTCHours()}h:${new Date(data[i].Duration).getUTCMinutes()}m </div>
+                            <div id="sunrise" class="fw-bold" style="padding: 2px;    color: black;" > ${((new Date(data[i].Duration).getUTCDate() - 1) * 24) + new Date(data[i].Duration).getUTCHours()}h : ${new Date(data[i].Duration).getUTCMinutes()}m </div>
                             <div id="sunset" style="padding: 2px;"> ${data[i].Source}-${data[i].Destination}  </div>
                         </div>
                         <div class="    col-2 p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
@@ -918,7 +1117,7 @@
                         </div>
 
                     </div>
-                    <div  class="row   justify-content-center p-3" style="display:none">
+                    <div  class="row train-toggle  justify-content-center p-3" style="display:none">
                         <div class="p-2 col-auto">
                         <table   class="table train-table table-responsive " style="width:400px">
                            <thead>
@@ -936,7 +1135,10 @@
                       </table>
                       </div>
                       <div class="p-2 col-auto">
-                        <button type="button" class="btn btn-primary">Primary</button>
+                        <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-tno='${data[i].TrainNo}' data-tname='${data[i].TrainName}' data-bs-target="#exampleModal">
+                       Train Schedule
+                 </button>
 
                         </div>
                     </div>
@@ -970,14 +1172,180 @@
 
         }
 
+         
 
         $(document).on('click', '.train', function () {
-          
+           
             $(this).siblings().slideToggle("fast");
             $(this).find(".fa-angle-down").toggle()
             $(this).find(".fa-angle-up").toggle()
+            $(this).parent().toggleClass("divactive")
+             
+        })
+
+        $(document).on('click', '.divlink', function () {
+
+            let div_id = $(this).data('id')
+            console.log(div_id)
+            $(this).addClass('active')
+            $(this).siblings().removeClass('active')
+            $(`#${div_id}`).siblings().hide()
+            $(`#${div_id}`).show()
+        })
+
+        $(document).on('click', '.modal-btn', function (e) {
+                 
+                e.preventDefault();
+                $('.spinner1').show()
+                let trainName=$(this).data('tname')
+                let trainNum=$(this).data('tno')
+                $('.tname').text(trainNum+" "+trainName  )
+
+            let url1 = `   https://indianrailapi.com/api/v2/TrainSchedule/apikey/c9b14556386b178bd3170c2a8d2196d7/TrainNumber/${trainNum}/`
+
+
+            $.ajax({
+                url: url1,
+                type: "GET",
+                success: function (data, status, jqXHR) {
+                    $(`#myTable1`).empty()
+                    $('.spinner1').hide()
+                    console.log(data)
+                    $.each(data.Route, function (idx, train) {
+                       
+                        var html = `
+                        <tr   style=" font-size: 14px;"> \
+                        <td style=" font-weight: 600;"> ${idx} </td>\
+                        <td>${train.StationName}  </td>\
+                        <td>${train.ArrivalTime} </td>\
+                        <td> ${train.DepartureTime}</td>\
+                        <td>${train.Distance} km </td>\
+                        <td> ${train.Day}</td>\
+                                             
+                    </tr>`;
+                    $(`#myTable1`).append(html);
+
+                    })
+
+                }
+            })
+
+
 
         })
+
+        $(`.train-schedule-table1`).hide()
+        $(`.train-station-table1`).hide()
+
+        $(document).on('click','#train-station-btn',function(e){
+            $('.spinner3').show()
+            
+            let stationName= $('#train-station-1').val()
+            console.log(stationName)
+            console.log(trainOnStation)
+
+            let obj1 = trainOnStation.find(o => o.label === stationName);
+            console.log("Searched", obj1)
+
+            let url1=`https://indianrailapi.com/api/v2/LiveStation/apikey/c9b14556386b178bd3170c2a8d2196d7/StationCode/${obj1.value}/hours/23/`
+            console.log(url1)
+
+            $.ajax({
+                url: url1,
+                type: "GET",
+                success: function (data, status, jqXHR) {
+                    $('#msg24').text(`Here are trains arriving at ${stationName} within next 24 hrs`)
+                    $(`#myTable3`).empty()
+                    $('.spinner3').hide()
+                 
+                    console.log(data.Trains)
+
+
+                    $.each(data.Trains, function (idx, train) {
+                        //console.log(train)
+                        var html = `
+                        <tr   style=" font-size: 14px;"> \
+                        <td style=" font-weight: 600;"> ${train.Number} </td>\
+                        <td>${train.Name}  </td>\
+                        <td>${train.ScheduleArrival} </td>\
+                        <td> ${train.ScheduleDeparture}</td>\
+                        <td> ${train.Platform} </td>\
+                        <td>${train.Delay} </td>\
+                                             
+                    </tr>`;
+                    $(`#myTable3`).append(html);
+
+                    })
+
+                    $(`.train-station-table1`).show()
+                   
+                    
+                }
+            })
+
+
+
+
+
+
+        })
+
+
+
+        $(document).on('click', '#train-schedule-btn', function (e) {
+            $('.spinner2').show()
+           let tno= $('#train-schedule').val()
+           console.log(tno)
+           let url1 = `   https://indianrailapi.com/api/v2/TrainSchedule/apikey/c9b14556386b178bd3170c2a8d2196d7/TrainNumber/${tno}/`
+
+
+           let url2=`https://indianrailapi.com/api/v2/TrainNumberToName/apikey/c9b14556386b178bd3170c2a8d2196d7/TrainNumber/${tno}/`
+
+           $.ajax({
+                url: url2,
+                type: "GET",
+                success: function (data, status, jqXHR) {
+                    console.log(data.TrainName)
+                    $('#tname1').text(data.TrainName)
+                }
+            })
+
+
+
+
+
+            $.ajax({
+                url: url1,
+                type: "GET",
+                success: function (data, status, jqXHR) {
+                    $(`#myTable2`).empty()
+                    $('.spinner2').hide()
+                 
+                    
+                    $.each(data.Route, function (idx, train) {
+                        //console.log(train)
+                        var html = `
+                        <tr   style=" font-size: 14px;"> \
+                        <td style=" font-weight: 600;"> ${idx} </td>\
+                        <td>${train.StationName}  </td>\
+                        <td>${train.ArrivalTime} </td>\
+                        <td> ${train.DepartureTime}</td>\
+                        <td>${train.Distance} km </td>\
+                        <td> ${train.Day}</td>\
+                                             
+                    </tr>`;
+                    $(`#myTable2`).append(html);
+
+                    })
+
+                    $(`.train-schedule-table1`).show()
+                }
+            })
+
+        })
+
+
+
 
 
 
