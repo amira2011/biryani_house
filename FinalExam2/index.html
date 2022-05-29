@@ -28,7 +28,7 @@
         }
 
         div {
-            border: 1px solid;
+            border: 1px  ;
         }
 
 
@@ -78,6 +78,21 @@
             width: 25px;
             object-fit: contain;
         }
+
+        input:focus { 
+            
+             outline: none !important;
+             border-color: #719ECE;
+             box-shadow: 0 0 6px #719ECE;
+ }
+ .divactive{
+             outline: none !important;
+             border-color: #719ECE;
+             box-shadow: 0 0 6px #719ECE;
+ }
+
+ 
+ 
     </style>
 </head>
 
@@ -657,7 +672,7 @@
 
         });
 
-
+        $('[data-toggle="tooltip"]').tooltip();   
 
 
         $("#station2").autocomplete({
@@ -714,7 +729,7 @@
                 date = date
                 // console.log(date)
             },
-
+             minDate: 0,
             inline: true,
 
         });
@@ -724,22 +739,31 @@
         $('#searchTrains').click(function (e) {
             e.preventDefault();
 
+            let dt = $('#datepicker').val()
+           
+            let a= $('#station1').val()
+            let obj1 = stationCode.find(o => o.label === a);
+            console.log(a, obj1 ,typeof(obj1) )
+
+            let b= $('#station2').val()
+            let obj2 = stationCode.find(o => o.label === b);
+            console.log(a, obj1 ,typeof(obj1) )
 
 
-            if ($('#station1').val() == '') {
-                alert("Plase Enter From Station");
+            if ((a == '' ) || obj1 == undefined || typeof(obj1) == 'undefined') {
+                alert("Plase Enter Valid From Station");
                 return false;
             }
-            else if ($('#station2').val() == '') {
-                alert("Plase Enter To Station");
+            else  if ((b == '' ) || obj2 == undefined || typeof(obj2) == 'undefined') {
+                alert("Plase Enter valid To Station");
                 return false;
             }
-            else if ($('#datepicker').val() == '') {
+            else if (dt == '') {
                 alert("Plase Enter Date");
                 return false;
             }
             else {
-                fetch_data()
+                fetch_data(a,b,dt)
             }
 
 
@@ -748,12 +772,10 @@
 
 
 
-        function fetch_data() {
+        function fetch_data(fromStationCd,toStationCd,dt) {
             $('#searchTrains').addClass("disabled")
             $('.spinner').show()
-            let fromStationCd = $('#station1').val()
-            let toStationCd = $('#station2').val()
-            let dt = $('#datepicker').val()
+             
             //   console.log(stationCode)
 
             let obj1 = stationCode.find(o => o.label === fromStationCd);
@@ -860,7 +882,7 @@
 
 
                 var html1 = `<div  id=train${i}">
-                    <div class="d-flex p-2 my-2 bg-light train " >
+                    <div class="d-flex p-2 my-2  train " style="background-color: #f6f6f6" >
                         <div id="icon" class="  p-2 d-flex  align-items-center" >
 
 
@@ -869,7 +891,7 @@
                         </div>
                         
                        
-                        <div class="    p-2 d-flex   col-3   flex-column" style="margin-left: 21px; color:#7e7e7e">
+                        <div class="    p-2 d-flex   col-3   flex-column" style="margin-left: 21px; color:#7e7e7e" data-toggle="tooltip" title="${(new Date(data[i].DepartureTime)).toLocaleString()}--${(new Date(data[i].ArrivalTime)).toLocaleString()}">
                             <div id="time" class="fw-bold" style="    color: black; padding: 2px;"> ${(new Date(data[i].DepartureTime)).toLocaleTimeString()}-${(new Date(data[i].ArrivalTime)).toLocaleTimeString()} </div>
                             <div id="trainName" style="padding: 2px;"> ${data[i].TrainName}  </div>
                             
@@ -882,8 +904,8 @@
                             <div id="min-temp" class="fw-bold" style="padding: 2px;    color: black;">  Train# </div>
                             <div id="max-temp" style="padding: 2px;"> ${data[i].TrainNo}  </div>
                         </div>
-                        <div class="    col-2 p-2 d-flex flex-grow-1 flex-column" style="padding-left: 30px; color:#7e7e7e">
-                            <div id="sunrise" class="fw-bold" style="padding: 2px;    color: black;"> ${((new Date(data[i].Duration).getUTCDate() - 1) * 24) + new Date(data[i].Duration).getUTCHours()}h:${new Date(data[i].Duration).getUTCMinutes()}m </div>
+                        <div class="    col-2 p-2 d-flex flex-grow-1 flex-column" style="padding-left: 30px; color:#7e7e7e"  >
+                            <div id="sunrise" class="fw-bold" style="padding: 2px;    color: black;" > ${((new Date(data[i].Duration).getUTCDate() - 1) * 24) + new Date(data[i].Duration).getUTCHours()}h:${new Date(data[i].Duration).getUTCMinutes()}m </div>
                             <div id="sunset" style="padding: 2px;"> ${data[i].Source}-${data[i].Destination}  </div>
                         </div>
                         <div class="    col-2 p-2 d-flex flex-column" style="padding-left: 30px; color:#7e7e7e">
@@ -950,7 +972,7 @@
 
 
         $(document).on('click', '.train', function () {
-
+          
             $(this).siblings().slideToggle("fast");
             $(this).find(".fa-angle-down").toggle()
             $(this).find(".fa-angle-up").toggle()
