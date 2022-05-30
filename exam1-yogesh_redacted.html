@@ -1,0 +1,353 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="http://maps.googleapis.com/maps/api/js?key={googleApiKey}&sensor=false&amp;libraries=places" type="text/javascript"></script>
+  <script>
+    function initialize() {
+      var options = {
+        types: ['(cities)'],
+        //componentRestrictions: {country: "us"}
+      };
+
+      var input = document.getElementById('searchTextField');
+      var autocomplete = new google.maps.places.Autocomplete(input, options);
+      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        //document.getElementById('lat').value = place.geometry.location.lat();
+        //document.getElementById('lng').value = place.geometry.location.lng();
+        //fillInAddress();
+        console.log(place);
+        var city = place.name;
+        var q = place.name;
+        var countryLongCode;
+        var countryShortCode;
+        $.each(place.address_components, function(idx, val) {
+          if ($.inArray("country", val.types) !== -1) {
+            q += `, ${val.short_name}`;
+            countryShortCode = val.short_name;
+            countryLongCode = val.long_name;
+            return false;
+          }
+        })
+        // console.log(`city: ${city}`);
+        getLocationCoordinates(city, countryShortCode, countryLongCode);
+      });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+  <style>
+    .custom-container {
+      padding-left:30px;
+      padding-right:30px
+    }
+    .left-sidebar {
+      background: whitesmoke;
+    }
+    td, th {
+      word-break: break-all;
+    }
+    .city-links {
+      text-decoration: none;
+    }
+    #loc-star:hover {
+      background: golden;
+    }
+    #mark-favorite-city:hover > #loc-star {
+      color: golden;
+    }
+  </style>
+
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="custom-container">
+      <a class="navbar-brand" href="javascript:;">
+        <span class="navbar-title">
+          Weather App
+        </span>
+      </a>
+    </div>
+  </nav>
+  <div class="custom-container mt-5">
+    <div class="row">
+      <div class="col-md-2 left-sidebar">
+        <div style="margin-top: 20px; font-weight: 800;">My Locations</div>
+        <hr />
+        <div style="font-size: 14px;" id="fav-desc">Click star button to save cities</div>
+        <div id="fav-cities" style="font-size: 14px;"></div>
+        <div style="margin-top: 30px; font-weight: 800;">Around the World</div>
+        <hr />
+        <div style="font-size: 14px; margin-bottom: 30px;">
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('40.7127281', '-74.0060152', 'metric', 'New York', 'United States')">New York</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('34.0536909', '-118.242766', 'metric', 'Los Angeles', 'United States')">Los Angeles</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('41.8755616', '-87.6244212', 'metric', 'Chicago', 'United States')">Chicago</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('29.7589382', '-95.3676974', 'metric', 'Houston', 'United States')">Houston</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('39.9527237', '-75.1635262', 'metric', 'Philadelphia', 'United States')">Philadelphia</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('37.7790262', '-122.419906', 'metric', 'San Francisco', 'United States')">San Francisco</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('35.6828387', '139.7594549', 'metric', 'Tokyo', 'Japan')">Tokyo</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('51.5156177', '-0.0919983', 'metric', 'London', 'United Kingdom')">London</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('48.8588897', '2.3200410217200766', 'metric', 'Paris', 'France')">Paris</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('45.4371908', '12.3345898', 'metric', 'Venice', 'Italy')">Venice</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('19.0759899', '72.8773928', 'metric', 'Mumbai', 'India')">Mumbai</a>
+          </div>
+          <div>
+            <a class="city-links" href="javascript:;" onclick="fetchWeather('28.6138954', '77.2090057', 'metric', 'New Delhi', 'India')">New Delhi</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-10" style="padding-left: 30px;">
+
+        <div class="search-box">
+          <div>
+            <span id="loc-lat" style="display: none;"></span>
+            <span id="loc-lon" style="display: none;"></span>
+            <span style="font-weight: 700; font-size: 30px;" id="city-name">Costa Mesa</span>
+            <span style="padding-left: 10px;">
+              <a href="javascript:;" id="mark-favorite-city"><i class="fa fa-2x fa-star" style="color: lightgrey;" id="loc-star"></i></a>
+            </span>
+            <span style="padding-left: 10px;">
+              <span class="dropdown">
+                <button class="btn btn-light" style="margin-top: -15px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Change Location
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="width: 400px; margin-top: 10px !important;">
+                  <div class="card-body">
+                    <h5 class="card-title">Change Location</h5>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <input id="searchTextField" type="text" class="form-control" placeholder="Enter a location" autocomplete="on" style="height: 30px; font-size: 13px;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </span>
+          </div>
+          <div style="font-size: 14px; margin-bottom: 30px;" id="country-name">United States</div>
+
+          <table style="height: 100px;">
+            <tbody>
+              <tr>
+                <td class="align-top">
+                  <img src="https://openweathermap.org/img/w/01n.png" id="weather-icon" style="margin-top: 10px;" />
+                </td>
+                <td class="align-top" style="font-size: 50px;">
+                  <div style="font-size: 55px;" id="current-temp"></div>
+                </td>
+                <td class="align-top">
+                  <div style="font-size: 12px; padding-top: 10px;">o C</div>
+                </td>
+                <td class="align-top" style="padding-left: 10px; color: grey;">
+                  <div style="font-size: 14px; padding-top: 10px;" id="weather-desc"></div>
+                  <div style="font-size: 14px;">Humidity: <span id="humidity"></span>%</div>
+                  <div style="font-size: 14px;">Wind: <span id="wind-speed"></span></div>
+                </td>
+                <td class="align-top" style="padding-left: 40px; color: grey;">
+                  <div style="font-size: 14px; padding-top: 10px;">Min: <span id="min-temp"></span><sup>o</sup></sup></div>
+                  <div style="font-size: 14px;">Max: <span id="max-temp"></span><sup>o</sup></div>
+                </td>
+                <td class="align-top" style="padding-left: 40px; color: grey;">
+                  <div style="font-size: 14px; padding-top: 10px;">Sunrise: <span id="sunrise"></span></sup></div>
+                  <div style="font-size: 14px;">Sunset: <span id="sunset"></span></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row" id="weekly-stats">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  
+  <script type="text/javascript">
+    // initialize local storage for favorite cities array
+    if (!localStorage.getItem('weather-fav-cities')) {
+      localStorage.setItem('weather-fav-cities', JSON.stringify([]));
+    }
+    var favoriteCities = JSON.parse(localStorage.getItem('weather-fav-cities')) || [];
+
+    $(document).ready(function () {
+      // fetch costa mesa weather when page loads
+      fetchWeather('33.6633386', '-117.903317', 'metric', 'Costa Mesa', 'United States');
+      populateSideBar();
+
+      // Mark favorite city
+      $("#mark-favorite-city").click(function(e) {
+        e.preventDefault();
+        var city = $("#city-name").text();
+        var country = $("#country-name").text();
+        var lat = $("#loc-lat").text();
+        var lon = $("#loc-lon").text();
+        if ($.inArray(`${city}-${country}`, favoriteCities) !== -1) {
+          // Don't do anything if the city is already in the favorite list
+        } else {
+          // add favorite city to the local storage
+          favoriteCities.push(`${city}-${country}`);
+          localStorage.setItem('weather-fav-cities', JSON.stringify(favoriteCities));
+          var html = `<div><a class="city-links" href="javascript:;" onclick="fetchWeather('${lat}', '${lon}', 'metric', '${city}', '${country}')">${city}</a>\
+            <a href='javascript:;' class='remove-fav' data-ary-elem='${city}-${country}'><i class='fa fa-close' style='padding-left: 10px; color: grey;'></i></a></div>`;
+          localStorage.setItem(`${city}-${country}`, html);
+          $("#fav-desc").hide();
+          $("#fav-cities").append(html);
+        }
+        $("#loc-star").css('color', 'goldenrod');
+      })
+
+      // fetch fav cities from local storage and display in sidebar
+      function populateSideBar() {
+        var list = JSON.parse(localStorage.getItem('weather-fav-cities')) || [];
+        var html;
+        if (list.length > 0) {
+          $("#fav-desc").hide();
+        }
+        $.each(list, function(idx, val) {
+          html = localStorage.getItem(val);
+          if (html) {
+            $("#fav-cities").append(html);
+          }
+        })
+      }
+
+      // remove favorite city
+      $(document).on('click', '.remove-fav', function(e) {
+        e.preventDefault();
+        var a = $(this).data('ary-elem');
+        favoriteCities.splice( $.inArray(a, favoriteCities), 1 );
+        localStorage.setItem('weather-fav-cities', JSON.stringify(favoriteCities));
+        $(this).closest("div").remove();
+        if (favoriteCities.length == 0) {
+          $("#fav-desc").show();
+        }
+        var city = $("#city-name").text();
+        var country = $("#country-name").text();
+        if ($.inArray(`${city}-${country}`, favoriteCities) === -1) {
+          $("#loc-star").css('color', 'lightgrey');
+        }
+      })
+      
+    })
+
+    // fetch current weather
+    function fetchWeather(lat, lon, unit, city, country) {
+      var apiKey = '{weatherApiKey}';
+      var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
+      $.get(url, function(data) {
+        $("#current-temp").text(parseInt(data.main.temp));
+        $("#city-name").text(city);
+        $("#country-name").text(country);
+        $("#loc-lat").text(lat);
+        $("#loc-lon").text(lon);
+        $("#humidity").text(data.main.humidity);
+        $("#wind-speed").text(data.wind.speed);
+        $("#min-temp").text(parseInt(data.main.temp_min));
+        $("#max-temp").text(parseInt(data.main.temp_max));
+        $("#sunrise").text(`${new Date(data.sys.sunrise*1000).getHours()}:${new Date(data.sys.sunrise*1000).getMinutes()}`);
+        $("#sunset").text(`${new Date(data.sys.sunset*1000).getHours()}:${new Date(data.sys.sunset*1000).getMinutes()}`);
+        $("#weather-icon").attr('src', `https://openweathermap.org/img/w/${data.weather[0].icon}.png`);
+        $("#weather-desc").text(data.weather[0].description);
+        if ($.inArray(`${city}-${country}`, favoriteCities) === -1) {
+          $("#loc-star").css('color', 'lightgrey');
+        } else {
+          $("#loc-star").css('color', 'goldenrod');
+        }
+      });
+      fetchWeatherForecast(lat, lon, unit);
+    }
+
+    // fetch weather forecast via API
+    function fetchWeatherForecast(lat, lon, unit) {
+      var obj = {};
+      var obj2 = {a: 1, b: 2};
+      var apiKey = '{weatherApiKey}';
+      var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
+      $.get(url, function(data) {
+        $.each(data.list, function(idx, val) {
+          var d = new Date(val.dt*1000);
+          var d_dt = d.getDate();
+          var wk_day = d.toLocaleDateString('en', {weekday:'long'});
+          wk_day = `${d_dt}_${wk_day}`;
+          var s = {dt: val.dt, temp_min: parseInt(val.main.temp_min), temp_max: parseInt(val.main.temp_max)};
+          if (wk_day in obj) {
+            obj[wk_day].push(s);
+          } else {
+            obj[wk_day] = []
+            obj[wk_day].push(s);
+          }
+        })
+        updateData(obj);
+      })
+    }
+
+    // populate cards
+    function updateData(obj) {
+      var html = '';
+      $.each(obj, function(k, v) {
+        var wk_day = k.split('_')[1];
+        html += `<div class="col-sm-2"><div class="card"><div class="card-body"><div style="text-align: center;">${wk_day}</div>\
+          <table class="table" style="font-size: 12px;"><thead><tr><th scope="col">Time</th><th scope="col">Min</th><th scope="col">Max</th></tr></thead><tbody>`;
+        $.each(v, function(idx, val) {
+          var t = new Date(val.dt*1000).getHours();
+          t = `${t}:00`;
+          html += `<tr><th scope="row">${t}</th><td>${val.temp_min}<sup>o</sup></td><td>${val.temp_max}<sup>o</sup></td></tr>`;
+        })
+        html += `</tbody></table></div></div></div>`;
+      })
+      $("#weekly-stats").html(html);
+    }
+
+    // get lat/lon coordinates
+    function getLocationCoordinates(city, countryShortCode, countryLongCode) {
+      var apiKey = '{weatherApiKey}';
+      var q = `${city},${countryShortCode}`;
+      var url = `https://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`;
+      $.get(url, function(data) {
+        if (data) {
+          var lat = data[0].lat;
+          var lon = data[0].lon;
+          fetchWeather(lat, lon, 'metric', city, countryLongCode);
+          $("body").trigger("click");
+        }
+      })
+    }
+    
+  </script>
+</body>
+</html>
