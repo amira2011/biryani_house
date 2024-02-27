@@ -1,0 +1,67 @@
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  padding: 20px;
+  text-align: center;
+}
+
+.logo a {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav {
+  padding: 20px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-bottom: 10px;
+}
+
+nav li a {
+  color: #333;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+nav li a:hover {
+  background-color: #f5f5f5;
+}
+
+nav ul ul {
+  /* Targets the nested list */
+  display: none; /* Hide by default */
+  position: absolute;
+  left: 100%; /* Position next to the parent */
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav li ul li {
+  margin: 0; /* Remove extra margins */
+}
+
+nav li ul li a {
+  padding: 10px 15px; /* Add link padding */
+  border-bottom: none; /* Remove bottom border for sub items */
+}

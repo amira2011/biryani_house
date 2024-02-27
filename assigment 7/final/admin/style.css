@@ -1,0 +1,56 @@
+body {
+  font-family: "Arial", sans-serif;
+}
+
+header {
+  background: #f2f2f2;
+  padding: 1em 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  padding: 0 1em;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.lead-info {
+  background: #fff;
+  padding: 1em;
+  margin: 1em;
+}
+
+.info-group label {
+  font-weight: bold;
+}
+
+.details-tabs .tab {
+  display: flex;
+  justify-content: space-between;
+  background: #e9e9e9;
+  padding: 1em;
+}
+
+.details-tabs .tab button {
+  background: none;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.details-tabs .tab button.active {
+  border-bottom: 2px solid #000;
+}
+
+.tabcontent {
+  background: #fff;
+  padding: 1em;
+  margin: 1em;
+}
