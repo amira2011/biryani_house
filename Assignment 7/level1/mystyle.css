@@ -1,0 +1,60 @@
+.b1 {
+    background-color: blueviolet;
+}
+
+body {
+    text-align: left;
+}
+p.solid {
+    border-style: solid; 
+}
+
+
+#one {
+    text-align: justify;
+    border-style: solid;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 20px;
+}
+#two {
+    text-align: right;
+    border-style: solid;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;    
+    text-transform: uppercase;
+}
+
+#h1 {
+    font-family: cursive;
+    text-align: center;
+    text-transform: uppercase;
+ }
+
+a {
+    text-decoration: none;
+}
+
+#h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+}
+
+
+#h3 {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+
+
+#h4 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+}
+#outer {
+    font-size: 25px;
+
+}
+#inner {
+    font-size: 10px;
+
+}
